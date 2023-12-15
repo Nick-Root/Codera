@@ -39,7 +39,7 @@ class Question(db.Model):
     __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True)
     ownerId = db.Column(db.Integer, db.ForeignKey('user.id'))
-    question = db.Column(db.String, nullable=False)
+    question = db.Column(db.String(255), nullable=False)
     topicId = db.Column(db.Integer, db.ForeignKey('topic.id'))
     createdAt = db.Column(db.TIMESTAMP)
     updatedAt = db.Column(db.TIMESTAMP)
@@ -56,14 +56,14 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('user.id'))
     questionId = db.Column(db.Integer, db.ForeignKey('question.id'))
-    comment = db.Column(db.String, nullable=False)
+    comment = db.Column(db.String(255), nullable=False)
     createdAt = db.Column(db.TIMESTAMP)
     updatedAt = db.Column(db.TIMESTAMP)
 
 class Topic(db.Model):
     __tablename__ = 'topics'
     id = db.Column(db.Integer, primary_key=True)
-    topic = db.Column(db.String, nullable=False)
+    topic = db.Column(db.String(20), nullable=False)
     questionId = db.Column(db.Integer, db.ForeignKey('question.id'))
 
 # Define relationships
