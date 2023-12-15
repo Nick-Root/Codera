@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from datetime import datetime
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -30,6 +30,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'firstname': self.firstname,
+            'lastname': self.lastname,
             'username': self.username,
             'email': self.email
         }
@@ -41,11 +43,21 @@ class Question(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey('users.id'))
     question = db.Column(db.String(255), nullable=False)
     topicId = db.Column(db.Integer, db.ForeignKey('topics.id'))
-    createdAt = db.Column(db.TIMESTAMP)
-    updatedAt = db.Column(db.TIMESTAMP)
+    createdAt = db.Column(db.TIMESTAMP, default=datetime.now())
+    updatedAt = db.Column(db.TIMESTAMP, default=datetime.now())
 
     # Specify the foreign key relationship with the 'topics' table
     topic = db.relationship('Topic', primaryjoin="Question.topicId == Topic.id", back_populates='questions', overlaps='topic')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'ownerId': self.ownerId,
+            'question': self.question,
+            'topicId': self.topicId,
+            'createdAt': self.createdAt,
+            'updatedAt': self.updatedAt
+        }
 
 class SavedQuestion(db.Model):
     __tablename__ = 'savedquestions'
@@ -54,23 +66,48 @@ class SavedQuestion(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     saved = db.Column(db.Boolean, nullable=False, default=False)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'questionId': self.questionId,
+            'userId': self.userId,
+            'saved': self.saved
+        }
+
+
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     questionId = db.Column(db.Integer, db.ForeignKey('questions.id'))
     comment = db.Column(db.String(255), nullable=False)
-    createdAt = db.Column(db.TIMESTAMP)
-    updatedAt = db.Column(db.TIMESTAMP)
+    createdAt = db.Column(db.TIMESTAMP, default=datetime.now())
+    updatedAt = db.Column(db.TIMESTAMP, default=datetime.now())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.userId,
+            'questionId': self.questionId,
+            'comment': self.comment,
+            'createdAt': self.createdAt,
+            'updatedAt': self.updatedAt
+        }
 
 class Topic(db.Model):
     __tablename__ = 'topics'
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(20), nullable=False)
 
-
     # Specify the foreign key relationship with the 'questions' table
     questions = db.relationship('Question', primaryjoin="Topic.id == Question.topicId", back_populates='topic', overlaps='questions')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'topic': self.topic
+        }
+
 
 # Define relationships
 User.questions = db.relationship('Question', back_populates='owner')
