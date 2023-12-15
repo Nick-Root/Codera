@@ -38,24 +38,27 @@ class User(db.Model, UserMixin):
 class Question(db.Model):
     __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True)
-    ownerId = db.Column(db.Integer, db.ForeignKey('user.id'))
+    ownerId = db.Column(db.Integer, db.ForeignKey('users.id'))
     question = db.Column(db.String(255), nullable=False)
-    topicId = db.Column(db.Integer, db.ForeignKey('topic.id'))
+    topicId = db.Column(db.Integer, db.ForeignKey('topics.id'))
     createdAt = db.Column(db.TIMESTAMP)
     updatedAt = db.Column(db.TIMESTAMP)
+
+    # Specify the foreign key relationship with the 'topics' table
+    topic = db.relationship('Topic', primaryjoin="Question.topicId == Topic.id", back_populates='questions')
 
 class SavedQuestion(db.Model):
     __tablename__ = 'savedquestions'
     id = db.Column(db.Integer, primary_key=True)
-    questionId = db.Column(db.Integer, db.ForeignKey('question.id'))
-    userId = db.Column(db.Integer, db.ForeignKey('user.id'))
+    questionId = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     saved = db.Column(db.Boolean, nullable=False, default=False)
 
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('user.id'))
-    questionId = db.Column(db.Integer, db.ForeignKey('question.id'))
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    questionId = db.Column(db.Integer, db.ForeignKey('questions.id'))
     comment = db.Column(db.String(255), nullable=False)
     createdAt = db.Column(db.TIMESTAMP)
     updatedAt = db.Column(db.TIMESTAMP)
@@ -64,7 +67,10 @@ class Topic(db.Model):
     __tablename__ = 'topics'
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(20), nullable=False)
-    questionId = db.Column(db.Integer, db.ForeignKey('question.id'))
+
+
+    # Specify the foreign key relationship with the 'questions' table
+    questions = db.relationship('Question', primaryjoin="Topic.id == Question.topicId", back_populates='topic')
 
 # Define relationships
 User.questions = db.relationship('Question', back_populates='owner')
