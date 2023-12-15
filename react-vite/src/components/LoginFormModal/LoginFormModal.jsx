@@ -30,6 +30,7 @@ function LoginFormModal() {
 
   return (
     <>
+      <h1>LoginFormModal</h1>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>

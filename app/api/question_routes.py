@@ -9,14 +9,14 @@ question_routes = Blueprint('questions', __name__)
 def get_questions():
     questions = Question.query.all()
 
-
+    questions = [question.to_dict() for question in questions]
     print(questions)
 
-    return questions
+    return questions@question_routes.route('/')
 
 @question_routes.route('/<int:id>')
 def get_single_question(id):
     question = Question.query.get(id)
     print(question)
 
-    return question
+    return question.to_dict()

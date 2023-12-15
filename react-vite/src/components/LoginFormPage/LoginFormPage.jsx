@@ -33,6 +33,7 @@ function LoginFormPage() {
 
   return (
     <>
+      <h1>LoginFormPage</h1>
       <h1>Log In</h1>
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
