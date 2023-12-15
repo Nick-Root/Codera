@@ -45,7 +45,7 @@ class Question(db.Model):
     updatedAt = db.Column(db.TIMESTAMP)
 
     # Specify the foreign key relationship with the 'topics' table
-    topic = db.relationship('Topic', primaryjoin="Question.topicId == Topic.id", back_populates='questions')
+    topic = db.relationship('Topic', primaryjoin="Question.topicId == Topic.id", back_populates='questions', overlaps='topic')
 
 class SavedQuestion(db.Model):
     __tablename__ = 'savedquestions'
@@ -70,7 +70,7 @@ class Topic(db.Model):
 
 
     # Specify the foreign key relationship with the 'questions' table
-    questions = db.relationship('Question', primaryjoin="Topic.id == Question.topicId", back_populates='topic')
+    questions = db.relationship('Question', primaryjoin="Topic.id == Question.topicId", back_populates='topic', overlaps='questions')
 
 # Define relationships
 User.questions = db.relationship('Question', back_populates='owner')
