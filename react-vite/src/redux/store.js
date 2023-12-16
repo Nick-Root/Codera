@@ -6,9 +6,11 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import questionsReducer from "./question";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  question: questionsReducer
 });
 
 let enhancer;

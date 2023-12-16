@@ -6,17 +6,25 @@ import { thunkGetAllQuestions } from "../../redux/question";
 
 const MainPage = () => {
     const dispatch = useDispatch();
-    const questions = useSelector((state) => state.questions)
-    console.log("%c   LOOK HERE", "color: red; font-size: 18px", questions);
 
     useEffect(() => {
         dispatch(thunkGetAllQuestions())
     }, [dispatch])
 
 
+    let questions = useSelector((state) => state.question)
+    if (!questions) return null
+    let arrQues = Object.values(questions)
+    console.log("%c   LOOK HERE", "color: red; font-size: 18px", arrQues);
     return (
         <>
-            <div>Hi</div>
+
+            <div className='questions-container'>
+                {arrQues.map((question) => (
+                    <div className='question' key={question.id}>{question.question}</div>
+                ))}
+
+            </div>
 
         </>
 
