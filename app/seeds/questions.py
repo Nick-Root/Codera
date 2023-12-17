@@ -11,9 +11,21 @@ def seed_questions():
     expressques = Question(
         ownerId = 2, topicId = 3, question = 'How do I write a route in express?'
     )
+    question4 = Question(
+        ownerId = 1, topicId = 3, question = 'How do I write a route in express? Please help'
+    )
+
+    question5 = Question(
+        ownerId = 1, topicId = 3, question = 'How do i use express?'
+    )
+
     db.session.add(pythonques)
     db.session.add(javascriptques)
     db.session.add(expressques)
+    db.session.add(question4)
+    db.session.add(question5)
+
+
     # print("pre commit seeding questions")
     db.session.commit()
 

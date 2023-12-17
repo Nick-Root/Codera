@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import TopicPage from '../components/TopicPage/TopicPage';
+import SavedQuestion from '../components/SavedQuestionPage/SavedQuestionPage';
 import Layout from './Layout';
 
 import MainPage from '../components/MainPage';
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/topics/:topicId",
         element: <TopicPage />
+      },
+      {
+        path: "/savedQuestions",
+        element: <SavedQuestion />
       }
     ],
   },
