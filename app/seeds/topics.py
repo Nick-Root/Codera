@@ -12,9 +12,21 @@ def seed_topics():
     express = Topic(
         topic = 'Express'
     )
+    sql = Topic(
+        topic= 'SQL'
+    )
+    html = Topic(
+        topic='HTML'
+    )
+    css = Topic(
+        topic='CSS'
+    )
     db.session.add(python)
     db.session.add(javascript)
     db.session.add(express)
+    db.session.add(sql)
+    db.session.add(html)
+    db.session.add(css)
     db.session.commit()
 
 def undo_topics():
