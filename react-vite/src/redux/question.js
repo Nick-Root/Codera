@@ -1,7 +1,6 @@
 const LOAD_ALL_QUESTIONS = "questions/loadAllQuestions";
 const LOAD_ONE_QUESTION = 'questions/loadOneQuestion'
 const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
-const DELETE_QUESTION = "questions/deleteQuestion"
 
 
 const loadAllQuestions = (allQuestions) => {
@@ -25,12 +24,6 @@ const loadSavedQuestions = (allQuestions) => {
   };
 };
 
-const deleteQuestion = (question) => {
-  return {
-    type: DELETE_QUESTION,
-    question
-  }
-}
 
 export const thunkGetAllQuestions = () => async (dispatch) => {
   //GET /api/Questions
@@ -74,17 +67,7 @@ export const thunkGetSavedQuestions = () => async (dispatch) => {
   }
 };
 
-export const thunkDeleteQuestion = (id) => async (dispatch) => {
-  const res = await fetch(`/api/questions/${id}`, {
-    method: 'DELETE',
-    headers: { "Content-Type": "application/json" }
-  })
 
-  if (res.ok) {
-    dispatch(deleteQuestion(id))
-  }
-  return id
-}
 
 //reducer
 const initialState = {};
@@ -109,12 +92,6 @@ const questionsReducer = (state = initialState, action) => {
       const newState = { ...initialState };
       action.allQuestions.forEach((question) => newState[question.id] = question);
       return newState;
-    }
-    case DELETE_QUESTION:
-      {
-        let newState = { ...state };
-        delete newState[action.question];
-        return newState;
     }
     default:
       return state;
