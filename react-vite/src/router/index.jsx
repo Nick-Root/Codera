@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 
 import MainPage from '../components/MainPage';
+import QuestionDetails from '../components/Questions/QuestionDetails'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignupFormPage />,
+      },
+      {
+        path: "/questions/:id",
+        element: <QuestionDetails />,
       },
     ],
   },

@@ -20,4 +20,4 @@ def get_single_question(id):
     question = Question.query.get(id)
     print(question)
 
-    return question.to_dict()
+    return jsonify(question.to_dict())
