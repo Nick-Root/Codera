@@ -19,7 +19,7 @@ const MainPage = () => {
     if (!questions, !topics) return null
     let arrQues = Object.values(questions)
     let arrTopic = Object.values(topics)
-
+    console.log(arrTopic)
     // console.log("%c   LOOK HERE", "color: red; font-size: 18px", arrQues);
     return (
         <>
