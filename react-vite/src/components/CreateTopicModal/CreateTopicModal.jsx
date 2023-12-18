@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { createTopicThunk } from "../../redux/topic";
+import { createTopicThunk, thunkGetAllTopics } from "../../redux/topic";
 
 function CreateTopicModal() {
     const dispatch = useDispatch()
@@ -16,6 +16,7 @@ function CreateTopicModal() {
                 topic
             })
         )
+        await dispatch(thunkGetAllTopics())
 
         if (serverResponse) {
             setErrors(serverResponse)
