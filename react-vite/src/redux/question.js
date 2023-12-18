@@ -52,7 +52,7 @@ const initialState = {};
 let nextState
 
 const questionsReducer = (state = initialState, action) => {
-  console.log("%c   LOOK HERE", "color: purple; font-size: 18px", action)
+  // console.log("%c   LOOK HERE", "color: purple; font-size: 18px", action)
   switch (action.type) {
     case LOAD_ALL_QUESTIONS: {
       const newState = { ...initialState };

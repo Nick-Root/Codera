@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import questionsReducer from "./question";
 import topicReducer from "./topic";
+import commentsReducer from "./comment";
 
 const rootReducer = combineReducers({
   session: sessionReducer,

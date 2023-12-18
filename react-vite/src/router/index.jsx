@@ -6,6 +6,7 @@ import Layout from './Layout';
 
 import MainPage from '../components/MainPage';
 import QuestionDetails from '../components/Questions/QuestionDetails'
+// import Comments from '../components/Questions/Comments';
 
 export const router = createBrowserRouter([
   {

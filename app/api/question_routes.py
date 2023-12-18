@@ -7,11 +7,19 @@ question_routes = Blueprint('questions', __name__)
 
 @question_routes.route('/')
 def get_questions():
-    questions = Question.query.all()
+    questions_list = Question.query.all()
 
+    questions = []
 
-    questions = [question.to_dict() for question in questions]
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",questions)
+    for question in questions_list:
+        asker_username = User.query.get(question.ownerId).username
+
+        question_data = question.to_dict()
+
+        question_data["askerUsername"] = asker_username
+
+        questions.append(question_data)
+
 
     return jsonify(questions)
 
@@ -20,10 +28,20 @@ def get_single_question(id):
 
     question = Question.query.get(id)
 
-    user = User.query.get(question.ownerId)
+    asker_username = User.query.get(question.ownerId).username
+
+    comments = Comment.query.filter_by(questionId=id).all()
+
+    comment_data = [{
+        "comment": comment.comment,
+        "createdAt": comment.createdAt,
+        "commentId": comment.id,
+        "username": User.query.get(comment.userId).username
+    } for comment in comments]
 
     question_data = question.to_dict()
-    user_data = user.to_dict()
+
+    question_data["askerUsername"] = asker_username
 
 
-    return jsonify(question_data, user_data)
+    return jsonify(question_data, comment_data)
