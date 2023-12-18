@@ -26,10 +26,14 @@ export const router = createBrowserRouter([
       {
         path: "/topics/:topicId",
         element: <TopicPage />
-      }
+      },
       {
         path: "/questions/:id",
         element: <QuestionDetails />,
+      },
+      {
+        path: "/*",
+        element: <h1>Page not found</h1>,
       },
     ],
   },

@@ -10,14 +10,12 @@ import { useParams } from "react-router-dom";
 const QuestionDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const question = useSelector((state) => state.oneQuestion)
-
+    const question = useSelector((state) => state.question.oneQuestion)
     console.log("%c   LOOK HERE", "color: blue; font-size: 18px", question);
 
+
     useEffect(() => {
-        if (id) {
-            dispatch(thunkGetOneQuestion)
-        }
+        dispatch(thunkGetOneQuestion(id))
     }, [dispatch, id])
 
 
@@ -27,9 +25,9 @@ const QuestionDetails = () => {
 
 
     return (
-        <>
-            <h1>TEST</h1>
-        </>
+        <div className='one_question_container'>
+            <h2>{question.question}</h2>
+        </div>
     )
 }
 
