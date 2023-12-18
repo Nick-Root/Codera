@@ -7,6 +7,10 @@
     width: 200px;
 }
 
+.topicscont > button, h3 {
+    margin-bottom: 10px;
+}
+
 .topics {
     display: flex;
     flex-direction: column;
@@ -54,4 +58,6 @@
     width: 600px;
     border: 1px solid black;
     margin-bottom: 10px;
+    padding: 20px 0px;
+    border-radius: 5px;
 }

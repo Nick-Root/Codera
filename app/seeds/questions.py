@@ -12,11 +12,11 @@ def seed_questions():
         ownerId = 2, topicId = 3, question = 'How do I write a route in express?'
     )
     question4 = Question(
-        ownerId = 1, topicId = 3, question = 'Why is it important to handle asynchronous operations in JavaScript? What are the common methods for managing asynchronous tasks, and how do Promises and async/await help in handling them effectively?'
+        ownerId = 1, topicId = 2, question = 'Why is it important to handle asynchronous operations in JavaScript? What are the common methods for managing asynchronous tasks, and how do Promises and async/await help in handling them effectively?'
     )
 
     question5 = Question(
-        ownerId = 1, topicId = 3, question = "What exactly are Python's built-in data structures like lists, tuples, dictionaries, and sets? How and when should I use each one?"
+        ownerId = 1, topicId = 1, question = "What exactly are Python's built-in data structures like lists, tuples, dictionaries, and sets? How and when should I use each one?"
     )
 
     db.session.add(pythonques)

@@ -27,3 +27,12 @@ def get_single_question(id):
 
 
     return jsonify(question_data, user_data)
+
+
+@question_routes.route('/<int:id>/delete', methods=['DELETE'])
+def delete_question(id):
+    question = Question.query.get(id)
+    
+    db.session.delete(question)
+    db.session.commit()
+    return {"message": "Successfuly Delete Question"}

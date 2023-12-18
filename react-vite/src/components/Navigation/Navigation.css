@@ -11,13 +11,16 @@ body {
 }
 
 .navbar {
+  position: sticky;
+  top: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   /* width: 1024px; */
-  padding: 0px 40px;
-  padding-bottom: 20px;
+  padding: 20px 40px;
   border-bottom: 1px solid gray;
+  background-color: #F1F2F2;
+  margin-bottom: 30px;
 }
 
 .profile-dropdown {
