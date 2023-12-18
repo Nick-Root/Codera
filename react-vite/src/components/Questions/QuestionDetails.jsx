@@ -10,10 +10,11 @@ import { useParams } from "react-router-dom";
 const QuestionDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const question = useSelector((state) => state.question.oneQuestion[0])
-    const user = useSelector((state) => state.question.oneQuestion[1])
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", question);
-    console.log("%c   LOOK HERE", "color: green; font-size: 18px", user);
+    const questionData = useSelector((state) => state.question.oneQuestion || [])
+    // const questionArray = Object.values(questionData)
+    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
+    const { 0: question, 1: user } = questionData
+    console.log("%c   LOOK HERE", "color: green; font-size: 18px", question);
 
 
 

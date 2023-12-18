@@ -26,5 +26,4 @@ def get_single_question(id):
     user_data = user.to_dict()
 
 
-
     return jsonify(question_data, user_data)
