@@ -7,6 +7,8 @@ import Layout from './Layout';
 import MainPage from '../components/MainPage';
 import QuestionDetails from '../components/Questions/QuestionDetails'
 
+import QuestionForm from '../components/QuestionForm/QuestionForm';
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -14,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <MainPage />,
+      },
+      {
+        path: "/test-post",
+        element: <QuestionForm/>
       },
       {
         path: "login",

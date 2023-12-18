@@ -1,5 +1,6 @@
 const LOAD_ALL_QUESTIONS = "questions/loadAllQuestions";
 const LOAD_ONE_QUESTION = 'questions/loadOneQuestion'
+const RECEIVE_ONE_QUESTION = "questions/receiveOneQuestion"
 
 const loadAllQuestions = (allQuestions) => {
   return {
@@ -15,12 +16,21 @@ const loadOneQuestion = (question) => {
   }
 }
 
+const receiveOneQuestion = (question) => {
+  return {
+    type: RECEIVE_ONE_QUESTION,
+    question
+  }
+}
+
+
+
 
 export const thunkGetAllQuestions = () => async (dispatch) => {
   //GET /api/Questions
-  console.log("before fetch")
+  //console.log("before fetch")
   const res = await fetch("/api/questions");
-  console.log("after fetch")
+  //console.log("after fetch")
   if (res.ok) {
     //{ Questions: [ {}, {}, ... ]}
     const allQuestions = await res.json();
@@ -33,18 +43,41 @@ export const thunkGetAllQuestions = () => async (dispatch) => {
 };
 
 export const thunkGetOneQuestion = (id) => async (dispatch) => {
-  console.log("before fetch")
+  //console.log("before fetch")
   const res = await fetch(`/api/questions/${id}`);
-  console.log("after fetch")
+  //console.log("after fetch")
 
   if (res.ok) {
     const questionDetails = await res.json()
     dispatch(loadOneQuestion(questionDetails))
     return questionDetails
   } else {
-    console.log('/api/questions/:id error output')
+    //console.log('/api/questions/:id error output')
   }
 }
+
+export const thunkPostOneQuestion = (question) => async (dispatch) => {
+  console.log("before POST");
+  const res = await fetch(`/api/question`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(question)
+  });
+  console.log("after POST");
+
+
+  if(res.ok) {
+    const newQuestion = await res.json();  //now the Question should have a id created from the backend
+    console.log("thunk newQuestion", newQuestion)
+    dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
+    return newQuestion;
+  } else {
+    console.log("POST error message")
+    const error = await res.json();
+    return error;
+  }
+ }
+
 
 
 //reducer
@@ -62,10 +95,13 @@ const questionsReducer = (state = initialState, action) => {
       return newState;
     }
     case LOAD_ONE_QUESTION: {
-
       nextState = {...state, oneQuestion:null}
       nextState.oneQuestion={...action.question}
       return nextState
+    }
+    case RECEIVE_ONE_QUESTION: {
+      const newState = { ...state, [action.question.id]: action.question }
+      return newState
     }
     default:
       return state;

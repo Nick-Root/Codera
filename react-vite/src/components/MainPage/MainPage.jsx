@@ -4,6 +4,7 @@ import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
 import { NavLink } from "react-router-dom";
 import './MainPage.css'
+//import QuestionForm from "../QuestionForm/QuestionForm";
 
 const MainPage = () => {
     const dispatch = useDispatch();
