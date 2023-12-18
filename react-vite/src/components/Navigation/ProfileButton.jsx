@@ -50,9 +50,6 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
-              <div>
-                <NavLink to={'/savedQuestions'}>Saved Questions</NavLink>
-              </div>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
