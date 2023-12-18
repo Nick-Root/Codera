@@ -47,7 +47,11 @@ const MainPage = () => {
                     </div>
                     {arrQues.map((question) => {
                         return (
-                            <NavLink to={`/questions/${question.id}`} className='question' key={question.id}>{question.question}</NavLink>
+                            <NavLink to={`/questions/${question.id}`} className='question' key={question.id}>{question.question}
+                                <p className="asker">
+                                    {question.askerUsername}
+                                </p>
+                            </NavLink>
                         )
                     })}
                 </div>

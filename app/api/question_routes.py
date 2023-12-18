@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify
+from flask_login import current_user
 from ..models import db
 from ..models.models import Question, SavedQuestion, User, Comment, Topic
 
@@ -45,3 +46,16 @@ def get_single_question(id):
 
 
     return jsonify(question_data, comment_data)
+
+
+@question_routes.route('/current')
+def get_curr_questions():
+    userId = current_user.id
+
+    user = User.query.get(userId)
+    questions = Question.query.filter_by(ownerId=userId).all()
+
+    user_data = user.to_dict()
+    question_data = [question.to_dict() for question in questions]
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", question_data, user_data)
+    return jsonify(user=user_data, questions=question_data)
