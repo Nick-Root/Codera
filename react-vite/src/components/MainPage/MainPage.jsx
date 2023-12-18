@@ -8,13 +8,14 @@ import './MainPage.css'
 const MainPage = () => {
     const dispatch = useDispatch();
 
+
+    let questions = useSelector((state) => state.question)
+    let topics = useSelector((state) => state.topic)
+
     useEffect(() => {
         dispatch(thunkGetAllQuestions())
         dispatch(thunkGetAllTopics())
     }, [dispatch])
-
-    let questions = useSelector((state) => state.question)
-    let topics = useSelector((state) => state.topic)
 
     if (!questions, !topics) return null
     let arrQues = Object.values(questions)
@@ -56,8 +57,8 @@ const MainPage = () => {
                     })}
                 </div>
 
-
             </div>
+
         </>
 
     )

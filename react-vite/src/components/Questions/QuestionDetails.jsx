@@ -16,8 +16,6 @@ const QuestionDetails = () => {
     const { 0: question, 1: comments } = questionData
     // console.log("%c   LOOK HERE", "color: green; font-size: 18px", comments);
 
-
-
     useEffect(() => {
         dispatch(thunkGetOneQuestion(id))
     }, [dispatch, id])
@@ -39,6 +37,7 @@ const QuestionDetails = () => {
                     year: "numeric",
                 })}
             </p>
+
             <div className="comments">
                 <h3>Comments:</h3>
                 {comments.map((comment) => (
@@ -55,8 +54,8 @@ const QuestionDetails = () => {
                     </div>
                 ))}
             </div>
-
         </div>
+
     )
 }
 
