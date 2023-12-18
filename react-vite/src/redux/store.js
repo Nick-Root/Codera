@@ -13,7 +13,8 @@ import commentsReducer from "./comment";
 const rootReducer = combineReducers({
   session: sessionReducer,
   question: questionsReducer,
-  topic: topicReducer
+  topic: topicReducer,
+  comment: commentsReducer
 });
 
 let enhancer;

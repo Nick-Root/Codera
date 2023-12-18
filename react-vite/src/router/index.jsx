@@ -7,6 +7,7 @@ import Layout from './Layout';
 import MainPage from '../components/MainPage';
 import QuestionDetails from '../components/Questions/QuestionDetails'
 import CurrentQuestions from '../components/CurrentQuestions/CurrentQuestions';
+import CurrentComments from '../components/CurrentComments/CurrentComments';
 
 
 export const router = createBrowserRouter([
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: '/questions/current',
         element: <CurrentQuestions />
+      },
+      {
+        path: '/comments/current',
+        element: <CurrentComments />
       },
       {
         path: "/*",
