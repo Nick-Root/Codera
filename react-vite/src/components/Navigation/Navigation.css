@@ -1,5 +1,5 @@
-.profile-dropdown {
-  position: absolute;
+body {
+  position: relative;
 }
 
 .homenav {
@@ -11,9 +11,27 @@
 }
 
 .navbar {
+  position: sticky;
+  top: 0px;
   display: flex;
   justify-content: space-between;
-  width: 1024px;
-  padding-bottom: 20px;
+  align-items: center;
+  /* width: 1024px; */
+  padding: 20px 40px;
   border-bottom: 1px solid gray;
+  background-color: #F1F2F2;
+  margin-bottom: 30px;
+}
+
+.profile-dropdown {
+  position: fixed;
+  right: 2.8em;
+  top: 3em;
+  background-color: #F1F2F2;
+  border: 1px solid gray;
+  padding: 15px;
+}
+
+ul > li {
+  list-style: none;
 }

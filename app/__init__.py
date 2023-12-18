@@ -10,6 +10,7 @@ from .api.auth_routes import auth_routes
 from .api.question_routes import question_routes
 from .api.comment_routes import comment_routes
 from .api.topic_routes import topic_routes
+from .api.savedQuestion_routes import savedQuestion_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -34,6 +35,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(question_routes, url_prefix='/api/questions')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
 app.register_blueprint(topic_routes, url_prefix='/api/topics')
+app.register_blueprint(savedQuestion_routes, url_prefix='/api/savedQuestions')
 db.init_app(app)
 Migrate(app, db)
 

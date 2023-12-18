@@ -1,6 +1,7 @@
 const LOAD_ALL_QUESTIONS = "questions/loadAllQuestions";
 const LOAD_ONE_QUESTION = 'questions/loadOneQuestion'
 const LOAD_USER_QUESTIONS = '/questions/loadUserQuestions'
+const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
 
 const loadAllQuestions = (allQuestions) => {
   return {
@@ -22,6 +23,13 @@ const loadUserQuestions = (userQuestions) => {
     userQuestions: userQuestions
   }
 }
+
+const loadSavedQuestions = (allQuestions) => {
+  return {
+    type: LOAD_SAVED_QUESTIONS,
+    allQuestions: allQuestions
+  };
+};
 
 export const thunkGetAllQuestions = () => async (dispatch) => {
   //GET /api/Questions
@@ -65,6 +73,17 @@ export const getCurrentQuestions = () => async (dispatch) => {
   }
 }
 
+export const thunkGetSavedQuestions = () => async (dispatch) => {
+  //GET /api/Questions
+  const res = await fetch("/api/savedQuestions");
+  if (res.ok) {
+    const allQuestions = await res.json();
+    dispatch(loadSavedQuestions(allQuestions));
+    return allQuestions;
+  } else {
+    console.log('/api/questions error output');
+  }
+};
 
 //reducer
 const initialState = {};
@@ -93,6 +112,12 @@ const questionsReducer = (state = initialState, action) => {
         question: question.question,
         createdAt: question.createdAt
       }))
+      return newState;
+    }
+    case LOAD_SAVED_QUESTIONS: {
+      const newState = { ...initialState };
+      action.allQuestions.forEach((question) => newState[question.id] = question);
+
       return newState;
     }
     default:

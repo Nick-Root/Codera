@@ -56,6 +56,9 @@ def get_curr_questions():
     questions = Question.query.filter_by(ownerId=userId).all()
 
     user_data = user.to_dict()
+
     question_data = [question.to_dict() for question in questions]
     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", question_data, user_data)
     return jsonify(user=user_data, questions=question_data)
+
+
