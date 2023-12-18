@@ -17,7 +17,14 @@ def get_questions():
 
 @question_routes.route('/<int:id>')
 def get_single_question(id):
-    question = Question.query.get(id)
-    print(question)
 
-    return jsonify(question.to_dict())
+    question = Question.query.get(id)
+
+    user = User.query.get(question.ownerId)
+
+    question_data = question.to_dict()
+    user_data = user.to_dict()
+
+
+
+    return jsonify(question_data, user_data)
