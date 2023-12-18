@@ -10,6 +10,8 @@ function Navigation() {
 
       <NavLink to='/questions/current'>Your Questions</NavLink>
 
+      <NavLink to='/comments/current'>Your Comments</NavLink>
+
       <ProfileButton />
 
     </ul>
