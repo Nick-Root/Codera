@@ -1,17 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
 import { NavLink } from "react-router-dom";
 import './MainPage.css'
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
+
 
 const MainPage = () => {
     const dispatch = useDispatch();
-
+    const [showMenu, setShowMenu] = useState(false);
     useEffect(() => {
         dispatch(thunkGetAllQuestions())
         dispatch(thunkGetAllTopics())
     }, [dispatch])
+    const ulRef = useRef();
+
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = (e) => {
+            if (ulRef.current && !ulRef.current.contains(e.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        document.addEventListener("click", closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
+    const closeMenu = () => setShowMenu(false);
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)
@@ -27,7 +48,16 @@ const MainPage = () => {
 
                 {/* All Topics */}
                 <div className='topicscont'>
-                    <button className='createtopic'>+  Create Topic</button> {/* placeholder for a create topic modal */}
+
+                    <ul>
+                        <OpenModalMenuItem
+                            itemText='Create Topic'
+                            onItemClick={closeMenu}
+                            modalComponent={<CreateTopicModal />}
+                        />
+                    </ul>
+
+
                     <h3 className='topicheader'>Topics</h3>
                     <div className='topics'>
                         {arrTopic.map((topic) => {
@@ -53,7 +83,7 @@ const MainPage = () => {
                 </div>
 
 
-            </div>
+            </div >
         </>
 
     )

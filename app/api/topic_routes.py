@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, redirect
 from ..models import db
 from ..models.models import Question, SavedQuestion, User, Comment, Topic
-
-
+from ..forms.topic_form import TopicForm
+from flask_login import login_required
 topic_routes = Blueprint('topics', __name__)
 
 
@@ -31,3 +31,14 @@ def get_single_topic(id):
     topic_data.append(data)
 
     return topic_data
+
+@topic_routes.route('/new', methods=['POST'])
+@login_required
+def new_topic():
+    form = TopicForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        topic = Topic(topic=form.data['topic'])
+        db.session.add(topic)
+        db.session.commit()
+    return
