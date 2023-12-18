@@ -6,6 +6,7 @@ import Layout from './Layout';
 
 import MainPage from '../components/MainPage';
 import QuestionDetails from '../components/Questions/QuestionDetails'
+import CurrentQuestions from '../components/CurrentQuestions/CurrentQuestions';
 
 export const router = createBrowserRouter([
   {
@@ -32,9 +33,14 @@ export const router = createBrowserRouter([
         element: <QuestionDetails />,
       },
       {
+        path: '/questions/current',
+        element: <CurrentQuestions />
+      },
+      {
         path: "/*",
         element: <h1>Page not found</h1>,
       },
+
     ],
   },
 ]);

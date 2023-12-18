@@ -8,7 +8,7 @@ function Navigation() {
 
       <NavLink to="/" className='homenav'>Codera</NavLink>
 
-
+      <NavLink to='/questions/current'>Your Questions</NavLink>
 
       <ProfileButton />
 

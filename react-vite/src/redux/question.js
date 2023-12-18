@@ -1,5 +1,6 @@
 const LOAD_ALL_QUESTIONS = "questions/loadAllQuestions";
 const LOAD_ONE_QUESTION = 'questions/loadOneQuestion'
+const LOAD_USER_QUESTIONS = '/questions/loadUserQuestions'
 
 const loadAllQuestions = (allQuestions) => {
   return {
@@ -15,6 +16,12 @@ const loadOneQuestion = (question) => {
   }
 }
 
+const loadUserQuestions = (userQuestions) => {
+  return {
+    type: LOAD_USER_QUESTIONS,
+    userQuestions: userQuestions
+  }
+}
 
 export const thunkGetAllQuestions = () => async (dispatch) => {
   //GET /api/Questions
@@ -46,6 +53,18 @@ export const thunkGetOneQuestion = (id) => async (dispatch) => {
   }
 }
 
+export const getCurrentQuestions = () => async (dispatch) => {
+  const res = await fetch('/api/questions/current')
+
+  if (res.ok) {
+    const userQuestions = await res.json()
+    console.log("USER QUESTIONS", userQuestions)
+    dispatch(loadUserQuestions(userQuestions))
+    console.log("USER QUESTIONS", userQuestions)
+    return userQuestions
+  }
+}
+
 
 //reducer
 const initialState = {};
@@ -63,9 +82,18 @@ const questionsReducer = (state = initialState, action) => {
     }
     case LOAD_ONE_QUESTION: {
 
-      nextState = {...state, oneQuestion:null}
-      nextState.oneQuestion={...action.question}
+      nextState = { ...state, oneQuestion: null }
+      nextState.oneQuestion = { ...action.question }
       return nextState
+    }
+    case LOAD_USER_QUESTIONS: {
+      const newState = { ...state };
+      newState.user = action.userQuestions.user;
+      newState.userQuestions = action.userQuestions.questions.map((question) => ({
+        question: question.question,
+        createdAt: question.createdAt
+      }))
+      return newState;
     }
     default:
       return state;
