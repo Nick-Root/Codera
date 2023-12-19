@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createTopicThunk, thunkGetAllTopics } from "../../redux/topic";
+import './CreateTopicModal.css'
+
 
 function CreateTopicModal() {
     const dispatch = useDispatch()
@@ -26,22 +28,23 @@ function CreateTopicModal() {
 
     }
     return (
-        <>
+        <div className='topmodalcont'>
             <h1>Create a Topic</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='topform'>
                 <label>
-                    Topic
                     <input
                         type='text'
                         value={topic}
                         onChange={(e) => setTopic(e.target.value)}
                         required
+                        placeholder="Topic Name"
+                        className='topname'
                     />
                 </label>
                 {<p>{errors}</p>}
-                <button type='submit' disabled={topic.length === 0}>Create Topic</button>
+                <button type='submit' disabled={topic.length === 0} className='topbutton'>Create Topic</button>
             </form>
-        </>
+        </div>
     )
 }
 
