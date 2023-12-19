@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import current_user
 from ..models import db
 from ..models.models import Question, SavedQuestion, User, Comment, Topic
+from flask_login import login_required
+from ..forms.comment_form import CommentForm
 
 
 question_routes = Blueprint('questions', __name__)
@@ -62,3 +64,21 @@ def get_curr_questions():
     return jsonify(user=user_data, questions=question_data)
 
 
+@question_routes.route('/<int:id>/comments', methods=['POST'])
+@login_required
+def post_comment(id):
+
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        new_comment = Comment(
+        userId=current_user.id,
+        questionId=id,
+        comment=form.data['comment']
+    )
+
+    db.session.add(new_comment)
+    db.session.commit()
+
+    return jsonify(message='Comment created successfully')
