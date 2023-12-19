@@ -14,21 +14,21 @@ const postComment = (comment) => ({
   comment,
 });
 
-const deleteComment = (commentId) => {
+const deleteComment = (commentId) => ({
   type: DELETE_COMMENT,
   commentId
-}
+});
 
-export const thunkDeleteComment = commentId => async (dispatch) => {
+export const thunkDeleteComment = (commentId) => async (dispatch) => {
   try {
-    const res = await fatch(`/api/comments/${commentId}`, {
+    const res = await fetch(`/api/comments/${commentId}/remove`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     }
   })
-  if (response.ok) {
-    dispatch(deleteCommentAction(commentId));
+  if (res.ok) {
+    dispatch(deleteComment(commentId));
   } else {
     console.error('Error deleting comment');
   }
@@ -41,9 +41,9 @@ export const getCurrentComments = () => async (dispatch) => {
   const res = await fetch('/api/comments/current')
 
   if (res.ok) {
-    const userComments = await res.json()
-    dispatch(loadUserComments(userComments))
-    return userComments
+    const comments = await res.json()
+    dispatch(loadUserComments(comments))
+    return comments
   }
 }
 
@@ -70,7 +70,7 @@ export const thunkPostComment = (questionId, commentData) => async (dispatch) =>
 };
 
 const initialState = {
-  comments: []
+
 }
 
 
@@ -83,7 +83,8 @@ const commentsReducer = (state= initialState, action) => {
       newState.user = action.userComments.user;
       newState.userComments = action.userComments.comments.map((comment) => ({
         comment: comment.comment,
-        createdAt: comment.createdAt
+        createdAt: comment.createdAt,
+        commentId: comment.id
       }))
       return newState;
       }

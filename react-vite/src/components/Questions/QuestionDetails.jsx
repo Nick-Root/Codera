@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
+import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
 import './QuestionDetails.css'
 
@@ -13,9 +15,10 @@ const QuestionDetails = () => {
     const dispatch = useDispatch();
     const questionData = useSelector((state) => state.question.oneQuestion || [])
     // const questionArray = Object.values(questionData)
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
+    // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
     const { 0: question, 1: comments } = questionData
-    // console.log("%c   LOOK HERE", "color: green; font-size: 18px", comments);
+    const user = useSelector((state) => state.session.user)
+    // console.log("%c   LOOK HERE", "color: green; font-size: 18px", user);
 
     const [commentText, setCommentText] = useState('');
 
@@ -84,6 +87,18 @@ const QuestionDetails = () => {
                                     year: "numeric",
                                 })}
                             </p>
+                            <div className="delete_sq">
+                                {user.id === comment.ownerId && (
+                                    <>
+                                        <i className="fa-solid fa-trash-can"></i>
+                                        <OpenModalMenuItem
+                                            itemText='Delete'
+                                            modalComponent={<DeleteCommentModal comment={comment} />}
+                                        />
+                                    </>
+                                )}
+                            </div>
+
                         </div>
                     </div>
                 ))}

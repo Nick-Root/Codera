@@ -18,7 +18,7 @@ def get_curr_comments():
     comment_data = [comment.to_dict() for comment in comments]
     return jsonify(user=user_data, comments=comment_data)
 
-@comment_routes.route('/<int:commentId>', methods=['DELETE'])
+@comment_routes.route('/<int:commentId>/remove', methods=['DELETE'])
 @login_required
 def delete_comment(commentId):
 

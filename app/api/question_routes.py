@@ -42,7 +42,8 @@ def get_single_question(id):
         "comment": comment.comment,
         "createdAt": comment.createdAt,
         "commentId": comment.id,
-        "username": User.query.get(comment.userId).username
+        "username": User.query.get(comment.userId).username,
+        "ownerId": comment.userId
     } for comment in comments]
 
     question_data = question.to_dict()
