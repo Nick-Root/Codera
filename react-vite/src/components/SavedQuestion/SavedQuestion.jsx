@@ -22,27 +22,35 @@ export default function SavedQuestion() {
 
     const saves = Object.values(saved)
 
+    let length = 0
+    for (let save of saves) {
+        if (sessionUser.id === save.userId) {
+            length += save.questions.length
+        }
+    }
 
     return (
         <>
+            <div>{length === 1 ? `${length} saved question` : `${length} saved questions`}</div>
             <div className='savedQuestion_page'>
-                {sessionUser && saves.map(save => {
+                {saves.map(save => {
                     if (sessionUser.id === save.userId) {
-                        return save?.questions.map(question => {
-                            return <div key={question.id} >
-                                <div>
+                        return <div>
+                            {save?.questions.map(question => {
+                                return <div key={question.id} >
                                     <NavLink to={`/questions/${question.id}`} className='question'>
                                         {question?.question}
                                     </NavLink>
-                                    <div>
+                                    <div className="delete_sq">
+                                        <i className="fa-solid fa-trash-can"></i>
                                         <OpenModalMenuItem
                                             itemText='Delete'
                                             modalComponent={<DeleteSavedQuestion question={question} />}
                                         />
                                     </div>
                                 </div>
-                            </div>
-                        })
+                            })}
+                        </div>
                     }
                 })}
             </div>

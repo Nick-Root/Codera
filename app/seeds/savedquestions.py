@@ -4,7 +4,7 @@ from datetime import datetime
 
 def seed_savedquestions():
     useronesaved = SavedQuestion(
-        questionId = 2, userId = 1, saved = True
+        questionId = 1, userId = 1, saved = True
     )
     useronesaved2 = SavedQuestion(
         questionId = 4, userId = 1, saved = True

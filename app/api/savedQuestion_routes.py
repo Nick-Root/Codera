@@ -19,6 +19,7 @@ def get_savedQuestions():
         saved_data.append(data)
     return saved_data
 
+
 @savedQuestion_routes.route('<int:id>/remove', methods=['DELETE'])
 def remove_savedQuestion(id):
     savedQuestion = SavedQuestion.query.filter_by(questionId = id).first()

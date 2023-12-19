@@ -11,16 +11,17 @@ export default function DeleteSavedQuestion ({ question }) {
         await dispatch(thunkFetchRemoveSavedQuestion(question.id))
         await dispatch(thunkGetSavedQuestions())
         .then(closeModal)
+
     }
 
     return (
         <>
         <div id='login_container' className="delete_container">
-            <div>Confirm Delete</div>
+            <div>Delete saved question?</div>
             <div>Are you sure you want to remove this question from the saved list?</div>
             <div>
-                <button onClick={removeQuestion}>Yes (Delete Question)</button>
-                <button onClick={closeModal}>No (Keep Question)</button>
+                <button onClick={closeModal}>Cancel</button>
+                <button onClick={removeQuestion}>Delete</button>
             </div>
         </div>
         </>
