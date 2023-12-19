@@ -32,7 +32,7 @@ const CurrentComments = () => {
                     <h2>{comment.comment}</h2>
                     <p className="userName">{user.username}</p>
                     <p className="created-date">
-                        Asked:{" "}
+                        Commented on:{" "}
                         {new Date(comment.createdAt).toLocaleDateString(undefined, {
                             day: "numeric",
                             month: "long",
