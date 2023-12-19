@@ -4,7 +4,7 @@ import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
 import { NavLink } from "react-router-dom";
 import './MainPage.css'
-//import QuestionForm from "../QuestionForm/QuestionForm";
+import QuestionForm from "../QuestionForm/QuestionForm";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -45,6 +45,9 @@ const MainPage = () => {
                     <div className='askaques'>
                         <p>Placeholder for ask a question box</p>
                         <p>(will have a modal button on the nav aswell)</p>
+                    </div>
+                    <div className='askaques'>
+                        <QuestionForm />
                     </div>
                     {arrQues.map((question) => {
                         return (

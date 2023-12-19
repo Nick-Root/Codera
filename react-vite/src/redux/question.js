@@ -94,7 +94,7 @@ const questionsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_QUESTIONS: {
       const newState = { ...initialState };
-      console.log('action.allQuestions', action.allQuestions)
+      //console.log('action.allQuestions', action.allQuestions)
       action.allQuestions.forEach((question) => newState[question.id] = question);
       // console.log('newState', newState);
       return newState;
