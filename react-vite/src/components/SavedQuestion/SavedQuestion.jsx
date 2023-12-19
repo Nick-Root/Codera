@@ -31,11 +31,12 @@ export default function SavedQuestion() {
 
     return (
         <>
-            <div>{length === 1 ? `${length} saved question` : `${length} saved questions`}</div>
-            <div className='savedQuestion_page'>
+        <div className='container'>
+            <div className="container_text">{length === 1 ? `${length} saved question` : `${length} saved questions`}</div>
+            <div >
                 {saves.map(save => {
                     if (sessionUser.id === save.userId) {
-                        return <div>
+                        return <div key={save.id}>
                             {save?.questions.map(question => {
                                 return <div key={question.id} >
                                     <NavLink to={`/questions/${question.id}`} className='question'>
@@ -54,6 +55,7 @@ export default function SavedQuestion() {
                     }
                 })}
             </div>
+        </div>
         </>
     )
 

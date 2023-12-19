@@ -3,6 +3,7 @@ from flask_login import current_user
 from ..models import db
 from ..models.models import Question, SavedQuestion, User, Comment, Topic
 from ..forms.question_form import QuestionForm
+from ..forms.comment_form import CommentForm
 
 from flask_login import login_required, current_user
 from datetime import date
@@ -93,3 +94,17 @@ def post_question():
     else:
         print("Bad Data")
         return "Bad Data"
+
+@question_routes.route('/<int:id>/comments', methods=['POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment(comment=form.data['comment'],
+        userId=current_user.id,
+        questionId= id
+        )
+        db.session.add(comment)
+        db.session.commit()
+    return

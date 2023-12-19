@@ -1,11 +1,15 @@
-.savedQuestion_page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 .delete_sq {
+    position: relative;
     list-style: none;
     display: flex;
     cursor: pointer;
+    bottom: 15px;
+    font-size: 12px;
 }
+
+.delete_sq > i {
+    padding-right: 5px;
+}
+

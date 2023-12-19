@@ -28,6 +28,10 @@ h3 {
     color: gray
 }
 
+.topic:hover {
+    color: #B92B27
+}
+
 .questionscont {
     display: flex;
     flex-direction: column;
@@ -40,13 +44,12 @@ h3 {
     display: flex;
     margin-bottom: 20px;
     border: 1px solid black;
-    padding: 20px 0px 20px 0px;
-    width: 600px;
+    padding: 20px 25px;
+    width: 550px;
     justify-content: center;
     text-decoration: none;
     background-color: white;
-    font-family: sans-serif;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
     color: black;
     border-radius: 5px;
