@@ -14,6 +14,8 @@ const CurrentQuestions = () => {
     console.log("Curr user question user", user)
     if (!questions) return null
     if (!user) return null
+
+    console.log("inside CurrentQuestions")
     return (
         <div>
             <h1>Your Questions</h1>

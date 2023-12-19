@@ -82,15 +82,6 @@ const topicReducer = (state = initialState, action) => {
     default:
       return state;
   }
-  const topicReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case LOAD_ALL_TOPICS:
-          return { ...state, ...action.topics };
-      case LOAD_SINGLE_TOPICS:
-          return { ...state, ...action.topic };
-      default:
-        return state;
-    }
 };
 
 export default topicReducer;

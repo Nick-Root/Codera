@@ -61,7 +61,9 @@ def get_curr_questions():
 
     user_data = user.to_dict()
 
-    return jsonify(question_data, user_data)
+    question_data = [question.to_dict() for question in questions]
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", question_data, user_data)
+    return jsonify(user=user_data, questions=question_data)
 
 
 @question_routes.route("", methods=["POST"])
