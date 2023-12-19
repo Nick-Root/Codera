@@ -10,6 +10,8 @@ import CurrentQuestions from '../components/CurrentQuestions/CurrentQuestions';
 import CurrentComments from '../components/CurrentComments/CurrentComments';
 import SavedQuestion from '../components/SavedQuestion/SavedQuestion';
 
+import QuestionForm from '../components/QuestionForm/QuestionForm';
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -17,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <MainPage />,
+      },
+      {
+        path: "/test-post",
+        element: <QuestionForm/>
       },
       {
         path: "login",
