@@ -7,7 +7,7 @@ import { thunkPostOneQuestion } from '../../redux/question.js';
 
 function QuestionForm() {
    const [question, setQuestion] = useState('');
-   const [topic, setTopic] = useState('');
+   const [topicId, setTopicId] = useState({});
    const dispatch = useDispatch();
 
 
@@ -23,7 +23,7 @@ function QuestionForm() {
    const arrAllTopics = Object.values(allTopics);  //array of objects
    //console.log("topicsArr", arrAllTopics)
 
-   const arrTopics = arrAllTopics.map(obj => obj.topic);
+   //const arrTopic = arrAllTopics.map(obj => obj.topic);
    //console.log("arrTopics", arrTopics)  //['Python', 'JavaScript', 'Express']
 
 
@@ -44,12 +44,13 @@ function QuestionForm() {
        e.preventDefault();
        // setHasSubmitted(true);
 
-       const newQuestion = {
+       //question and topicId
+       const dataObj = {
            question,
-           topic
+           topicId
        };
-       console.log("onSubmit newQuestion", newQuestion);
-       dispatch(thunkPostOneQuestion(newQuestion));
+       console.log("dataObj with {topicId: topicId, question: question}", dataObj );
+       dispatch(thunkPostOneQuestion(dataObj));
 
        setQuestion('');
        // reset validation errors to empty object
@@ -60,7 +61,7 @@ function QuestionForm() {
 
    //state check
    //console.log("question", question)
-   //console.log("topic", topic)
+   console.log("topicId", topicId)
    return (
      <div>
        <h2>Ask a Question</h2>
@@ -79,9 +80,10 @@ function QuestionForm() {
            </div>
            <div>
                 <label htmlFor='question'>Topic</label>
-                <select id='topic' onChange={e => setTopic(e.target.value)} value={topic}>
-                    {arrTopics.map((topic) => (
-                        <option key={topic} value={topic}>{topic}</option>
+                <select onChange={e => setTopicId(e.target.value)} value={topicId}>
+                    {arrAllTopics.map((topicObj) => (
+                        //value is topicObj.id because we want to pass that back
+                        <option key={topicObj.id} value={topicObj.id}>{topicObj.topic}</option>
                     ))}
                 </select>
            </div>

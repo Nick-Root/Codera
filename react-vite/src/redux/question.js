@@ -56,14 +56,16 @@ export const thunkGetOneQuestion = (id) => async (dispatch) => {
   }
 }
 
-export const thunkPostOneQuestion = (question) => async (dispatch) => {
-  console.log("before POST");
+//dataObj {question: question, topicId: topicId}
+export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
+  //should go inside the database
+  //console.log("before POST");
   const res = await fetch(`/api/questions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(question)
+    body: JSON.stringify(dataObj)
   });
-  console.log("after POST");
+  //console.log("after POST");
 
 
   if(res.ok) {
@@ -73,6 +75,7 @@ export const thunkPostOneQuestion = (question) => async (dispatch) => {
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
     return newQuestion;
   } else {
+    console.log('status code:', res.status)
     console.log("POST error message")
     const error = await res.json();
     console.log('error', error)
@@ -91,7 +94,7 @@ const questionsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_QUESTIONS: {
       const newState = { ...initialState };
-      console.log('action.allquestions', action.allQuestions)
+      console.log('action.allQuestions', action.allQuestions)
       action.allQuestions.forEach((question) => newState[question.id] = question);
       // console.log('newState', newState);
       return newState;
