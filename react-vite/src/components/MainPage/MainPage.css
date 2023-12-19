@@ -28,6 +28,10 @@ h3 {
     color: gray
 }
 
+.topic:hover {
+    color: #B92B27
+}
+
 .questionscont {
     display: flex;
     flex-direction: column;
