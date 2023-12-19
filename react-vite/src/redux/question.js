@@ -58,7 +58,7 @@ export const thunkGetOneQuestion = (id) => async (dispatch) => {
 
 export const thunkPostOneQuestion = (question) => async (dispatch) => {
   console.log("before POST");
-  const res = await fetch(`/api/question`, {
+  const res = await fetch(`/api/questions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(question)
@@ -67,6 +67,7 @@ export const thunkPostOneQuestion = (question) => async (dispatch) => {
 
 
   if(res.ok) {
+    console.log("post res.ok")
     const newQuestion = await res.json();  //now the Question should have a id created from the backend
     console.log("thunk newQuestion", newQuestion)
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
@@ -74,6 +75,7 @@ export const thunkPostOneQuestion = (question) => async (dispatch) => {
   } else {
     console.log("POST error message")
     const error = await res.json();
+    console.log('error', error)
     return error;
   }
  }
