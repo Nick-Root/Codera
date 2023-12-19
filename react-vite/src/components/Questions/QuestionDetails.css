@@ -1,0 +1,31 @@
+.bottom_text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user_question {
+    position: relative;
+    font-size: 15px;
+    margin-top: 15px;
+    color: grey;
+    font-weight: 500;
+}
+
+.save_button {
+    position: relative;
+    top: 17px;
+    height: 30px;
+}
+
+.create-comment {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.create-comment > textarea {
+    width: 33em;
+}
+
+.comments {
+    width: 35em;
+}

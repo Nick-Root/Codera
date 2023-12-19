@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentComments } from "../../redux/comment"
+import './CurrentComments.css'
 
 
 const CurrentComments = () => {
@@ -25,20 +26,22 @@ const CurrentComments = () => {
     if (!user) return null
 
     return (
-        <div>
-            <h1>Your Comments</h1>
+        <div className="container">
+            <div className="container_text">Your Comments</div>
             {comments.map((comment) => (
-                <div key={comment.commentId} className="one_question_container">
-                    <h2>{comment.comment}</h2>
-                    <p className="userName">{user.username}</p>
-                    <p className="created-date">
-                        Commented on:{" "}
-                        {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                        })}
-                    </p>
+                <div key={comment.commentId} className="one_question_container" >
+                    <div>{comment.comment}</div>
+                    <div className="user_comments">
+                        <p className="userName">{user.username}</p>
+                        <p className="created-date">
+                            Commented on:{" "}
+                            {new Date(comment.createdAt).toLocaleDateString(undefined, {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </p>
+                    </div>
                 </div>
             ))}
         </div>
