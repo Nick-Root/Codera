@@ -30,7 +30,7 @@ const QuestionDetails = () => {
         await dispatch(thunkPostComment(id, commentData))
         await dispatch(thunkGetOneQuestion(id))
 
-        // setCommentText('')
+        setCommentText('')
     };
 
     useEffect(() => {
