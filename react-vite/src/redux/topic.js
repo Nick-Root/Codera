@@ -48,6 +48,8 @@ export const thunkGetSingleTopic = (topicId) => async (dispatch) => {
   }
 };
 
+
+
 export const createTopicThunk = (topic) => async dispatch => {
   const res = await fetch("/api/topics/new", {
     method: "POST",
@@ -66,8 +68,8 @@ export const createTopicThunk = (topic) => async dispatch => {
 }
 
 
-//reducer
-const initialState = {};
+  //reducer
+  const initialState = {};
 
 const topicReducer = (state = initialState, action) => {
   switch (action.type) {

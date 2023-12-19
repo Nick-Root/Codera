@@ -4,6 +4,9 @@ const LOAD_USER_QUESTIONS = '/questions/loadUserQuestions'
 const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
 const DELETE_SAVED_QUESTION = "questions/deleteSavedQuestion"
 const ADD_SAVED_QUESTION = "questions/addSavedQuestion"
+const RECEIVE_ONE_QUESTION = "questions/receiveOneQuestion"
+
+
 
 const loadAllQuestions = (allQuestions) => {
   return {
@@ -18,7 +21,6 @@ const loadOneQuestion = (question) => {
     question
   }
 }
-
 const loadUserQuestions = (userQuestions) => {
   return {
     type: LOAD_USER_QUESTIONS,
@@ -33,7 +35,7 @@ const loadSavedQuestions = (allQuestions) => {
   };
 };
 
-export const deleteSavedQuestion = (questionId) => ({
+const deleteSavedQuestion = (questionId) => ({
   type: DELETE_SAVED_QUESTION,
   questionId
 })
@@ -41,6 +43,13 @@ export const deleteSavedQuestion = (questionId) => ({
 const addSavedQuestion = (question) => {
   return {
     type: ADD_SAVED_QUESTION,
+    question
+  }
+}
+
+const receiveOneQuestion = (question) => {
+  return {
+    type: RECEIVE_ONE_QUESTION,
     question
   }
 }
@@ -125,6 +134,36 @@ export const thunkFetchAddSavedQuestion = (question, questionId) => async (dispa
   }
 }
 
+
+//dataObj {question: question, topicId: topicId}
+export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
+  //should go inside the database
+  //console.log("before POST");
+  const res = await fetch(`/api/questions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dataObj)
+  });
+  //console.log("after POST");
+
+
+  if(res.ok) {
+    console.log("post res.ok")
+    const newQuestion = await res.json();  //now the Question should have a id created from the backend
+    console.log("thunk newQuestion", newQuestion)
+    dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
+    return newQuestion;
+  } else {
+    console.log('status code:', res.status)
+    console.log("POST error message")
+    const error = await res.json();
+    console.log('error', error)
+    return error;
+  }
+ }
+
+
+
 //reducer
 const initialState = {};
 let nextState
@@ -153,6 +192,10 @@ const questionsReducer = (state = initialState, action) => {
         createdAt: question.createdAt
       }))
       return newState;
+    }
+    case RECEIVE_ONE_QUESTION: {
+      const newState = { ...state, [action.question.id]: action.question }
+      return newState
     }
     case LOAD_SAVED_QUESTIONS: {
       const newState = { ...initialState };
