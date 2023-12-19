@@ -71,37 +71,37 @@ const MainPage = () => {
                                         <>
                                             <i className="fa-brands fa-python"></i> {topic.topic}
                                         </>
-                                    ) 
-                                    : topic.topic === 'JavaScript' ? (
-                                        <>
-                                            <i className="fab fa-js"></i> {topic.topic}
-                                        </>
                                     )
-                                    : topic.topic === 'Express' ? (
-                                        <>
-                                            <i className="fa-solid fa-code"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : topic.topic === 'SQL' ? (
-                                        <>
-                                            <i className="fa-solid fa-database"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : topic.topic === 'HTML' ? (
-                                        <>
-                                            <i className="fa-brands fa-html5"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : topic.topic === 'CSS' ? (
-                                        <>
-                                            <i className="fa-brands fa-css3-alt"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : (
-                                        <>
-                                           <i className="fa-solid fa-code"></i> {topic.topic}
-                                        </>
-                                    )}
+                                        : topic.topic === 'JavaScript' ? (
+                                            <>
+                                                <i className="fab fa-js"></i> {topic.topic}
+                                            </>
+                                        )
+                                            : topic.topic === 'Express' ? (
+                                                <>
+                                                    <i className="fa-solid fa-code"></i> {topic.topic}
+                                                </>
+                                            )
+                                                : topic.topic === 'SQL' ? (
+                                                    <>
+                                                        <i className="fa-solid fa-database"></i> {topic.topic}
+                                                    </>
+                                                )
+                                                    : topic.topic === 'HTML' ? (
+                                                        <>
+                                                            <i className="fa-brands fa-html5"></i> {topic.topic}
+                                                        </>
+                                                    )
+                                                        : topic.topic === 'CSS' ? (
+                                                            <>
+                                                                <i className="fa-brands fa-css3-alt"></i> {topic.topic}
+                                                            </>
+                                                        )
+                                                            : (
+                                                                <>
+                                                                    <i className="fa-solid fa-code"></i> {topic.topic}
+                                                                </>
+                                                            )}
                                 </NavLink>
                             );
                         })}
