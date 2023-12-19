@@ -50,7 +50,7 @@ export default function TopicPage() {
     }
 
     return (
-        <div>
+        <div className="container">
             <ul className='updatetop'>
                 {ownercheck && (<OpenModalMenuItem
                     itemText='Edit Topic'
@@ -59,7 +59,7 @@ export default function TopicPage() {
                     modalComponent={<UpdateTopicModal />}
                 />)}
             </ul>
-            <div>{topic[0]?.topic}</div>
+            <div className="container_text">{topic[0]?.topic}</div>
             <div>
                 {topic[0]?.questions.map(question => {
                     return <NavLink to={`/questions/${question.id}`} className='question'>
