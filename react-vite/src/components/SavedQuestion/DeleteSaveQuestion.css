@@ -1,0 +1,12 @@
+.delete_buttons {
+    margin-top: 10px;
+}
+
+.delete_buttons > button {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.delete_buttons > button:nth-child(2) {
+    background-color: #B92B27;
+}

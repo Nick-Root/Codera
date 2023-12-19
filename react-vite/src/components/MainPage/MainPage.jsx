@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
@@ -11,7 +11,7 @@ import QuestionForm from "../QuestionForm/QuestionForm";
 
 const MainPage = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)
@@ -67,7 +67,41 @@ const MainPage = () => {
                         {arrTopic.map((topic) => {
                             return (
                                 <NavLink to={`/topics/${topic.id}`} key={topic.id} className='topic'>
-                                    {topic.topic}
+                                    {topic.topic === 'Python' ? (
+                                        <>
+                                            <i className="fa-brands fa-python"></i> {topic.topic}
+                                        </>
+                                    ) 
+                                    : topic.topic === 'JavaScript' ? (
+                                        <>
+                                            <i className="fab fa-js"></i> {topic.topic}
+                                        </>
+                                    )
+                                    : topic.topic === 'Express' ? (
+                                        <>
+                                            <i className="fa-solid fa-code"></i> {topic.topic}
+                                        </>
+                                    )
+                                    : topic.topic === 'SQL' ? (
+                                        <>
+                                            <i className="fa-solid fa-database"></i> {topic.topic}
+                                        </>
+                                    )
+                                    : topic.topic === 'HTML' ? (
+                                        <>
+                                            <i className="fa-brands fa-html5"></i> {topic.topic}
+                                        </>
+                                    )
+                                    : topic.topic === 'CSS' ? (
+                                        <>
+                                            <i className="fa-brands fa-css3-alt"></i> {topic.topic}
+                                        </>
+                                    )
+                                    : (
+                                        <>
+                                           <i className="fa-solid fa-code"></i> {topic.topic}
+                                        </>
+                                    )}
                                 </NavLink>
                             );
                         })}
@@ -75,10 +109,7 @@ const MainPage = () => {
                 </div>
 
                 <div className='questionscont'>
-                    <div className='askaques'>
-                        <p>Placeholder for ask a question box</p>
-                        <p>(will have a modal button on the nav aswell)</p>
-                    </div>
+
                     <div className='askaques'>
                         <QuestionForm />
                     </div>
@@ -91,6 +122,20 @@ const MainPage = () => {
                             </NavLink>
                         )
                     })}
+                </div>
+                <div className='resourcescont'>
+                    <h3 className='resourcesheader'>External Resoures</h3>
+                    <div className='resimgs'>
+                        <a href='https://developer.mozilla.org/en-US/'><img src='../../../../public/mdn_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://www.python.org/doc/'><img src='../../../../public/python_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://react.dev/reference/react/hooks'><img src='../../../../public/react_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://redux.js.org/introduction/getting-started'><img src='../../../../public/redux_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://sequelize.org/'><img src='../../../../public/sequelize_logo.png' className='resourceimg'></img></a>
+                    </div>
                 </div>
 
             </div>

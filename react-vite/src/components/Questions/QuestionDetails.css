@@ -22,10 +22,26 @@
     margin-bottom: 20px;
 }
 
-.create-comment > textarea {
+.create-comment>textarea {
     width: 33em;
 }
 
 .comments {
     width: 35em;
+}
+
+.comment {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    padding: 20px 25px;
+    width: 550px;
+    justify-content: center;
+    text-decoration: none;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    border-radius: 5px;
+
 }
