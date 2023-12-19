@@ -25,8 +25,8 @@ function CreateTopicModal() {
         } else {
             closeModal()
         }
-
     }
+
     return (
         <div className='topmodalcont'>
             <h1>Create a Topic</h1>

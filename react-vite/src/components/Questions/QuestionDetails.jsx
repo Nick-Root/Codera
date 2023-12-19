@@ -1,12 +1,12 @@
 import './QuestionDetails.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import { useParams } from "react-router-dom";
 
-
-
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
 
 const QuestionDetails = () => {
     const { id } = useParams();
@@ -33,6 +33,24 @@ const QuestionDetails = () => {
         setCommentText('')
     };
 
+    //logic for Modal
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
+    useEffect(() => {
+        if (!showMenu) return;
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+            setShowMenu(false);
+            }
+        };
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+    const closeMenu = () => setShowMenu(false);
+
+
+
     useEffect(() => {
         dispatch(thunkGetOneQuestion(id))
     }, [dispatch, id])
@@ -56,6 +74,16 @@ const QuestionDetails = () => {
                 })}
             </p>
             <button onClick={saved}>save</button>
+            {/* edit question button/modal */}
+            <div id="update-question-button">
+                <OpenModalMenuItem
+                    itemText='Edit'
+                    onItemClick={closeMenu}
+                    className='updatequestionmodal'
+                    modalComponent={<UpdateQuestionModal id={parseInt(id)}/>}
+                />
+            </div>
+            <div></div>
             <div className="comments">
                 <h3>Comments:</h3>
                 <div className='create-comment'>

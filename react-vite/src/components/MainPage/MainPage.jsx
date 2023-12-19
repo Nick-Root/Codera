@@ -6,12 +6,26 @@ import { NavLink } from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
+import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
 
 const MainPage = () => {
     const dispatch = useDispatch();
+    const [topicId, setTopicId] = useState(1);
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)
+
+    // //needs to set topicId
+    // const questionData = useSelector((state) => state.question.oneQuestion || [])
+    // const { 0: questionText, 1: comments } = questionData
+    // console.log("questionText.topicId", questionText.topicId)
+
+    // //do not want to set state on first render, only on second and when it changes
+    // useEffect(() => {
+    //     setQuestion(questionText.question)
+    //     setTopicId(questionText.topicId)
+    // }, [questionData])
+
 
     const [showMenu, setShowMenu] = useState(false);
     useEffect(() => {
@@ -41,7 +55,11 @@ const MainPage = () => {
     let arrQues = Object.values(questions)
     let arrTopic = Object.values(topics)
 
+
+
+
     // console.log("%c   LOOK HERE", "color: red; font-size: 18px", arrQues);
+    console.log("arrQues", arrQues)
     return (
         <>
             <div className='mainpage'>
@@ -74,11 +92,22 @@ const MainPage = () => {
                 <div className='questionscont'>
                     {arrQues.map((question) => {
                         return (
+                            <>
                             <NavLink to={`/questions/${question.id}`} className='question' key={question.id}>{question.question}
                                 <p className="asker">
                                     {question.askerUsername}
                                 </p>
                             </NavLink>
+                            {/* <div id="edit-question-button-main">
+                                <OpenModalMenuItem
+                                    itemText='Edit'
+                                    onItemClick={closeMenu}
+                                    className='topmodal'
+                                    modalComponent={<UpdateQuestionModal id={question.id}/>}
+                                />
+                            </div> */}
+                            </>
+
                         )
                     })}
                 </div>
