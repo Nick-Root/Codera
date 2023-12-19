@@ -19,7 +19,7 @@ export const getCurrentComments = () => async (dispatch) => {
 
 
 const initialState = {}
-let newState
+// let newState
 
 const commentsReducer = (state= initialState, action) => {
     console.log("%c   LOOK HERE", "color: purple; font-size: 18px", action)

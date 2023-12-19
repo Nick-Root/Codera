@@ -8,7 +8,7 @@ question_routes = Blueprint('questions', __name__)
 
 @question_routes.route('/')
 def get_questions():
-    questions_list = Question.query.all()
+    questions_list = Question.query.order_by(Question.id.desc()).all()
 
     questions = []
 
@@ -62,3 +62,11 @@ def get_curr_questions():
     return jsonify(user=user_data, questions=question_data)
 
 
+@question_routes.route('<int:id>', methods=['DELETE'])
+def delete_question(id):
+    question = Question.query.get(id)
+
+    db.session.delete(question)
+    db.session.commit()
+
+    return jsonify({'message': 'Question removed successfully'})

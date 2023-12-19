@@ -2,6 +2,7 @@ const LOAD_ALL_QUESTIONS = "questions/loadAllQuestions";
 const LOAD_ONE_QUESTION = 'questions/loadOneQuestion'
 const LOAD_USER_QUESTIONS = '/questions/loadUserQuestions'
 const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
+const DELETE_SAVED_QUESTION = "questions/deleteSavedQuestion"
 
 const loadAllQuestions = (allQuestions) => {
   return {
@@ -30,6 +31,11 @@ const loadSavedQuestions = (allQuestions) => {
     allQuestions: allQuestions
   };
 };
+
+export const deleteSavedQuestion = (questionId) => ({
+  type: DELETE_SAVED_QUESTION,
+  questionId
+})
 
 export const thunkGetAllQuestions = () => async (dispatch) => {
   //GET /api/Questions
@@ -85,6 +91,18 @@ export const thunkGetSavedQuestions = () => async (dispatch) => {
   }
 };
 
+export const thunkFetchRemoveSavedQuestion = (questionId) => async (dispatch) => {
+  const res = await fetch(`/api/savedQuestions/${questionId}/remove`, {
+      method: 'DELETE',
+      headers: { "Content-Type": "application/json" },
+  })
+
+  if (res.ok) {
+      dispatch(deleteSavedQuestion(questionId))
+  }
+  return questionId
+}
+
 //reducer
 const initialState = {};
 let nextState
@@ -117,7 +135,11 @@ const questionsReducer = (state = initialState, action) => {
     case LOAD_SAVED_QUESTIONS: {
       const newState = { ...initialState };
       action.allQuestions.forEach((question) => newState[question.id] = question);
-
+      return newState;
+    }
+    case DELETE_SAVED_QUESTION: {
+      let newState = { ...state };
+      delete newState[action.questionId];
       return newState;
     }
     default:
