@@ -76,10 +76,6 @@ const MainPage = () => {
 
                 <div className='questionscont'>
                     <div className='askaques'>
-                        <p>Placeholder for ask a question box</p>
-                        <p>(will have a modal button on the nav aswell)</p>
-                    </div>
-                    <div className='askaques'>
                         <QuestionForm />
                     </div>
                     {arrQues.map((question) => {
@@ -91,6 +87,10 @@ const MainPage = () => {
                             </NavLink>
                         )
                     })}
+                </div>
+                <div className='resourcescont'>
+                    <h3 className='resourcesheader'>External Resoures</h3>
+
                 </div>
 
             </div>
