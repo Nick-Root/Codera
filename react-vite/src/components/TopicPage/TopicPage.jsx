@@ -2,14 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetSingleTopic } from "../../redux/topic";
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
 import UpdateTopicModal from "../UpdateTopicModal/UpdateTopicModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useModal } from "../../context/Modal";
-=======
 import { NavLink } from "react-router-dom";
 
->>>>>>> 8ccbdabbb28c7e3932a099e088a48aa83a302dab
 
 export default function TopicPage() {
     const { topicId } = useParams()
@@ -53,7 +50,6 @@ export default function TopicPage() {
     }
 
     return (
-<<<<<<< HEAD
         <div>
             <ul className='updatetop'>
                 {ownercheck && (<OpenModalMenuItem
@@ -65,11 +61,6 @@ export default function TopicPage() {
             </ul>
             <div>{topic[0]?.topic}</div>
             <div>
-=======
-        <div className="container">
-            <div className="container_text">{topic[0]?.topic}</div>
-            <div >
->>>>>>> 8ccbdabbb28c7e3932a099e088a48aa83a302dab
                 {topic[0]?.questions.map(question => {
                     return <NavLink to={`/questions/${question.id}`} className='question'>
                         {question?.question}
