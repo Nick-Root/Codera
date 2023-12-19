@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import { useParams } from "react-router-dom";
-
+import './QuestionDetails.css'
 
 
 
@@ -44,18 +44,24 @@ const QuestionDetails = () => {
         dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
     }
     return (
-        <div className='one_question_container'>
-            <h2>{question.question}</h2>
-            <p className='userName'>{question.askerUsername}</p>
-            <p className='created-date'>
-                Asked:{" "}
-                {new Date(question.createdAt).toLocaleDateString(undefined, {
-                    day: 'numeric',
-                    month: "long",
-                    year: "numeric",
-                })}
-            </p>
-            <button onClick={saved}>save</button>
+        <div className='container'>
+            <div className="container_text">
+                <div>{question.question}</div>
+                <div className='bottom_text'>
+                    <div className="user_question">
+                        <p className='userName'>{question.askerUsername}</p>
+                        <p className='created-date'>
+                            Asked:{" "}
+                            {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                day: 'numeric',
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </p>
+                    </div>
+                    <button onClick={saved} className='save_button'>save</button>
+                </div>
+            </div>
             <div className="comments">
                 <h3>Comments:</h3>
                 <div className='create-comment'>
@@ -68,15 +74,17 @@ const QuestionDetails = () => {
                 </div>
                 {comments.map((comment) => (
                     <div key={comment.commentId} className="comment">
-                        <p>{comment.comment}</p>
-                        <p className='comment-date'>
-                            Commented by: {comment.username}{" "} on {' '}
-                            {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                                day: 'numeric',
-                                month: "long",
-                                year: "numeric",
-                            })}
-                        </p>
+                        <div className='comments'>
+                            <p>{comment.comment}</p>
+                            <p className='user_question' >
+                                Commented by: {comment.username}{" "} on {' '}
+                                {new Date(comment.createdAt).toLocaleDateString(undefined, {
+                                    day: 'numeric',
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>
