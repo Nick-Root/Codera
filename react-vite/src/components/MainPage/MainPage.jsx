@@ -71,37 +71,37 @@ const MainPage = () => {
                                         <>
                                             <i className="fa-brands fa-python"></i> {topic.topic}
                                         </>
-                                    ) 
-                                    : topic.topic === 'JavaScript' ? (
-                                        <>
-                                            <i className="fab fa-js"></i> {topic.topic}
-                                        </>
                                     )
-                                    : topic.topic === 'Express' ? (
-                                        <>
-                                            <i className="fa-solid fa-code"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : topic.topic === 'SQL' ? (
-                                        <>
-                                            <i className="fa-solid fa-database"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : topic.topic === 'HTML' ? (
-                                        <>
-                                            <i className="fa-brands fa-html5"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : topic.topic === 'CSS' ? (
-                                        <>
-                                            <i className="fa-brands fa-css3-alt"></i> {topic.topic}
-                                        </>
-                                    )
-                                    : (
-                                        <>
-                                           <i className="fa-solid fa-code"></i> {topic.topic}
-                                        </>
-                                    )}
+                                        : topic.topic === 'JavaScript' ? (
+                                            <>
+                                                <i className="fab fa-js"></i> {topic.topic}
+                                            </>
+                                        )
+                                            : topic.topic === 'Express' ? (
+                                                <>
+                                                    <i className="fa-solid fa-code"></i> {topic.topic}
+                                                </>
+                                            )
+                                                : topic.topic === 'SQL' ? (
+                                                    <>
+                                                        <i className="fa-solid fa-database"></i> {topic.topic}
+                                                    </>
+                                                )
+                                                    : topic.topic === 'HTML' ? (
+                                                        <>
+                                                            <i className="fa-brands fa-html5"></i> {topic.topic}
+                                                        </>
+                                                    )
+                                                        : topic.topic === 'CSS' ? (
+                                                            <>
+                                                                <i className="fa-brands fa-css3-alt"></i> {topic.topic}
+                                                            </>
+                                                        )
+                                                            : (
+                                                                <>
+                                                                    <i className="fa-solid fa-code"></i> {topic.topic}
+                                                                </>
+                                                            )}
                                 </NavLink>
                             );
                         })}
@@ -126,15 +126,15 @@ const MainPage = () => {
                 <div className='resourcescont'>
                     <h3 className='resourcesheader'>External Resoures</h3>
                     <div className='resimgs'>
-                        <a href='https://developer.mozilla.org/en-US/'><img src='../../../../public/mdn_logo.png' className='resourceimg'></img></a>
+                        <a href='https://developer.mozilla.org/en-US/'><img src='../../../../mdn_logo.png' className='resourceimg'></img></a>
 
-                        <a href='https://www.python.org/doc/'><img src='../../../../public/python_logo.png' className='resourceimg'></img></a>
+                        <a href='https://www.python.org/doc/'><img src='../../../../python_logo.png' className='resourceimg'></img></a>
 
-                        <a href='https://react.dev/reference/react/hooks'><img src='../../../../public/react_logo.png' className='resourceimg'></img></a>
+                        <a href='https://react.dev/reference/react/hooks'><img src='../../../../react_logo.png' className='resourceimg'></img></a>
 
-                        <a href='https://redux.js.org/introduction/getting-started'><img src='../../../../public/redux_logo.png' className='resourceimg'></img></a>
+                        <a href='https://redux.js.org/introduction/getting-started'><img src='../../../../redux_logo.png' className='resourceimg'></img></a>
 
-                        <a href='https://sequelize.org/'><img src='../../../../public/sequelize_logo.png' className='resourceimg'></img></a>
+                        <a href='https://sequelize.org/'><img src='../../../../sequelize_logo.png' className='resourceimg'></img></a>
                     </div>
                 </div>
 
