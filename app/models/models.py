@@ -98,19 +98,24 @@ class Topic(db.Model):
     __tablename__ = 'topics'
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(20), nullable=False)
+    ownerId = db.Column(db.Integer, db.ForeignKey('users.id', name='topic_owner'))
 
-    # Specify the foreign key relationship with the 'questions' table
+    owner = db.relationship('User', back_populates='topics')
+
     questions = db.relationship('Question', primaryjoin="Topic.id == Question.topicId", back_populates='topic', overlaps='questions')
 
     def to_dict(self):
         return {
             'id': self.id,
-            'topic': self.topic
+            'topic': self.topic,
+            'ownerId': self.ownerId
         }
+
 
 
 # Define relationships
 User.questions = db.relationship('Question', back_populates='owner')
+User.topics = db.relationship('Topic', back_populates='owner', overlaps='owner_topics')
 Question.owner = db.relationship('User', back_populates='questions')
 Question.saved_questions = db.relationship('SavedQuestion', back_populates='question')
 SavedQuestion.question = db.relationship('Question', back_populates='saved_questions')
