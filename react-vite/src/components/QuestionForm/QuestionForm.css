@@ -1,0 +1,25 @@
+#heading {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.question-form-container {
+    width: 90%;
+    margin-left: 100px;
+}
+
+.input-container{
+    margin: 5px 0;
+}
+#question-label {
+    margin: 0 5px;
+}
+
+#question-input {
+    width: 80%;
+}
+
+#submit-question-button {
+    margin: 5px 0;
+}

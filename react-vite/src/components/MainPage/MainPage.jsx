@@ -7,6 +7,7 @@ import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
 
+import QuestionForm from "../QuestionForm/QuestionForm";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -76,6 +77,9 @@ const MainPage = () => {
                     <div className='askaques'>
                         <p>Placeholder for ask a question box</p>
                         <p>(will have a modal button on the nav aswell)</p>
+                    </div>
+                    <div className='askaques'>
+                        <QuestionForm />
                     </div>
                     {arrQues.map((question) => {
                         return (

@@ -1,7 +1,7 @@
 import './QuestionDetails.css';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetOneQuestion } from '../../redux/question'
+import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import { useParams } from "react-router-dom";
 
@@ -40,8 +40,9 @@ const QuestionDetails = () => {
     if (!question) {
         return null
     }
-
-
+    const saved = () => {
+        dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
+    }
     return (
         <div className='one_question_container'>
             <h2>{question.question}</h2>
@@ -54,7 +55,7 @@ const QuestionDetails = () => {
                     year: "numeric",
                 })}
             </p>
-
+            <button onClick={saved}>save</button>
             <div className="comments">
                 <h3>Comments:</h3>
                 <div className='create-comment'>

@@ -4,13 +4,20 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', firstname='Demo', lastname='User', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', firstname='M-Dog', lastname='mLast', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', firstname='Bob', lastname='bie', email='bobbie@aa.io', password='password')
+    demo = User(username='Demo', firstname='Demo', lastname='User', email='demo@aa.io', password='password')
+    marnie = User(username='marnie', firstname='M-Dog', lastname='mLast', email='marnie@aa.io', password='password')
+    bobbie = User(username='bobbie', firstname='Bob', lastname='bie', email='bobbie@aa.io', password='password')
+    botone = User(username='botone', firstname='bot', lastname='one', email='botone@gmail.com', password='botonepass')
+    bottwo = User(username='bottwo', firstname='bot', lastname='two', email='bottwo@gmail.com', password='bottwopass')
+    botthree = User(username='botthree', firstname='bot', lastname='three', email='botthree@gmail.com', password='botthreepass')
+    botfour = User(username='botfour', firstname='bot', lastname='four', email='botfour@gmail.com', password='botfourpass')
+    botfive = User(username='botfive', firstname='bot', lastname='five', email='botfive@gmail.com', password='botfivepass')
 
+    db.session.add(botone)
+    db.session.add(bottwo)
+    db.session.add(botthree)
+    db.session.add(botfour)
+    db.session.add(botfive)
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
