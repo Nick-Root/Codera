@@ -52,10 +52,11 @@ const MainPage = () => {
                 {/* All Topics */}
                 <div className='topicscont'>
 
-                    <ul>
+                    <ul className='createtop'>
                         <OpenModalMenuItem
                             itemText='Create Topic'
                             onItemClick={closeMenu}
+                            className='topmodal'
                             modalComponent={<CreateTopicModal />}
                         />
                     </ul>
