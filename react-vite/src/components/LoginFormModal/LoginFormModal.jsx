@@ -36,7 +36,7 @@ function LoginFormModal() {
 
   return (
     <>
-      <div className="logIn_SingUp_container">
+      <div className="modal_container">
         {/* <h1>LoginFormModal</h1> */}
         <h1>Log In</h1>
         <form onSubmit={handleSubmit} className="logIn_SingUp_form">
