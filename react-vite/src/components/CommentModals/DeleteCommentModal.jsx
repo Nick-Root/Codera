@@ -28,11 +28,11 @@ const DeleteCommentModal = ({ comment }) => {
     return (
         <>
             <div id='delete_comment_container' className="login_container">
-                <div>Delete comment?</div>
-                <div>Are you sure you want to delete this comment?</div>
+                <h2 className='delcomm'>Delete comment?</h2>
+                <div className='commconfirm'>Are you sure you want to delete this comment?</div>
                 <div className='modal-buttons'>
-                    <button onClick={closeModal}>Cancel</button>
                     <button onClick={deleteComment}>Delete</button>
+                    <button onClick={closeModal}>Cancel</button>
                 </div>
             </div>
         </>

@@ -15,12 +15,14 @@
     margin-left: 50px;
 }
 
-.input-container{
+.input-container {
     margin: 5px 0;
 }
+
 #question-label {
     margin: 0 5px;
 }
+
 #question-input {
     width: 80%;
     height: 25px;
@@ -36,4 +38,14 @@
 
 #submit-question-button {
     margin: 5px 0;
+    color: white;
+    background-color: #B92B27;
+    box-shadow: 2px 2px black;
+    border: 2px solid black;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+}
+
+#submit-question-button:hover {
+    cursor: pointer;
 }

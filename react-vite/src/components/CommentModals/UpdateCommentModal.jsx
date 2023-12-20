@@ -40,23 +40,24 @@ const UpdateCommentModal = ({ comment }) => {
     return (
         <div className="update-comment-modal">
             <div className="modal-header">
-                <h3>Edit Comment</h3>
+                <h3>Edit Your Comment</h3>
             </div>
             <div className="modal-content">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="updatedComment">Updated Comment</label>
-                        <textarea
+                        <input
                             id="updatedComment"
+                            type='text'
                             name="updatedComment"
                             placeholder=''
                             value={newCommentText}
                             onChange={(e) => setUpdatedComment(e.target.value)}
                         />
+                        {/* <label htmlFor="updatedComment">Updated Comment</label> */}
 
                     </div>
                     <div className="form-group">
-                        <button type="submit">Save Changes</button>
+                        <button type="submit" className='savechange'>Save Changes</button>
                     </div>
                 </form>
             </div>
