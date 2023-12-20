@@ -37,4 +37,5 @@
     margin-top: 15px;
     color: grey;
     font-weight: 500;
+    z-index: 1;
 }
