@@ -139,7 +139,17 @@ const MainPage = () => {
                         <a href='https://redux.js.org/introduction/getting-started'><img src='../../../../redux_logo.png' className='resourceimg'></img></a>
 
                         <a href='https://sequelize.org/'><img src='../../../../sequelize_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://expressjs.com/'><img src='../../../../express_logo.png' className='resourceimg'></img></a>
                     </div>
+                    <ul className='footer'>
+                        <h3 className="devteam">Dev Team</h3>
+                        <NavLink to='https://github.com/Nick-Root' className={'footLink'}>Nick Root</NavLink>
+                        <NavLink to='https://github.com/JomarAA' className={'footLink'}>Jomar Yanos</NavLink>
+                        <NavLink to='https://github.com/anchiingn' className={'footLink'}>Anchi Nguyen</NavLink>
+                        <NavLink to='https://github.com/howtojames' className={'footLink'}>James Ruan</NavLink>
+
+                    </ul>
                 </div>
 
             </div>

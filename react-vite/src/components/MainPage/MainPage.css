@@ -123,3 +123,29 @@ h3 {
     border-bottom: 1px solid black;
     padding-bottom: 5px;
 }
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 40px;
+    margin-top: 30px;
+}
+
+.footLink {
+    font-weight: 100;
+    text-decoration: none;
+    color: grey;
+}
+
+.footLink:hover {
+    color: #B92B27;
+}
+
+.footLink.active {
+    color: #B92B27;
+}
+
+.devteam {
+    border-bottom: 1px solid black;
+}

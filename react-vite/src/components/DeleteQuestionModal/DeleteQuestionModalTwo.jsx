@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import { thunkDeleteQuestion, getCurrentQuestions } from '../../redux/question';
 import './DeleteQuestionModal.css'
 
-const DeleteQuestionModalTwo = ( {id} ) => {
+const DeleteQuestionModalTwo = ({ id }) => {
     //const { id } = useParams()
     const { closeModal } = useModal()
     const dispatch = useDispatch()
@@ -28,11 +28,11 @@ const DeleteQuestionModalTwo = ( {id} ) => {
     return (
         <>
             <div id='delete_Question_container' className="login_container">
-                <div>Delete Question?</div>
-                <div>Are you sure you want to delete this Question?</div>
+                <h2 className='delques'>Delete Question?</h2>
+                <div className='delconfirm'>Are you sure you want to delete this Question?</div>
                 <div className='modal-buttons'>
-                    <button onClick={closeModal}>Cancel</button>
                     <button onClick={deleteQuestion}>Delete</button>
+                    <button onClick={closeModal}>Cancel</button>
                 </div>
             </div>
         </>
