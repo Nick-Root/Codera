@@ -6,9 +6,8 @@ import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
-
-import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
 import './QuestionDetails.css'
+import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal"
 
 
 
@@ -54,8 +53,6 @@ const QuestionDetails = () => {
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
 
-
-
     useEffect(() => {
         dispatch(thunkGetOneQuestion(id))
     }, [dispatch, id])
@@ -83,6 +80,17 @@ const QuestionDetails = () => {
                         </p>
                     </div>
                     <button onClick={saved} className='save_button'>save</button>
+
+
+                </div>
+                {/* edit question button/modal */}
+                <div id="update-question-button">
+                        <OpenModalMenuItem
+                            itemText='Edit'
+                            onItemClick={closeMenu}
+                            className='updatequestionmodal'
+                            modalComponent={<UpdateQuestionModal id={parseInt(id)}/>}
+                        />
                 </div>
             </div>
             <div className="comments">

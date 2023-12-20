@@ -11,7 +11,7 @@ function CreateQuestionModal() {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
-  const [errors, setErrors] = useState({});
+  //const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const allTopics = useSelector(state => state.topic)  //object of objects

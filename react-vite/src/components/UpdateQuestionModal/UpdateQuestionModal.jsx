@@ -1,7 +1,6 @@
 import { thunkGetAllTopics } from '../../redux/topic';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 import { useModal } from "../../context/Modal";
 import { thunkGetOneQuestion, thunkUpdateOneQuestion } from '../../redux/question.js';
@@ -13,7 +12,7 @@ function UpdateQuestionModal({ id }) {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
-  const [errors, setErrors] = useState({});
+  //const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const allTopics = useSelector(state => state.topic)  //object of objects
@@ -24,14 +23,14 @@ function UpdateQuestionModal({ id }) {
 
   //from QuestionDetails destructure the datas
   const questionData = useSelector((state) => state.question.oneQuestion || [])
-  const { 0: questionText, 1: comments } = questionData
+  const { 0: questionText } = questionData
   console.log("questionText.topicId", questionText.topicId)
 
   //do not want to set state on first render, only on second and when it changes
   useEffect(() => {
     setQuestion(questionText.question)
     setTopicId(questionText.topicId)
-  }, [questionData])
+  }, [questionData, questionText.question, questionText.topicId])
 
 
   //might not need it because main page uses thunkGetAllTopics
