@@ -3,6 +3,7 @@ import { getCurrentComments, thunkDeleteComment, } from '../../redux/comment';
 import { useModal } from "../../context/Modal";
 import { thunkGetOneQuestion } from '../../redux/question';
 import { useParams } from 'react-router-dom';
+import './DeleteCommentModal.css'
 
 const DeleteCommentModal = ({ comment }) => {
     const { closeModal } = useModal()

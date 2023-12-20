@@ -6,7 +6,7 @@
     align-items: center;
     padding-top: 20px;
     border-radius: 20px;
-    border: 3px solid #B92B27
+    /* border: 3px solid #B92B27 */
 }
 
 .topbutton {
@@ -14,6 +14,22 @@
     /* justify-content: center; */
     width: fit-content;
     margin-top: 15px;
+    box-shadow: 2px 2px darkgray;
+    border: 2px solid darkgray;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+}
+
+.topbutton:enabled {
+    color: white;
+    background-color: #B92B27;
+    box-shadow: 2px 2px black;
+    border: 2px solid black;
+    padding: 5px 5px 5px 5px
+}
+
+.topbutton:hover {
+    cursor: pointer;
 }
 
 .topform {

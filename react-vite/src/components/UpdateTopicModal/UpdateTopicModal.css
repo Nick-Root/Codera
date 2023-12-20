@@ -1,5 +1,28 @@
-
 .topupbutton {
     cursor: pointer;
     margin-left: 10px;
+}
+
+.topupbutton {
+    display: flex;
+    /* justify-content: center; */
+    width: fit-content;
+    margin-top: 15px;
+    box-shadow: 2px 2px darkgray;
+    border: 2px solid darkgray;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    margin-left: 35px;
+}
+
+.topupbutton:enabled {
+    color: white;
+    background-color: #B92B27;
+    box-shadow: 2px 2px black;
+    border: 2px solid black;
+    padding: 5px 5px 5px 5px
+}
+
+.topbutton:hover {
+    cursor: pointer;
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { thunkGetOneQuestion } from '../../redux/question.js';
 import { thunkUpdateComment, getCurrentComments } from '../../redux/comment.js';
-
+import './UpdateCommentModal.css'
 
 
 
