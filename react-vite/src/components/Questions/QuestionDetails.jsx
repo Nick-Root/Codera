@@ -66,6 +66,7 @@ const QuestionDetails = () => {
     const saved = () => {
         dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
     }
+    console.log(question)
     return (
         <div className='container'>
             <div className="container_text">
@@ -82,7 +83,9 @@ const QuestionDetails = () => {
                             })}
                         </p>
                     </div>
-                    <button onClick={saved} className='save_button'>save</button>
+                    {user && user.id === question.ownerId && (
+                        <button onClick={saved} className='save_button'>save</button>
+                    )}
                 </div>
             </div>
             <div className="comments">
@@ -108,7 +111,7 @@ const QuestionDetails = () => {
                                 })}
                             </p>
                             <div className="delete_sq">
-                                {user.id === comment.ownerId && (
+                                {user && user.id === comment.ownerId && (
                                     <>
                                         <i className="fa-solid fa-trash-can"></i>
                                         <OpenModalMenuItem

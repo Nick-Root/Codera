@@ -43,7 +43,7 @@ const CurrentComments = () => {
                                 year: "numeric",
                             })}
                         </p>
-                        <div className="delete_sq">
+                        <div className="delete_comment">
                             <i className="fa-solid fa-trash-can"></i>
                             <OpenModalMenuItem
                                 itemText='Delete'
