@@ -1,5 +1,6 @@
 const LOAD_USER_COMMENTS = '/comments/loadUserComments'
 const POST_COMMENT = '/comments/postComment'
+const DELETE_COMMENT = 'comments/deleteComment'
 
 const loadUserComments = (userComments) => {
   return {
@@ -13,14 +14,36 @@ const postComment = (comment) => ({
   comment,
 });
 
+const deleteComment = (commentId) => ({
+  type: DELETE_COMMENT,
+  commentId
+});
+
+export const thunkDeleteComment = (commentId) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/comments/${commentId}/remove`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  if (res.ok) {
+    dispatch(deleteComment(commentId));
+  } else {
+    console.error('Error deleting comment');
+  }
+  } catch (error) {
+    console.error('Errors:', error)
+  }
+}
 
 export const getCurrentComments = () => async (dispatch) => {
   const res = await fetch('/api/comments/current')
 
   if (res.ok) {
-    const userComments = await res.json()
-    dispatch(loadUserComments(userComments))
-    return userComments
+    const comments = await res.json()
+    dispatch(loadUserComments(comments))
+    return comments
   }
 }
 
@@ -47,7 +70,7 @@ export const thunkPostComment = (questionId, commentData) => async (dispatch) =>
 };
 
 const initialState = {
-  comments: []
+
 }
 
 
@@ -60,7 +83,8 @@ const commentsReducer = (state= initialState, action) => {
       newState.user = action.userComments.user;
       newState.userComments = action.userComments.comments.map((comment) => ({
         comment: comment.comment,
-        createdAt: comment.createdAt
+        createdAt: comment.createdAt,
+        commentId: comment.id
       }))
       return newState;
       }
@@ -69,6 +93,16 @@ const commentsReducer = (state= initialState, action) => {
           ...state,
           comments: [...state.comments, action.comment],
         };
+      case DELETE_COMMENT:{
+          const updatedComments = state.userComments.filter(
+            (comment) => comment.id !== action.commentId
+          );
+
+          return {
+            ...state,
+            userComments: updatedComments,
+          };
+        }
       default:
         return state;
     }

@@ -5,7 +5,7 @@ const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
 const DELETE_SAVED_QUESTION = "questions/deleteSavedQuestion"
 const ADD_SAVED_QUESTION = "questions/addSavedQuestion"
 const RECEIVE_ONE_QUESTION = "questions/receiveOneQuestion"
-
+const UPDATE_ONE_QUESTION = "questions/updateOneQuestion"
 
 
 const loadAllQuestions = (allQuestions) => {
@@ -46,13 +46,14 @@ const addSavedQuestion = (question) => {
     question
   }
 }
-
+//used for both post and put
 const receiveOneQuestion = (question) => {
   return {
     type: RECEIVE_ONE_QUESTION,
     question
   }
 }
+
 
 export const thunkGetAllQuestions = () => async (dispatch) => {
   //GET /api/Questions
@@ -137,20 +138,16 @@ export const thunkFetchAddSavedQuestion = (question, questionId) => async (dispa
 
 //dataObj {question: question, topicId: topicId}
 export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
-  //should go inside the database
-  //console.log("before POST");
   const res = await fetch(`/api/questions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dataObj)
   });
-  //console.log("after POST");
-
 
   if(res.ok) {
-    console.log("post res.ok")
+    //console.log("post res.ok")
     const newQuestion = await res.json();  //now the Question should have a id created from the backend
-    console.log("thunk newQuestion", newQuestion)
+   //console.log("thunk newQuestion", newQuestion)
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
     return newQuestion;
   } else {
@@ -160,7 +157,32 @@ export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
     console.log('error', error)
     return error;
   }
- }
+}
+
+//needs woek
+export const thunkUpdateOneQuestion = (id, dataObj) => async (dispatch) => {
+  const res = await fetch(`/api/questions/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dataObj)
+  });
+
+  if(res.ok) {
+    //console.log("post res.ok")
+    const newQuestion = await res.json();  //now the Question should have a id created from the backend
+   //console.log("thunk newQuestion", newQuestion)
+    dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
+    return newQuestion;
+  } else {
+    console.log('status code:', res.status)
+    console.log("POST error message")
+    const error = await res.json();
+    console.log('error', error)
+    return error;
+  }
+}
+
+
 
 
 

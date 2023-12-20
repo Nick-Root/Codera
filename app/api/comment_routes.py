@@ -17,3 +17,18 @@ def get_curr_comments():
     user_data = user.to_dict()
     comment_data = [comment.to_dict() for comment in comments]
     return jsonify(user=user_data, comments=comment_data)
+
+@comment_routes.route('/<int:commentId>/remove', methods=['DELETE'])
+@login_required
+def delete_comment(commentId):
+
+        comment = Comment.query.get(commentId)
+
+
+        if comment.userId != current_user.id:
+            return jsonify(message="You are not authorized to delete this comment"), 403
+
+        db.session.delete(comment)
+        db.session.commit()
+
+        return jsonify(message="Comment deleted successfully"), 200

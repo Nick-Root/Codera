@@ -1,6 +1,8 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentComments } from "../../redux/comment"
+import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import './CurrentComments.css'
 
 
@@ -14,12 +16,12 @@ const CurrentComments = () => {
 
 
     const comments = useSelector((state) => state.comment.userComments)
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", comments);
 
     const user = useSelector((state) => state.comment.user)
 
-    console.log("Curr user questions", comments)
-    console.log("Curr user question user", user)
+    // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", comments);
+
+    // const isCommentOwner = comment.user.Id === user.id;
 
     if (!comments) return null
 
@@ -41,6 +43,13 @@ const CurrentComments = () => {
                                 year: "numeric",
                             })}
                         </p>
+                        <div className="delete_sq">
+                            <i className="fa-solid fa-trash-can"></i>
+                            <OpenModalMenuItem
+                                itemText='Delete'
+                                modalComponent={<DeleteCommentModal comment={comment} />}
+                            />
+                        </div>
                     </div>
                 </div>
             ))}

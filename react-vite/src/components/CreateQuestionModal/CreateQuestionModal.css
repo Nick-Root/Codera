@@ -1,0 +1,39 @@
+#create-question-modal-container {
+    width: 500px;
+    height: 150px;
+}
+
+#heading {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.question-form-container {
+    width: 90%;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.input-container{
+    margin: 5px 0;
+}
+#question-label {
+    margin: 0 5px;
+}
+#question-input {
+    width: 80%;
+    height: 25px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#question-input:focus {
+    outline: none
+}
+
+
+#submit-question-button {
+    margin: 5px 0;
+}
