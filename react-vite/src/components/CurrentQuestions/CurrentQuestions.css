@@ -30,11 +30,15 @@
     border-radius: 5px;
 }
 
-.user_questions{
+.user_questions {
     position: relative;
     right: 12em;
     font-size: 15px;
     margin-top: 15px;
     color: grey;
     font-weight: 500;
+}
+
+.navtopage {
+    text-decoration: none;
 }
