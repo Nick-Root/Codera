@@ -4,22 +4,22 @@ from datetime import datetime
 
 def seed_topics():
     python = Topic(
-        topic = 'Python'
+        topic = 'Python', ownerId = 1
     )
     javascript = Topic(
-        topic = 'JavaScript'
+    topic = 'JavaScript', ownerId = 2
     )
     express = Topic(
-        topic = 'Express'
+        topic = 'Express', ownerId = 3
     )
     sql = Topic(
-        topic= 'SQL'
+        topic= 'SQL', ownerId = 4
     )
     html = Topic(
-        topic='HTML'
+        topic='HTML', ownerId = 5
     )
     css = Topic(
-        topic='CSS'
+        topic='CSS', ownerId = 6
     )
     db.session.add(python)
     db.session.add(javascript)

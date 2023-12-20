@@ -31,11 +31,11 @@ function Navigation() {
 
       <NavLink to="/" className='homenav'>Codera</NavLink>
 
-      <NavLink to='/questions/current'>Your Questions</NavLink>
+      <NavLink to='/questions/current' className={'navLink'}>Your Questions</NavLink>
 
-      <NavLink to='/comments/current'>Your Comments</NavLink>
+      <NavLink to='/comments/current' className={'navLink'} >Your Comments</NavLink>
 
-      <NavLink to='/savedQuestions'>Saved Questions</NavLink>
+      <NavLink to='/savedQuestions' className={'navLink'}>Saved Questions</NavLink>
 
       <div id="ask-question-button">
         <OpenModalMenuItem

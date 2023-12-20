@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { createTopicThunk, thunkGetAllTopics } from "../../redux/topic";
-import './CreateTopicModal.css'
+import { updateTopicThunk } from "../../redux/topic";
+// import { thunkGetAllTopics } from "../../redux/topic";
+import { useParams } from "react-router-dom";
+import { thunkGetSingleTopic } from "../../redux/topic";
 
 
-function CreateTopicModal() {
+function UpdateTopicModal() {
+    const { topicId } = useParams()
     const dispatch = useDispatch()
     const [topic, setTopic] = useState("")
     const [errors, setErrors] = useState([])
     const { closeModal } = useModal()
-
+    const topicById = useSelector(state => state.topic);
     const existingTopics = useSelector(state => Object.values(state.topic) || [])
 
     useEffect(() => {
-        dispatch(thunkGetAllTopics)
-    }, [dispatch])
-
+        dispatch(thunkGetSingleTopic(topicId));
+    }, [dispatch, topicId]);
+    useEffect(() => {
+        setTopic(topicById[0]?.topic);
+    }, [topicById]);
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -28,23 +33,24 @@ function CreateTopicModal() {
             return;
         }
         const serverResponse = await dispatch(
-            createTopicThunk({
-                topic
-            })
+            updateTopicThunk(
+                topicId, topic
+            )
         )
-        await dispatch(thunkGetAllTopics())
+        await dispatch(thunkGetSingleTopic(topicId))
 
         if (serverResponse) {
             setErrors(serverResponse)
         } else {
             closeModal()
         }
+        closeModal()
     }
 
     return (
-        <div className='topmodalcont'>
-            <h1>Create a Topic</h1>
-            <form onSubmit={handleSubmit} className='topform'>
+        <div className='topupmodalcont'>
+            <h1>Update Your Topic</h1>
+            <form onSubmit={handleSubmit} className='topupform'>
                 <label>
                     <input
                         type='text'
@@ -52,14 +58,15 @@ function CreateTopicModal() {
                         onChange={(e) => setTopic(e.target.value)}
                         required
                         placeholder="Topic Name"
-                        className='topname'
+                        className='topupname'
                     />
                 </label>
-                {<p>{errors}</p>}
-                <button type='submit' disabled={topic.length === 0} className='topbutton'>Create Topic</button>
+
+
+                <button type='submit' disabled={topic.length === 0} className='topupbutton'>Update Topic</button>
             </form>
         </div>
     )
 }
 
-export default CreateTopicModal
+export default UpdateTopicModal

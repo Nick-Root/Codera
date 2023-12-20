@@ -13,12 +13,12 @@ def seed_users():
     botfour = User(username='botfour', firstname='bot', lastname='four', email='botfour@gmail.com', password='botfourpass')
     botfive = User(username='botfive', firstname='bot', lastname='five', email='botfive@gmail.com', password='botfivepass')
 
+    db.session.add(demo)
     db.session.add(botone)
     db.session.add(bottwo)
     db.session.add(botthree)
     db.session.add(botfour)
     db.session.add(botfive)
-    db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
     db.session.commit()

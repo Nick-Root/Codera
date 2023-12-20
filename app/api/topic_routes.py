@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, redirect
 from ..models import db
 from ..models.models import Question, SavedQuestion, User, Comment, Topic
 from ..forms.topic_form import TopicForm
-from flask_login import login_required
+from flask_login import login_required, current_user
 topic_routes = Blueprint('topics', __name__)
 
 
@@ -38,7 +38,27 @@ def new_topic():
     form = TopicForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        topic = Topic(topic=form.data['topic'])
+        topic = Topic(topic=form.data['topic'], ownerId = current_user.id)
         db.session.add(topic)
         db.session.commit()
     return
+
+
+@topic_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def update_topic(id):
+    topic = Topic.query.get(id)
+
+    if current_user.id != topic.ownerId:
+        return jsonify({"error": "You are not authorized to update this topic"}), 403
+
+    form = TopicForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        topic.topic = form.data['topic']
+        db.session.commit()
+        return jsonify({"message": "Topic updated successfully"})
+    else:
+        errors = form.errors
+        return jsonify({"error": errors}), 400

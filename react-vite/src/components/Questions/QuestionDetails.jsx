@@ -3,19 +3,24 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
+import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
 
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
+import './QuestionDetails.css'
+
+
 
 const QuestionDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const questionData = useSelector((state) => state.question.oneQuestion || [])
     // const questionArray = Object.values(questionData)
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
+    // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
     const { 0: question, 1: comments } = questionData
-    // console.log("%c   LOOK HERE", "color: green; font-size: 18px", comments);
+    const user = useSelector((state) => state.session.user)
+    // console.log("%c   LOOK HERE", "color: green; font-size: 18px", user);
 
     const [commentText, setCommentText] = useState('');
 
@@ -62,28 +67,24 @@ const QuestionDetails = () => {
         dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
     }
     return (
-        <div className='one_question_container'>
-            <h2>{question.question}</h2>
-            <p className='userName'>{question.askerUsername}</p>
-            <p className='created-date'>
-                Asked:{" "}
-                {new Date(question.createdAt).toLocaleDateString(undefined, {
-                    day: 'numeric',
-                    month: "long",
-                    year: "numeric",
-                })}
-            </p>
-            <button onClick={saved}>save</button>
-            {/* edit question button/modal */}
-            <div id="update-question-button">
-                <OpenModalMenuItem
-                    itemText='Edit'
-                    onItemClick={closeMenu}
-                    className='updatequestionmodal'
-                    modalComponent={<UpdateQuestionModal id={parseInt(id)}/>}
-                />
+        <div className='container'>
+            <div className="container_text">
+                <div>{question.question}</div>
+                <div className='bottom_text'>
+                    <div className="user_question">
+                        <p className='userName'>{question.askerUsername}</p>
+                        <p className='created-date'>
+                            Asked:{" "}
+                            {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                day: 'numeric',
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </p>
+                    </div>
+                    <button onClick={saved} className='save_button'>save</button>
+                </div>
             </div>
-            <div></div>
             <div className="comments">
                 <h3>Comments:</h3>
                 <div className='create-comment'>
@@ -96,15 +97,29 @@ const QuestionDetails = () => {
                 </div>
                 {comments.map((comment) => (
                     <div key={comment.commentId} className="comment">
-                        <p>{comment.comment}</p>
-                        <p className='comment-date'>
-                            Commented by: {comment.username}{" "} on {' '}
-                            {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                                day: 'numeric',
-                                month: "long",
-                                year: "numeric",
-                            })}
-                        </p>
+                        <div className='comments'>
+                            <p>{comment.comment}</p>
+                            <p className='user_question' >
+                                Commented by: {comment.username}{" "} on {' '}
+                                {new Date(comment.createdAt).toLocaleDateString(undefined, {
+                                    day: 'numeric',
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
+                            <div className="delete_sq">
+                                {user.id === comment.ownerId && (
+                                    <>
+                                        <i className="fa-solid fa-trash-can"></i>
+                                        <OpenModalMenuItem
+                                            itemText='Delete'
+                                            modalComponent={<DeleteCommentModal comment={comment} />}
+                                        />
+                                    </>
+                                )}
+                            </div>
+
+                        </div>
                     </div>
                 ))}
             </div>

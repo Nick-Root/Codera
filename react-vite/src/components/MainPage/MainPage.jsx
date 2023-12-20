@@ -2,30 +2,18 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
-import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
+
 
 const MainPage = () => {
     const dispatch = useDispatch();
-    const [topicId, setTopicId] = useState(1);
+    //const navigate = useNavigate()
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)
-
-    // //needs to set topicId
-    // const questionData = useSelector((state) => state.question.oneQuestion || [])
-    // const { 0: questionText, 1: comments } = questionData
-    // console.log("questionText.topicId", questionText.topicId)
-
-    // //do not want to set state on first render, only on second and when it changes
-    // useEffect(() => {
-    //     setQuestion(questionText.question)
-    //     setTopicId(questionText.topicId)
-    // }, [questionData])
-
 
     const [showMenu, setShowMenu] = useState(false);
     useEffect(() => {
@@ -55,11 +43,7 @@ const MainPage = () => {
     let arrQues = Object.values(questions)
     let arrTopic = Object.values(topics)
 
-
-
-
     // console.log("%c   LOOK HERE", "color: red; font-size: 18px", arrQues);
-    console.log("arrQues", arrQues)
     return (
         <>
             <div className='mainpage'>
@@ -82,7 +66,41 @@ const MainPage = () => {
                         {arrTopic.map((topic) => {
                             return (
                                 <NavLink to={`/topics/${topic.id}`} key={topic.id} className='topic'>
-                                    {topic.topic}
+                                    {topic.topic === 'Python' ? (
+                                        <>
+                                            <i className="fa-brands fa-python"></i> {topic.topic}
+                                        </>
+                                    )
+                                        : topic.topic === 'JavaScript' ? (
+                                            <>
+                                                <i className="fab fa-js"></i> {topic.topic}
+                                            </>
+                                        )
+                                            : topic.topic === 'Express' ? (
+                                                <>
+                                                    <i className="fa-solid fa-code"></i> {topic.topic}
+                                                </>
+                                            )
+                                                : topic.topic === 'SQL' ? (
+                                                    <>
+                                                        <i className="fa-solid fa-database"></i> {topic.topic}
+                                                    </>
+                                                )
+                                                    : topic.topic === 'HTML' ? (
+                                                        <>
+                                                            <i className="fa-brands fa-html5"></i> {topic.topic}
+                                                        </>
+                                                    )
+                                                        : topic.topic === 'CSS' ? (
+                                                            <>
+                                                                <i className="fa-brands fa-css3-alt"></i> {topic.topic}
+                                                            </>
+                                                        )
+                                                            : (
+                                                                <>
+                                                                    <i className="fa-solid fa-code"></i> {topic.topic}
+                                                                </>
+                                                            )}
                                 </NavLink>
                             );
                         })}
@@ -92,24 +110,27 @@ const MainPage = () => {
                 <div className='questionscont'>
                     {arrQues.map((question) => {
                         return (
-                            <>
                             <NavLink to={`/questions/${question.id}`} className='question' key={question.id}>{question.question}
                                 <p className="asker">
                                     {question.askerUsername}
                                 </p>
                             </NavLink>
-                            {/* <div id="edit-question-button-main">
-                                <OpenModalMenuItem
-                                    itemText='Edit'
-                                    onItemClick={closeMenu}
-                                    className='topmodal'
-                                    modalComponent={<UpdateQuestionModal id={question.id}/>}
-                                />
-                            </div> */}
-                            </>
-
                         )
                     })}
+                </div>
+                <div className='resourcescont'>
+                    <h3 className='resourcesheader'>External Resoures</h3>
+                    <div className='resimgs'>
+                        <a href='https://developer.mozilla.org/en-US/'><img src='../../../../mdn_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://www.python.org/doc/'><img src='../../../../python_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://react.dev/reference/react/hooks'><img src='../../../../react_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://redux.js.org/introduction/getting-started'><img src='../../../../redux_logo.png' className='resourceimg'></img></a>
+
+                        <a href='https://sequelize.org/'><img src='../../../../sequelize_logo.png' className='resourceimg'></img></a>
+                    </div>
                 </div>
 
             </div>

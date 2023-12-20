@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentQuestions } from "../../redux/question"
-
+import './CurrentQuestions.css'
 
 const CurrentQuestions = () => {
     const dispatch = useDispatch()
@@ -17,20 +17,22 @@ const CurrentQuestions = () => {
 
     console.log("inside CurrentQuestions")
     return (
-        <div>
-            <h1>Your Questions</h1>
+        <div className="container">
+            <div className="container_text">Your Questions</div>
             {questions.map((question) => (
                 <div key={question.questionId} className="one_question_container">
-                    <h2>{question.question}</h2>
-                    <p className="userName">{user.username}</p>
-                    <p className="created-date">
-                        Asked:{" "}
-                        {new Date(question.createdAt).toLocaleDateString(undefined, {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                        })}
-                    </p>
+                    <div>{question.question}</div>
+                    <div className="user_questions">
+                        <p className="userName">{user.username}</p>
+                        <p className="created-date">
+                            Asked:{" "}
+                            {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </p>
+                    </div>
                 </div>
             ))}
         </div>
