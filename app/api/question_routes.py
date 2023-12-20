@@ -6,7 +6,7 @@ from ..forms.question_form import QuestionForm
 from ..forms.comment_form import CommentForm
 
 from flask_login import login_required, current_user
-from datetime import date
+from datetime import datetime
 
 
 question_routes = Blueprint('questions', __name__)
@@ -76,12 +76,6 @@ def post_question():
     #form.topicId.choices = [(topic.id, topic.topic) for topic in Topic.query.all()]
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    # topicId2 = 0
-    # for tup in form.topicId.choices:
-    #     if tup[1] == form.topicId.data:
-    #         topicId2 = tup[0]
-    # print("topicId**********************************", topicId2)
-
     if form.validate_on_submit():
         new_question = Question (
             question = form.data["question"],
@@ -95,6 +89,33 @@ def post_question():
     else:
         print("Bad Data")
         return "Bad Data"
+
+
+@question_routes.route("<int:id>", methods=["PUT"])
+@login_required
+def update_question(id):
+    question = Question.query.get(id)
+    print("question", question)
+
+    if not question:
+        return "Question does not exist"
+
+    form = QuestionForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        question.question = form.data["question"]
+        question.ownerId = current_user.id
+        question.topicId = form.data["topicId"]
+        question.updatedAt = datetime.now()
+
+        db.session.commit()
+        return question.to_dict()
+    else:
+        print("Bad Data")
+        return "Bad Data"
+
+
 
 @question_routes.route('/<int:id>/comments', methods=['POST'])
 @login_required

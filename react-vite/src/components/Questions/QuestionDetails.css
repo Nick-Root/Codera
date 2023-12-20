@@ -1,3 +1,12 @@
+#update-question-button {
+    list-style: none;
+    background-color: lightgray;
+    color: black;
+    font-size: 12px;
+    width: 30px;
+    border: 1px solid black;
+    padding: 5px;
+}
 .bottom_text {
     display: flex;
     justify-content: space-between;
