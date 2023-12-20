@@ -17,14 +17,12 @@ export default function DeleteSavedQuestion({ question }) {
 
     return (
         <>
-            <div id="create-question-modal-container">
-                <div className="question-form-container">
-                <div className="heading">Delete saved question?</div>
+            <div className="modal_container">
+                <h1 className="heading">Delete saved question?</h1>
                 <div>Are you sure you want to remove this question from the saved list?</div>
                 <div className="delete_buttons">
                     <button onClick={closeModal}>Cancel</button>
                     <button onClick={removeQuestion}>Delete</button>
-                </div>
                 </div>
             </div>
         </>
