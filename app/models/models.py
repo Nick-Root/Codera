@@ -39,14 +39,16 @@ class User(db.Model, UserMixin):
 
 class Question(db.Model):
     __tablename__ = 'questions'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    ownerId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     question = db.Column(db.String(255), nullable=False)
-    topicId = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    topicId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('topics.id')))
     createdAt = db.Column(db.TIMESTAMP, default=datetime.now())
     updatedAt = db.Column(db.TIMESTAMP, default=datetime.now())
 
-    # Specify the foreign key relationship with the 'topics' table
     topic = db.relationship('Topic', primaryjoin="Question.topicId == Topic.id", back_populates='questions', overlaps='topic')
 
     def to_dict(self):
@@ -61,9 +63,12 @@ class Question(db.Model):
 
 class SavedQuestion(db.Model):
     __tablename__ = 'savedquestions'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    questionId = db.Column(db.Integer, db.ForeignKey('questions.id'))
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    questionId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')))
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     saved = db.Column(db.Boolean, nullable=False, default=False)
 
     def to_dict(self):
@@ -77,9 +82,12 @@ class SavedQuestion(db.Model):
 
 class Comment(db.Model):
     __tablename__ = 'comments'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
-    questionId = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    questionId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')))
     comment = db.Column(db.String(255), nullable=False)
     createdAt = db.Column(db.TIMESTAMP, default=datetime.now())
     updatedAt = db.Column(db.TIMESTAMP, default=datetime.now())
@@ -96,9 +104,12 @@ class Comment(db.Model):
 
 class Topic(db.Model):
     __tablename__ = 'topics'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(20), nullable=False)
-    ownerId = db.Column(db.Integer, db.ForeignKey('users.id', name='topic_owner'))
+    ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
 
     owner = db.relationship('User', back_populates='topics')
 

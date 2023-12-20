@@ -6,22 +6,24 @@ import { useEffect, useState, useRef } from "react";
 //import { useDispatch } from "react-redux";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import CreateQuestionModal from "../CreateQuestionModal/CreateQuestionModal";
+import { useSelector } from "react-redux";
 
 function Navigation() {
   //logic for Modal
   const [showMenu, setShowMenu] = useState(false);
+  const user = useSelector((state) => state.session.user)
   const ulRef = useRef();
   useEffect(() => {
-      if (!showMenu) return;
-      //if showMenu is true, we have a closeMenu
-      const closeMenu = (e) => {
-          if (!ulRef.current.contains(e.target)) {
-          setShowMenu(false);
-          }
-      };
-      document.addEventListener('click', closeMenu);
+    if (!showMenu) return;
+    //if showMenu is true, we have a closeMenu
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener('click', closeMenu);
 
-      return () => document.removeEventListener("click", closeMenu);
+    return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
   //added in bonus optional
   const closeMenu = () => setShowMenu(false);
@@ -31,20 +33,25 @@ function Navigation() {
 
       <NavLink to="/" className='homenav'>Codera</NavLink>
 
-      <NavLink to='/questions/current' className={'navLink'}>Your Questions</NavLink>
+      {user && (
 
-      <NavLink to='/comments/current' className={'navLink'} >Your Comments</NavLink>
+        <>
+          <NavLink to='/questions/current' className={'navLink'}>Your Questions</NavLink>
 
-      <NavLink to='/savedQuestions' className={'navLink'}>Saved Questions</NavLink>
+          <NavLink to='/comments/current' className={'navLink'} >Your Comments</NavLink>
 
-      <div id="ask-question-button">
-        <OpenModalMenuItem
-            itemText='Add question'
-            onItemClick={closeMenu}
-            className='questionmodal'
-            modalComponent={<CreateQuestionModal />}
-        />
-      </div>
+          <NavLink to='/savedQuestions' className={'navLink'}>Saved Questions</NavLink>
+
+          <div id="ask-question-button">
+            <OpenModalMenuItem
+              itemText='Add question'
+              onItemClick={closeMenu}
+              className='questionmodal'
+              modalComponent={<CreateQuestionModal />}
+            />
+          </div>
+        </>
+      )}
 
       <ProfileButton />
 
