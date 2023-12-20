@@ -91,7 +91,7 @@ const QuestionDetails = () => {
                             className='updatequestionmodal'
                             modalComponent={<UpdateQuestionModal id={parseInt(id)}/>}
                         />
-                    </div>
+                </div>
             </div>
             <div className="comments">
                 <h3>Comments:</h3>
