@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
-import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
 import './QuestionDetails.css'
 import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal"
+import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 
 
 
 const QuestionDetails = () => {
-    const { questionId } = useParams();
+    const { id } = useParams();
     const dispatch = useDispatch();
     const questionData = useSelector((state) => state.question.oneQuestion || [])
     // const questionArray = Object.values(questionData)
@@ -32,8 +32,8 @@ const QuestionDetails = () => {
         };
 
 
-        await dispatch(thunkPostComment(questionId, commentData))
-        await dispatch(thunkGetOneQuestion(questionId))
+        await dispatch(thunkPostComment(id, commentData))
+        await dispatch(thunkGetOneQuestion(id))
 
         setCommentText('')
     };

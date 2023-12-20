@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { thunkGetOneQuestion } from '../../redux/question.js';
 import { thunkUpdateComment, getCurrentComments } from '../../redux/comment.js';
@@ -10,7 +9,6 @@ import { thunkUpdateComment, getCurrentComments } from '../../redux/comment.js';
 
 const UpdateCommentModal = ({ comment }) => {
     const dispatch = useDispatch();
-    const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
     const id = comment.commentId
     const [newCommentText, setUpdatedComment] = useState(comment.comment);
@@ -29,16 +27,14 @@ const UpdateCommentModal = ({ comment }) => {
 
         const response = await dispatch(thunkUpdateComment(id, newCommentText));
 
-        if (response && response.error) {
-            setErrors(response.error);
-        }
-        else if (id) {
-            await dispatch(thunkGetOneQuestion(questionId))
-                .then(closeModal)
-        } else {
-            await dispatch(getCurrentComments())
-                .then(closeModal)
-        }
+
+
+        await dispatch(thunkGetOneQuestion(questionId))
+            .then(closeModal)
+
+        await dispatch(getCurrentComments())
+            .then(closeModal)
+
     }
 
     return (
@@ -57,9 +53,7 @@ const UpdateCommentModal = ({ comment }) => {
                             value={newCommentText}
                             onChange={(e) => setUpdatedComment(e.target.value)}
                         />
-                        {errors.comment && (
-                            <div className="error-message">{errors.comment}</div>
-                        )}
+
                     </div>
                     <div className="form-group">
                         <button type="submit">Save Changes</button>
