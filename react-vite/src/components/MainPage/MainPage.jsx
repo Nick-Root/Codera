@@ -125,7 +125,7 @@ const MainPage = () => {
                                 </div>
                             </NavLink>
                         )
-                    }).reverse()}
+                    })}
                 </div>
                 <div className='resourcescont'>
                     <h3 className='resourcesheader'>External Resoures</h3>
