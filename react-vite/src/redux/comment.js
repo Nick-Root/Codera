@@ -112,7 +112,8 @@ const commentsReducer = (state= initialState, action) => {
       newState.userComments = action.userComments.comments.map((comment) => ({
         comment: comment.comment,
         createdAt: comment.createdAt,
-        commentId: comment.id
+        commentId: comment.id,
+        questionId: comment.questionId
       }))
       return newState;
       }
@@ -134,7 +135,7 @@ const commentsReducer = (state= initialState, action) => {
           const updatedComment = {
             comment: action.comment.comment,
             createdAt: action.comment.createdAt,
-            commentId: action.comment.id,
+            commentId: action.comment.id
           };
 
           return {
