@@ -6,13 +6,15 @@ import { useEffect, useState, useRef } from "react";
 //import { useDispatch } from "react-redux";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import CreateQuestionModal from "../CreateQuestionModal/CreateQuestionModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkGetAllTopics } from "../../redux/topic";
 
 function Navigation() {
   //logic for Modal
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((state) => state.session.user)
   const ulRef = useRef();
+  const dispatch = useDispatch()
   useEffect(() => {
     if (!showMenu) return;
     //if showMenu is true, we have a closeMenu
@@ -31,7 +33,7 @@ function Navigation() {
   return (
     <ul className='navbar'>
 
-      <NavLink to="/" className='homenav'>Codera</NavLink>
+      <NavLink to="/" className='homenav' onClick={dispatch(thunkGetAllTopics())}>Codera</NavLink>
 
       {user && (
 
