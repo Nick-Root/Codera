@@ -12,14 +12,24 @@ const UpdateCommentModal = ({ comment }) => {
     const { closeModal } = useModal();
     const id = comment.commentId
     const [newCommentText, setUpdatedComment] = useState(comment.comment);
-
     const questionData = useSelector((state) => state.question.oneQuestion || [])
-    // const questionArray = Object.values(questionData)
-    // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
-    const { 0: question } = questionData
-    const questionId = question?.id
 
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionId);
+
+    const { 0: question } = questionData
+    let questionPageId
+
+    if (question) {
+        questionPageId = question.id
+    } else {
+        questionPageId = comment.questionId
+    }
+
+
+
+    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", comment);
+    console.log("%c   LOOK HERE", "color: purple; font-size: 18px", question);
+    console.log("%c   LOOK HERE", "color: red; font-size: 18px", questionPageId);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -29,8 +39,10 @@ const UpdateCommentModal = ({ comment }) => {
 
 
 
-        await dispatch(thunkGetOneQuestion(questionId))
+        await dispatch(thunkGetOneQuestion(questionPageId))
             .then(closeModal)
+
+
 
         await dispatch(getCurrentComments())
             .then(closeModal)
