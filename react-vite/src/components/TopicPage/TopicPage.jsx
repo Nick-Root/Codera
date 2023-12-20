@@ -104,7 +104,7 @@ export default function TopicPage() {
                     return <NavLink to={`/questions/${question.id}`} className='question'>
                         {question?.question}
                     </NavLink>
-                })}
+                }).reverse()}
             </div>
         </div>
     )
