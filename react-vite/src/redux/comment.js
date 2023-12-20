@@ -1,6 +1,7 @@
 const LOAD_USER_COMMENTS = '/comments/loadUserComments'
 const POST_COMMENT = '/comments/postComment'
 const DELETE_COMMENT = 'comments/deleteComment'
+const UPDATE_COMMENT = '/comments/editComment'
 
 const loadUserComments = (userComments) => {
   return {
@@ -18,6 +19,33 @@ const deleteComment = (commentId) => ({
   type: DELETE_COMMENT,
   commentId
 });
+
+const updateComment = (comment) => ({
+  type: UPDATE_COMMENT,
+  comment
+})
+
+export const thunkUpdateComment = (commentId, newCommentText) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/comments/${commentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ comment: newCommentText }),
+    });
+
+    if (res.ok) {
+      const updatedComment = await res.json();
+      dispatch(updateComment(updatedComment));
+      return updatedComment;
+    } else {
+      console.error('Error updating comment');
+    }
+  } catch (error) {
+    console.error('Errors:', error);
+  }
+}
 
 export const thunkDeleteComment = (commentId) => async (dispatch) => {
   try {
@@ -97,6 +125,18 @@ const commentsReducer = (state= initialState, action) => {
           const updatedComments = state.userComments.filter(
             (comment) => comment.id !== action.commentId
           );
+          return {
+            ...state,
+            userComments: updatedComments,
+          };
+        }
+        case UPDATE_COMMENT: {
+          const updatedComments = state.userComments.map((comment) => {
+            if (comment.id === action.comment.id) {
+              return { ...comment, comment: action.comment.comment };
+            }
+            return comment;
+          });
 
           return {
             ...state,
