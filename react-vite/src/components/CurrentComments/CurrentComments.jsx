@@ -33,12 +33,12 @@ const CurrentComments = () => {
         <div className="container">
             <div className="container_text">Your Comments</div>
             {comments.map((comment) => (
-                <NavLink
+                <div
                     key={comment.commentId}
-                    to={`/questions/${comment.questionId}`} // Set the NavLink to the question URL
+
                     className="one_question_container"
                 >
-                    <div>{comment.comment}</div>
+                    <NavLink to={`/questions/${comment.questionId}`} className='navtopage'>{comment.comment}</NavLink>
                     <div className="user_comments">
                         <p className="userName">{user.username}</p>
                         <p className="created-date">
@@ -68,8 +68,8 @@ const CurrentComments = () => {
                         </div>
                     </div>
 
-                </NavLink>
-            ))}
+                </div>
+            )).reverse()}
         </div>
 
     );

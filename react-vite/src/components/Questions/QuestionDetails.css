@@ -7,6 +7,7 @@
     border: 1px solid black;
     padding: 5px;
 }
+
 .bottom_text {
     display: flex;
     justify-content: space-between;
@@ -28,7 +29,7 @@
     cursor: pointer;
 }
 
-.save_b > i {
+.save_b>i {
     font-size: 15px;
 }
 
@@ -93,6 +94,37 @@
     font-weight: 500;
 }
 
-.edit_question > i{
+.edit_question>i {
     margin-right: 3px;
+}
+
+.fa-regular.fa-bookmark {
+    padding-top: 2px;
+    margin-left: 10px;
+}
+
+.save_button {
+    font-size: 12px;
+}
+
+.subcomm {
+    width: fit-content;
+    margin-left: 10px;
+    box-shadow: 2px 2px darkgray;
+    border: 2px solid darkgray;
+    padding: 5px 5px 5px 5px;
+    border-radius: 20px;
+    /* margin-left: 35px; */
+}
+
+.subcomm:enabled {
+
+    width: fit-content;
+    color: white;
+    background-color: #B92B27;
+    box-shadow: 2px 2px black;
+    border: 2px solid black;
+    padding: 5px 5px 5px 5px;
+    border-radius: 20px;
+    margin-left: 10px;
 }

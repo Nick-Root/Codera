@@ -66,7 +66,7 @@ const CurrentQuestions = () => {
                     </div>
                 </div>
 
-            ))}
+            )).reverse()}
         </div>
     );
 

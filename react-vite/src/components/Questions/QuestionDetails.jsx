@@ -96,13 +96,13 @@ const QuestionDetails = () => {
                                 onItemClick={closeMenu}
                                 className='updatequestionmodal'
                                 modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
-                        />
+                            />
                         </div>
                     )}
                     {user && (
                         <div className='save_b'>
                             <i class="fa-regular fa-bookmark"></i>
-                            <button onClick={saved} className='save_button'>save</button>
+                            <button onClick={saved} className='save_button'>Save</button>
                         </div>
                     )}
                 </div>
@@ -117,7 +117,7 @@ const QuestionDetails = () => {
                                 onChange={(e) => setCommentText(e.target.value)}
                                 placeholder="Enter your comment"
                             />
-                            <button onClick={handleCommentSubmit} style={{ 'cursor': 'pointer' }}>Submit Comment</button>
+                            <button onClick={handleCommentSubmit} style={{ 'cursor': 'pointer' }} className='subcomm' disabled={commentText.length < 1}>Post Comment</button>
                         </>
                     )}
                 </div>

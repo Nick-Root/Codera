@@ -1,0 +1,35 @@
+.update-comment-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 150px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#updatedComment {
+    border: none;
+    width: 400px;
+    height: fit-content;
+    border-bottom: 1px solid black;
+}
+
+.savechange {
+    color: white;
+    background-color: #B92B27;
+    box-shadow: 2px 2px black;
+    border: 2px solid black;
+    padding: 5px 5px 5px 5px;
+    width: fit-content;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.savechange:hover {
+    cursor: pointer;
+}
