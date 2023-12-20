@@ -1,11 +1,11 @@
-from app.models import db, User, Question, SavedQuestion, Comment, Topic
-from app import app
+# from app.models import db, User, Question, SavedQuestion, Comment, Topic
+# from app import app
 #from app.forms.question_form import QuestionForm
 
 
 #allows for a built in try catch block
 #connects to the app
-with app.app_context():
+# with app.app_context():
     # do not do this with alembic
     # db.drop_all()
     # print("all tables detroyed")
