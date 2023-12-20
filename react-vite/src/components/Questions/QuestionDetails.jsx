@@ -95,7 +95,10 @@ const QuestionDetails = () => {
                     </div>
                 )}
                 {user && (
-                    <button onClick={saved} className='save_button'>save</button>
+                    <div className='save_b'>
+                        <i class="fa-regular fa-bookmark"></i>
+                        <button onClick={saved} className='save_button'>save</button>
+                    </div>
                 )}
                 </div>
             </div>
@@ -107,7 +110,7 @@ const QuestionDetails = () => {
                         onChange={(e) => setCommentText(e.target.value)}
                         placeholder="Enter your comment"
                     />
-                    <button onClick={handleCommentSubmit}>Submit Comment</button>
+                    <button onClick={handleCommentSubmit} style={{'cursor':'pointer'}}>Submit Comment</button>
                 </div>
                 {comments.map((comment) => (
                     <div key={comment.commentId} className="comment">
