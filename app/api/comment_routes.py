@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from flask_login import current_user
 from ..models import db
 from ..models.models import Question, SavedQuestion, User, Comment, Topic
+from ..forms.comment_form import CommentForm
 
 comment_routes = Blueprint('comments', __name__)
 
@@ -32,3 +33,22 @@ def delete_comment(commentId):
         db.session.commit()
 
         return jsonify(message="Comment deleted successfully"), 200
+
+@comment_routes.route('/<int:commentId>', methods=['PUT'])
+@login_required
+def update_comment(commentId):
+    comment = Comment.query.get(commentId)
+
+    if current_user.id != comment.userId:
+        return jsonify({"error": "You are not authorized to update this comment"}), 403
+
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        comment.comment = form.data['comment']
+        db.session.commit()
+        return jsonify({"message": "Comment updated successfully", "comment": comment.to_dict()})
+    else:
+        errors = form.errors
+        return jsonify({"error": errors}), 400
