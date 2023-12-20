@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
@@ -110,10 +110,19 @@ const MainPage = () => {
                 <div className='questionscont'>
                     {arrQues.map((question) => {
                         return (
-                            <NavLink to={`/questions/${question.id}`} className='question' key={question.id}>{question.question}
-                                <p className="asker">
-                                    {question.askerUsername}
-                                </p>
+                            <NavLink to={`/questions/${question.id}`} className='one_question_container' key={question.id}>
+                                {question.question}
+                                <div className="user_questions">
+                                    <p className="userName">{question.askerUsername}</p>
+                                    <p className="created-date">
+                                        Asked:{" "}
+                                        {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                            day: "numeric",
+                                            month: "long",
+                                            year: "numeric",
+                                        })}
+                                    </p>
+                                </div>
                             </NavLink>
                         )
                     })}

@@ -55,6 +55,19 @@ h3 {
     border-radius: 5px;
 }
 
+.q_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user_q {
+    position: relative;
+    font-size: 15px;
+    margin-top: 15px;
+    color: grey;
+    font-weight: 500;
+}
+
 .askaques {
     display: flex;
     justify-content: center;
@@ -95,7 +108,7 @@ h3 {
 
 .resourceimg:hover {
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 2);
+    box-shadow: 0 3px 5px rgba(108, 108, 108, 0.5);
 }
 
 .resourcescont {
