@@ -40,7 +40,7 @@ export default function SavedQuestion() {
                                 {save?.questions.map(question => {
                                     return <div key={question.id} >
                                         <div className='one_question_container'>
-                                            <NavLink to={`/questions/${question.id}`} style={{textDecoration: 'none', color:'black'}}>{question?.question}</NavLink>
+                                            <NavLink to={`/questions/${question.id}`} className='navtopage'>{question?.question}</NavLink>
                                             <div className="user_comments">
                                                 <p className="userName">{sessionUser.username}</p>
                                                 <p className="created-date">
