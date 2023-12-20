@@ -66,7 +66,7 @@ export default function SavedQuestion() {
                                 })}
                             </div>
                         }
-                    })}
+                    }).reverse()}
                 </div>
             </div>
         </>

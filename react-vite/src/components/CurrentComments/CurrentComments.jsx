@@ -69,7 +69,7 @@ const CurrentComments = () => {
                     </div>
 
                 </div>
-            ))}
+            )).reverse()}
         </div>
 
     );
