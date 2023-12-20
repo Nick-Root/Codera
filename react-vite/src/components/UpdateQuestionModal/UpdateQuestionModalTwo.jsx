@@ -1,15 +1,15 @@
-//this is for updating questions on questions/:id page
+//this is for updating questions on the /questions/current page
 import { thunkGetAllTopics } from '../../redux/topic';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 
 import { useModal } from "../../context/Modal";
-import { thunkGetOneQuestion, thunkUpdateOneQuestion } from '../../redux/question.js';
+import { thunkGetOneQuestion, thunkUpdateOneQuestion, getCurrentQuestions } from '../../redux/question.js';
 
 import "./UpdateQuestionModal.css";
 
 
-function UpdateQuestionModal({ id }) {
+function UpdateQuestionModalTwo({ id }) {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
@@ -30,31 +30,41 @@ function UpdateQuestionModal({ id }) {
   console.log("UpdateQuestionModal id", id)
 
 
-
+  //for getting all topics
   const allTopics = useSelector(state => state.topic)  //object of objects
   //if(!allTopics) return null;
   //console.log("allTopics", allTopics)c
   const arrAllTopics = Object.values(allTopics);  //array of objects
   //console.log("topicsArr", arrAllTopics)
 
-  //console.log("as;ldkjf;asldkjf;aslkdjf;alskjdf;aslkjdf")
-  //const questionState = useSelector((state) => state.question)
-  //console.log("questionState", questionState)
+
+
+  const questionState = useSelector((state) => state.question)
+  console.log("questionState in UpdateQuestionModalTwo", questionState)
+  console.log("userQuestions", questionState.userQuestions);
+
+  let thisQuestion = {}
+  for(let ques of questionState.userQuestions){
+    if(ques.id === id) thisQuestion = ques
+  }
+  //console.log("thisQuestion", thisQuestion);
 
 
   //from QuestionDetails destructure the datas
-  const questionData = useSelector((state) => state.question.oneQuestion)
-  //console.log("questionData", questionData)
-  const { 0: questionText = "default text"} = questionData
+  //there is no question.oneQuestion on question/currentPage
+  //const questionData = useSelector((state) => state.question.oneQuestion)
+  //console.log("questionData**********", questionData)
+
+  //const { 0: questionText = "default text"} = questionData
   //console.log("questionText.topicId", questionText.topicId)
 
 
 
   //do not want to set state on first render, only on second and when it changes
   useEffect(() => {
-    setQuestion(questionText.question)
-    setTopicId(questionText.topicId)
-  }, [questionData, questionText.question, questionText.topicId])
+    setQuestion(thisQuestion.question)
+    setTopicId(thisQuestion.topicId)
+  }, [thisQuestion,thisQuestion.question, thisQuestion.topicId])
 
 
   const onSubmit = async (e) => {
@@ -69,14 +79,16 @@ function UpdateQuestionModal({ id }) {
     };
     console.log("dataObj with {topicId: topicId, question: question}", dataObj);
 
-    const serverResponse = await dispatch(thunkUpdateOneQuestion(id, dataObj));
+    await dispatch(thunkUpdateOneQuestion(id, dataObj));
+    await dispatch(getCurrentQuestions())
+    closeModal();
     console.log("serverResponse", serverResponse)
-    await dispatch(thunkGetOneQuestion(id))
+    //await dispatch(thunkGetOneQuestion(id))
 
-    setQuestion('');
+    //setQuestion('');
     // setValidationErrors({});
     // setHasSubmitted(false);
-    closeModal();
+
   }
 
   return (
@@ -111,4 +123,4 @@ function UpdateQuestionModal({ id }) {
   );
 }
 
-export default UpdateQuestionModal;
+export default UpdateQuestionModalTwo;

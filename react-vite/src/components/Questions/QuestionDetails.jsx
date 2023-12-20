@@ -13,6 +13,8 @@ import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 
 
 const QuestionDetails = () => {
+    const questionState = useSelector((state) => state.question || [])
+
     const { id } = useParams();
     const dispatch = useDispatch();
     const questionData = useSelector((state) => state.question.oneQuestion || [])
@@ -65,6 +67,9 @@ const QuestionDetails = () => {
         dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
     }
     console.log(question)
+
+
+    console.log("questionState in QuestionDetails", questionState)
     return (
         <div className='container'>
             <div className="container_text">
@@ -91,7 +96,7 @@ const QuestionDetails = () => {
                                 onItemClick={closeMenu}
                                 className='updatequestionmodal'
                                 modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
-                            />
+                        />
                         </div>
                     )}
                     {user && (
