@@ -29,7 +29,6 @@ def add_savedquestion(id):
 
     if not savedQuestion:
         add_savedQuestion = SavedQuestion(
-            userId=current_user.id,
             questionId=id,
             saved=True
         )

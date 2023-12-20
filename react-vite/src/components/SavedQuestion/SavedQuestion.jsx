@@ -42,10 +42,9 @@ export default function SavedQuestion() {
                                         <div className='one_question_container'>
                                             <NavLink to={`/questions/${question.id}`} className='navtopage'>{question?.question}</NavLink>
                                             <div className="user_comments">
-                                                <p className="userName">{sessionUser.username}</p>
                                                 <p className="created-date">
-                                                    Commented on:{" "}
-                                                    {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                                    Saved on:{" "}
+                                                    {new Date().toLocaleDateString(undefined, {
                                                         day: "numeric",
                                                         month: "long",
                                                         year: "numeric",
