@@ -4,6 +4,7 @@ import { getCurrentQuestions } from "../../redux/question"
 import './CurrentQuestions.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateQuestionModalTwo from "../UpdateQuestionModal/UpdateQuestionModalTwo";
+import DeleteQuestionModalTwo from "../DeleteQuestionModal/DeleteQuestionModalTwo";
 import { NavLink } from "react-router-dom"
 
 const CurrentQuestions = () => {
@@ -54,13 +55,13 @@ const CurrentQuestions = () => {
                                     modalComponent={<UpdateQuestionModalTwo id={question.id} />}
                                 />
                             </div>
-                            {/* <div className="delete_Question">
+                            <div className="delete_question">
                                 <i className="fa-solid fa-trash-can"></i>
                                 <OpenModalMenuItem
                                     itemText='Delete'
-                                    modalComponent={<DeleteQuestionModal Question={Question} />}
+                                    modalComponent={<DeleteQuestionModalTwo id={question.id} />}
                                 />
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>

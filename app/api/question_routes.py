@@ -116,6 +116,21 @@ def update_question(id):
         return "Bad Data"
 
 
+@question_routes.route('<int:id>', methods=['DELETE'])
+def remove_question(id):
+    question = Question.query.get(id)
+
+    if question:
+        db.session.delete(question)
+        db.session.commit()
+        return jsonify({'message': 'Saved question removed successfully'})
+    else:
+        print("Question does not exist")
+
+    return jsonify({'message': 'Saved question not found'})
+
+
+
 
 @question_routes.route('/<int:id>/comments', methods=['POST'])
 @login_required

@@ -68,6 +68,17 @@
     z-index: 1;
 }
 
+.delete_question {
+    position: relative;
+    left: 40em;
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    bottom: 15px;
+    font-size: 12px;
+}
+
+
 .navtopage {
     text-decoration: none;
 }

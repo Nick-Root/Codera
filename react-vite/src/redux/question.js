@@ -5,6 +5,7 @@ const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
 const DELETE_SAVED_QUESTION = "questions/deleteSavedQuestion"
 const ADD_SAVED_QUESTION = "questions/addSavedQuestion"
 const RECEIVE_ONE_QUESTION = "questions/receiveOneQuestion"
+const DELETE_QUESTION = "question/deleteQuestion";
 
 
 const loadAllQuestions = (allQuestions) => {
@@ -50,6 +51,12 @@ const receiveOneQuestion = (question) => {
   return {
     type: RECEIVE_ONE_QUESTION,
     question
+  }
+}
+const deleteQuestion = (questionId) => {
+  return {
+    type: DELETE_QUESTION,
+    questionId
   }
 }
 
@@ -158,7 +165,8 @@ export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
   }
 }
 
-//needs woek
+
+
 export const thunkUpdateOneQuestion = (id, dataObj) => async (dispatch) => {
   const res = await fetch(`/api/questions/${id}`, {
     method: 'PUT',
@@ -180,6 +188,27 @@ export const thunkUpdateOneQuestion = (id, dataObj) => async (dispatch) => {
     return error;
   }
 }
+
+
+export const thunkDeleteQuestion = (questionId) => async (dispatch) => {
+  console.log("before fetch DELETE")
+  const res = await fetch(`/api/questions/${questionId}`, {  //check the route!!!
+    method: 'DELETE'   //DELETE does not have any header and body
+  });
+  console.log("after fetch DELETE")
+
+
+  if(res.ok){
+    const data = await res.json();
+    dispatch(deleteQuestion(questionId));  //payload is the questionId
+    return data;
+  } else {
+    const error = await res.json(); //will return an erorr object here
+    console.log("fetch DELETE error message")
+    return error;
+  }
+}
+
 
 
 
@@ -233,6 +262,10 @@ const questionsReducer = (state = initialState, action) => {
       delete newState[action.questionId];
       return newState;
     }
+    // case DELETE_QUESTION: {
+    //   newState = { ...state }
+    //   return newState
+    // }
     case ADD_SAVED_QUESTION:
       return { ...state, [action.question.id]: action.question };
     default:
