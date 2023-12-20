@@ -4,6 +4,7 @@ import { getCurrentComments } from "../../redux/comment"
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateCommentModal from "../CommentModals/UpdateCommentModal";
+import { NavLink } from "react-router-dom";
 import './CurrentComments.css'
 
 
@@ -32,7 +33,11 @@ const CurrentComments = () => {
         <div className="container">
             <div className="container_text">Your Comments</div>
             {comments.map((comment) => (
-                <div key={comment.commentId} className="one_question_container" >
+                <NavLink
+                    key={comment.commentId}
+                    to={`/questions/${comment.questionId}`} // Set the NavLink to the question URL
+                    className="one_question_container"
+                >
                     <div>{comment.comment}</div>
                     <div className="user_comments">
                         <p className="userName">{user.username}</p>
@@ -62,7 +67,8 @@ const CurrentComments = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+
+                </NavLink>
             ))}
         </div>
 

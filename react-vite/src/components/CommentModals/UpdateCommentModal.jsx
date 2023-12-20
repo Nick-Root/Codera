@@ -17,7 +17,7 @@ const UpdateCommentModal = ({ comment }) => {
     // const questionArray = Object.values(questionData)
     // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
     const { 0: question } = questionData
-    const questionId = question.id
+    const questionId = question?.id
 
     console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionId);
     const handleSubmit = async (e) => {

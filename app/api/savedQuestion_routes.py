@@ -11,6 +11,7 @@ savedQuestion_routes = Blueprint('savedQuestions', __name__)
 @savedQuestion_routes.route('/')
 # @login_required
 def get_savedQuestions():
+  
     savedQuestions = SavedQuestion.query.filter_by(saved = True).all()
     saved_data = []
     for saved in savedQuestions:
@@ -21,21 +22,22 @@ def get_savedQuestions():
     return saved_data
 
 
+
 @savedQuestion_routes.route('<int:id>', methods=['POST'])
 def add_savedquestion(id):
-    savedQuestion = SavedQuestion.query.filter_by(questionId = id).first()
+    savedQuestion = SavedQuestion.query.filter_by(userId=current_user.id, questionId=id).first()
 
     if not savedQuestion:
         add_savedQuestion = SavedQuestion(
             userId=current_user.id,
             questionId=id,
-            saved = True
+            saved=True
         )
         db.session.add(add_savedQuestion)
         db.session.commit()
         return jsonify(message='Question saved successfully')
-    
     return jsonify(message='Question already saved')
+    
 
 
 @savedQuestion_routes.route('<int:id>/remove', methods=['DELETE'])

@@ -87,35 +87,39 @@ const QuestionDetails = () => {
                         </p>
                     </div>
 
-                {/* edit question button/modal */}
-                {user && user.id === question.ownerId && (
-                    <div className="edit_question">
-                        <i className="fa-solid fa-pen-to-square"></i>
-                        <OpenModalMenuItem
-                            itemText='Edit'
-                            onItemClick={closeMenu}
-                            className='updatequestionmodal'
-                            modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
+                    {/* edit question button/modal */}
+                    {user && user.id === question.ownerId && (
+                        <div className="edit_question">
+                            <i className="fa-solid fa-pen-to-square"></i>
+                            <OpenModalMenuItem
+                                itemText='Edit'
+                                onItemClick={closeMenu}
+                                className='updatequestionmodal'
+                                modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
                         />
-                    </div>
-                )}
-                {user && (
-                    <div className='save_b'>
-                        <i class="fa-regular fa-bookmark"></i>
-                        <button onClick={saved} className='save_button'>save</button>
-                    </div>
-                )}
+                        </div>
+                    )}
+                    {user && (
+                        <div className='save_b'>
+                            <i class="fa-regular fa-bookmark"></i>
+                            <button onClick={saved} className='save_button'>save</button>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="comments">
                 <h3>Comments:</h3>
                 <div className='create-comment'>
-                    <textarea
-                        value={commentText}
-                        onChange={(e) => setCommentText(e.target.value)}
-                        placeholder="Enter your comment"
-                    />
-                    <button onClick={handleCommentSubmit} style={{'cursor':'pointer'}}>Submit Comment</button>
+                    {user && (
+                        <>
+                            <textarea
+                                value={commentText}
+                                onChange={(e) => setCommentText(e.target.value)}
+                                placeholder="Enter your comment"
+                            />
+                            <button onClick={handleCommentSubmit} style={{ 'cursor': 'pointer' }}>Submit Comment</button>
+                        </>
+                    )}
                 </div>
                 {comments.map((comment) => (
                     <div key={comment.commentId} className="comment">

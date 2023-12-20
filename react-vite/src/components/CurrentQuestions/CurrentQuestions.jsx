@@ -4,6 +4,7 @@ import { getCurrentQuestions } from "../../redux/question"
 import './CurrentQuestions.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateQuestionModalTwo from "../UpdateQuestionModal/UpdateQuestionModalTwo";
+import { NavLink } from "react-router-dom"
 
 const CurrentQuestions = () => {
     const dispatch = useDispatch()
@@ -23,25 +24,27 @@ const CurrentQuestions = () => {
     if (!questions) return null
     if (!user) return null
 
-    console.log("questionState in CurrentQuestions", questionState)
+    console.log("questionState in CurrentQuestions", questionState, questions)
     return (
         <div className="container">
             <div className="container_text">Your Questions</div>
             {questions.map((question) => (
-                <div key={question.id} className="one_question_container">
+                <NavLink to={`/questions/${question.id}`} className='navtopage'>
+                    <div key={question.id} className="one_question_container">
                     {console.log("question.question", question.question)}
                     {console.log("question.question", question.id)}
-                    <div>{question.question}</div>
-                    <div className="user_questions">
-                        <p className="userName">{user.username}</p>
-                        <p className="created-date">
-                            Asked:{" "}
-                            {new Date(question.createdAt).toLocaleDateString(undefined, {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                            })}
-                        </p>
+
+                        <div>{question.question}</div>
+                        <div className="user_questions">
+                            <p className="userName">{user.username}</p>
+                            <p className="created-date">
+                                Asked:{" "}
+                                {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
                         <div className="edit_delete_question">
                             <div className="update_question">
 
@@ -59,8 +62,9 @@ const CurrentQuestions = () => {
                                 />
                             </div> */}
                         </div>
+                        </div>
                     </div>
-                </div>
+                </NavLink>
             ))}
         </div>
     );

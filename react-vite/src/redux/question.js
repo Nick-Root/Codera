@@ -143,10 +143,10 @@ export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
     body: JSON.stringify(dataObj)
   });
 
-  if(res.ok) {
+  if (res.ok) {
     //console.log("post res.ok")
     const newQuestion = await res.json();  //now the Question should have a id created from the backend
-   //console.log("thunk newQuestion", newQuestion)
+    //console.log("thunk newQuestion", newQuestion)
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
     return newQuestion;
   } else {
@@ -166,10 +166,10 @@ export const thunkUpdateOneQuestion = (id, dataObj) => async (dispatch) => {
     body: JSON.stringify(dataObj)
   });
 
-  if(res.ok) {
+  if (res.ok) {
     //console.log("post res.ok")
     const newQuestion = await res.json();  //now the Question should have a id created from the backend
-   //console.log("thunk newQuestion", newQuestion)
+    //console.log("thunk newQuestion", newQuestion)
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
     return newQuestion;
   } else {
