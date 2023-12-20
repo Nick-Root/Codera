@@ -38,3 +38,20 @@
     color: grey;
     font-weight: 500;
 }
+
+/* added for edit delete for current questions */
+.edit_delete_question {
+    display: flex;
+    position: relative;
+    right: 60px;
+}
+.update_question {
+    position: relative;
+    left: 40em;
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    bottom: 15px;
+    font-size: 12px;
+    margin-right: 10px;
+}

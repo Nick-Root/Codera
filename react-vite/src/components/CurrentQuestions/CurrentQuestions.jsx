@@ -2,25 +2,35 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentQuestions } from "../../redux/question"
 import './CurrentQuestions.css'
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import UpdateQuestionModalTwo from "../UpdateQuestionModal/UpdateQuestionModalTwo";
 
 const CurrentQuestions = () => {
     const dispatch = useDispatch()
+    const questionState = useSelector((state) => state.question)
+
+
     useEffect(() => {
-        dispatch(getCurrentQuestions())
+        dispatch(getCurrentQuestions())  //gets current quesitons, (thunk)
     }, [dispatch])
-    const questions = useSelector((state) => state.question.userQuestions)
+
+
+    const questions = useSelector((state) => state.question.userQuestions || [])
+    console.log("questionsState.userQuestions in CurrentQuestions", questions)
     const user = useSelector((state) => state.question.user)
     console.log("Curr user questions", questions)
     console.log("Curr user question user", user)
     if (!questions) return null
     if (!user) return null
 
-    console.log("inside CurrentQuestions")
+    console.log("questionState in CurrentQuestions", questionState)
     return (
         <div className="container">
             <div className="container_text">Your Questions</div>
             {questions.map((question) => (
-                <div key={question.questionId} className="one_question_container">
+                <div key={question.id} className="one_question_container">
+                    {console.log("question.question", question.question)}
+                    {console.log("question.question", question.id)}
                     <div>{question.question}</div>
                     <div className="user_questions">
                         <p className="userName">{user.username}</p>
@@ -32,6 +42,23 @@ const CurrentQuestions = () => {
                                 year: "numeric",
                             })}
                         </p>
+                        <div className="edit_delete_question">
+                            <div className="update_question">
+
+                                <i className="fa-solid fa-pen-to-square"></i>
+                                <OpenModalMenuItem
+                                    itemText='Update'
+                                    modalComponent={<UpdateQuestionModalTwo id={question.id}/>}
+                                />
+                            </div>
+                            {/* <div className="delete_Question">
+                                <i className="fa-solid fa-trash-can"></i>
+                                <OpenModalMenuItem
+                                    itemText='Delete'
+                                    modalComponent={<DeleteQuestionModal Question={Question} />}
+                                />
+                            </div> */}
+                        </div>
                     </div>
                 </div>
             ))}
