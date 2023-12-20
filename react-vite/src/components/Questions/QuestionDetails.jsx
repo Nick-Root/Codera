@@ -1,11 +1,13 @@
 import './QuestionDetails.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
+
+import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
 import './QuestionDetails.css'
 
 
@@ -35,6 +37,24 @@ const QuestionDetails = () => {
 
         setCommentText('')
     };
+
+    //logic for Modal
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
+    useEffect(() => {
+        if (!showMenu) return;
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+            setShowMenu(false);
+            }
+        };
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+    const closeMenu = () => setShowMenu(false);
+
+
 
     useEffect(() => {
         dispatch(thunkGetOneQuestion(id))
