@@ -8,6 +8,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
 import './QuestionDetails.css'
 import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal"
+import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 
 
 
@@ -44,7 +45,7 @@ const QuestionDetails = () => {
         if (!showMenu) return;
         const closeMenu = (e) => {
             if (!ulRef.current.contains(e.target)) {
-            setShowMenu(false);
+                setShowMenu(false);
             }
         };
         document.addEventListener('click', closeMenu);
@@ -63,6 +64,7 @@ const QuestionDetails = () => {
     const saved = () => {
         dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
     }
+    console.log(question)
     return (
         <div className='container'>
             <div className="container_text">
@@ -79,18 +81,25 @@ const QuestionDetails = () => {
                             })}
                         </p>
                     </div>
-                    <button onClick={saved} className='save_button'>save</button>
 
-
-                </div>
                 {/* edit question button/modal */}
-                <div id="update-question-button">
+                {user && user.id === question.ownerId && (
+                    <div className="edit_question">
+                        <i className="fa-solid fa-pen-to-square"></i>
                         <OpenModalMenuItem
                             itemText='Edit'
                             onItemClick={closeMenu}
                             className='updatequestionmodal'
-                            modalComponent={<UpdateQuestionModal id={parseInt(id)}/>}
-                        />
+                            modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
+                            />
+                    </div>
+                )}
+                {user && (
+                    <div className='save_b'>
+                        <i class="fa-regular fa-bookmark"></i>
+                        <button onClick={saved} className='save_button'>save</button>
+                    </div>
+                )}
                 </div>
             </div>
             <div className="comments">
@@ -101,30 +110,45 @@ const QuestionDetails = () => {
                         onChange={(e) => setCommentText(e.target.value)}
                         placeholder="Enter your comment"
                     />
-                    <button onClick={handleCommentSubmit}>Submit Comment</button>
+                    <button onClick={handleCommentSubmit} style={{'cursor':'pointer'}}>Submit Comment</button>
                 </div>
                 {comments.map((comment) => (
                     <div key={comment.commentId} className="comment">
                         <div className='comments'>
                             <p>{comment.comment}</p>
-                            <p className='user_question' >
-                                Commented by: {comment.username}{" "} on {' '}
-                                {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                                    day: 'numeric',
-                                    month: "long",
-                                    year: "numeric",
-                                })}
-                            </p>
-                            <div className="delete_sq">
-                                {user.id === comment.ownerId && (
-                                    <>
-                                        <i className="fa-solid fa-trash-can"></i>
-                                        <OpenModalMenuItem
-                                            itemText='Delete'
-                                            modalComponent={<DeleteCommentModal comment={comment} />}
-                                        />
-                                    </>
-                                )}
+                            <div className='user_question'>
+                                <p >
+                                    Commented by: {comment.username}{" "} on {' '}
+                                    {new Date(comment.createdAt).toLocaleDateString(undefined, {
+                                        day: 'numeric',
+                                        month: "long",
+                                        year: "numeric",
+                                    })}
+                                </p>
+                                <div className="edit_delete_comment">
+                                    <div className="update_comment">
+                                        {user && user.id === comment.ownerId && (
+                                            <>
+                                                <i className="fa-solid fa-pen-to-square"></i>
+                                                <OpenModalMenuItem
+                                                    itemText='Update'
+                                                    modalComponent={<UpdateCommentModal comment={comment} />}
+                                                />
+                                            </>
+                                        )}
+                                    </div>
+                                    <div className="delete_comment">
+                                        {user && user.id === comment.ownerId && (
+                                            <>
+                                                <i className="fa-solid fa-trash-can"></i>
+                                                <OpenModalMenuItem
+                                                    itemText='Delete'
+                                                    modalComponent={<DeleteCommentModal comment={comment} />}
+                                                />
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

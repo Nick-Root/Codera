@@ -32,7 +32,7 @@ export default function SavedQuestion() {
     return (
         <>
         <div className='container'>
-            <div className="container_text">{length === 1 ? `${length} saved question` : `${length} saved questions`}</div>
+            <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>
             <div >
                 {saves.map(save => {
                     if (sessionUser.id === save.userId) {
