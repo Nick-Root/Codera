@@ -6,7 +6,7 @@ import UpdateTopicModal from "../UpdateTopicModal/UpdateTopicModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useModal } from "../../context/Modal";
 import { NavLink } from "react-router-dom";
-
+import './TopicPage.css'
 
 export default function TopicPage() {
     const { topicId } = useParams()
@@ -51,14 +51,17 @@ export default function TopicPage() {
 
     return (
         <div className="container">
-            <ul className='updatetop'>
-                {ownercheck && (<OpenModalMenuItem
-                    itemText='Edit Topic'
-                    onItemClick={closeMenu}
-                    className='topmodal'
-                    modalComponent={<UpdateTopicModal />}
-                />)}
-            </ul>
+                {ownercheck && (
+                    <div className="edit_topic">
+                        <i className="fa-solid fa-pen-to-square"></i>
+                        <OpenModalMenuItem
+                            itemText='Edit Topic'
+                            onItemClick={closeMenu}
+                            className='topmodal'
+                            modalComponent={<UpdateTopicModal />}
+                        />
+                    </div>
+                )}
             <div className="container_text">{topic[0]?.topic}</div>
             <div>
                 {topic[0]?.questions.map(question => {
