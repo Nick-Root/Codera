@@ -131,13 +131,9 @@ const commentsReducer = (state= initialState, action) => {
           };
         }
         case UPDATE_COMMENT: {
-          const updatedComments = state.userComments.map((comment) => {
-            if (comment.id === action.comment.id) {
-              return { ...comment, comment: action.comment.comment };
-            }
-            return comment;
-          });
-
+          const updatedComments = state.userComments.filter(
+            (comment) => comment.id !== action.commentId
+          );
           return {
             ...state,
             userComments: updatedComments,

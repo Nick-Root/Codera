@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
+import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
 
@@ -45,7 +46,7 @@ const QuestionDetails = () => {
         if (!showMenu) return;
         const closeMenu = (e) => {
             if (!ulRef.current.contains(e.target)) {
-            setShowMenu(false);
+                setShowMenu(false);
             }
         };
         document.addEventListener('click', closeMenu);
@@ -114,6 +115,17 @@ const QuestionDetails = () => {
                                         <OpenModalMenuItem
                                             itemText='Delete'
                                             modalComponent={<DeleteCommentModal comment={comment} />}
+                                        />
+                                    </>
+                                )}
+                            </div>
+                            <div className="delete_sq">
+                                {user.id === comment.ownerId && (
+                                    <>
+                                        <i className="fa-solid fa-trash-can"></i>
+                                        <OpenModalMenuItem
+                                            itemText='Update'
+                                            modalComponent={<UpdateCommentModal comment={comment} />}
                                         />
                                     </>
                                 )}

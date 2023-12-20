@@ -14,7 +14,7 @@ const DeleteCommentModal = ({ comment }) => {
         e.preventDefault()
 
         await dispatch(thunkDeleteComment(comment.commentId))
-        if (id) {
+        if (!id) {
             await dispatch(thunkGetOneQuestion(id))
                 .then(closeModal)
         } else {
@@ -22,11 +22,6 @@ const DeleteCommentModal = ({ comment }) => {
                 .then(closeModal)
         }
     }
-
-
-
-
-
 
 
     return (
