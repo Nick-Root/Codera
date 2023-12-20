@@ -33,8 +33,8 @@ function LoginFormModal() {
   const demo = async (e) => {
     e.preventDefault()
     return await dispatch(thunkLogin({ email: 'demo@aa.io', password: 'password' }))
-    .then(navigate('/'))
     .then(closeModal)
+    .then(navigate('/'))
   }
 
   return (

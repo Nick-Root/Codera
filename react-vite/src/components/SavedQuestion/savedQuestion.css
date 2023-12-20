@@ -7,6 +7,7 @@
     cursor: pointer;
     bottom: 15px;
     font-size: 12px;
+    width: 60px;
 }
 
 .delete_sq > i {
