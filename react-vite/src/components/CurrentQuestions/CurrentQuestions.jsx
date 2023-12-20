@@ -29,29 +29,29 @@ const CurrentQuestions = () => {
         <div className="container">
             <div className="container_text">Your Questions</div>
             {questions.map((question) => (
-                <NavLink to={`/questions/${question.id}`} className='navtopage'>
-                    <div key={question.id} className="one_question_container">
+
+                <div key={question.id} className="one_question_container">
                     {console.log("question.question", question.question)}
                     {console.log("question.question", question.id)}
 
-                        <div>{question.question}</div>
-                        <div className="user_questions">
-                            <p className="userName">{user.username}</p>
-                            <p className="created-date">
-                                Asked:{" "}
-                                {new Date(question.createdAt).toLocaleDateString(undefined, {
-                                    day: "numeric",
-                                    month: "long",
-                                    year: "numeric",
-                                })}
-                            </p>
+                    <NavLink to={`/questions/${question.id}`} className='navtopage'>{question.question}</NavLink>
+                    <div className="user_questions">
+                        <p className="userName">{user.username}</p>
+                        <p className="created-date">
+                            Asked:{" "}
+                            {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </p>
                         <div className="edit_delete_question">
                             <div className="update_question">
 
                                 <i className="fa-solid fa-pen-to-square"></i>
                                 <OpenModalMenuItem
                                     itemText='Update'
-                                    modalComponent={<UpdateQuestionModalTwo id={question.id}/>}
+                                    modalComponent={<UpdateQuestionModalTwo id={question.id} />}
                                 />
                             </div>
                             {/* <div className="delete_Question">
@@ -62,9 +62,9 @@ const CurrentQuestions = () => {
                                 />
                             </div> */}
                         </div>
-                        </div>
                     </div>
-                </NavLink>
+                </div>
+
             ))}
         </div>
     );

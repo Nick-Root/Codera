@@ -42,6 +42,11 @@
 
 .navtopage {
     text-decoration: none;
+    color: black
+}
+
+.navtopage:hover {
+    text-decoration: underline;
 }
 
 /* added for edit delete for current questions */
@@ -50,6 +55,7 @@
     position: relative;
     right: 60px;
 }
+
 .update_question {
     position: relative;
     left: 40em;
