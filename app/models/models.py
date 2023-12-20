@@ -46,7 +46,6 @@ class Question(db.Model):
     createdAt = db.Column(db.TIMESTAMP, default=datetime.now())
     updatedAt = db.Column(db.TIMESTAMP, default=datetime.now())
 
-    # Specify the foreign key relationship with the 'topics' table
     topic = db.relationship('Topic', primaryjoin="Question.topicId == Topic.id", back_populates='questions', overlaps='topic')
 
     def to_dict(self):
