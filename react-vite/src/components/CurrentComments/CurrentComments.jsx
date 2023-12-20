@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getCurrentComments } from "../../redux/comment"
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import UpdateCommentModal from "../CommentModals/UpdateCommentModal";
 import './CurrentComments.css'
 
 
@@ -49,6 +50,16 @@ const CurrentComments = () => {
                                 itemText='Delete'
                                 modalComponent={<DeleteCommentModal comment={comment} />}
                             />
+                        </div>
+                        <div className="delete_sq">
+
+                            <i className="fa-solid fa-trash-can"></i>
+                            <OpenModalMenuItem
+                                itemText='Update'
+                                modalComponent={<UpdateCommentModal comment={comment} />}
+                            />
+
+
                         </div>
                     </div>
                 </div>

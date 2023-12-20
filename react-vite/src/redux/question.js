@@ -5,7 +5,6 @@ const LOAD_SAVED_QUESTIONS = "questions/loadSavedQuestions";
 const DELETE_SAVED_QUESTION = "questions/deleteSavedQuestion"
 const ADD_SAVED_QUESTION = "questions/addSavedQuestion"
 const RECEIVE_ONE_QUESTION = "questions/receiveOneQuestion"
-const UPDATE_ONE_QUESTION = "questions/updateOneQuestion"
 
 
 const loadAllQuestions = (allQuestions) => {

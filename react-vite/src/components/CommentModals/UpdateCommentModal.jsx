@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import { useModal } from "../../context/Modal";
 import { thunkGetOneQuestion } from '../../redux/question.js';
 import { thunkUpdateComment, getCurrentComments } from '../../redux/comment.js';
@@ -16,7 +15,13 @@ const UpdateCommentModal = ({ comment }) => {
     const id = comment.commentId
     const [newCommentText, setUpdatedComment] = useState(comment.comment);
 
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", newCommentText);
+    const questionData = useSelector((state) => state.question.oneQuestion || [])
+    // const questionArray = Object.values(questionData)
+    // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionData);
+    const { 0: question } = questionData
+    const questionId = question.id
+
+    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", questionId);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -25,13 +30,16 @@ const UpdateCommentModal = ({ comment }) => {
         const response = await dispatch(thunkUpdateComment(id, newCommentText));
 
         if (response && response.error) {
-            // Handle any errors from the server, e.g., validation errors
             setErrors(response.error);
-        } else {
-            // Comment updated successfully, close the modal
-            closeModal();
         }
-    };
+        else if (id) {
+            await dispatch(thunkGetOneQuestion(questionId))
+                .then(closeModal)
+        } else {
+            await dispatch(getCurrentComments())
+                .then(closeModal)
+        }
+    }
 
     return (
         <div className="update-comment-modal">

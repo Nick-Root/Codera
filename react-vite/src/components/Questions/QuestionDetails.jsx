@@ -7,14 +7,13 @@ import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
-
-import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
 import './QuestionDetails.css'
+import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal"
 
 
 
 const QuestionDetails = () => {
-    const { id } = useParams();
+    const { questionId } = useParams();
     const dispatch = useDispatch();
     const questionData = useSelector((state) => state.question.oneQuestion || [])
     // const questionArray = Object.values(questionData)
@@ -33,8 +32,8 @@ const QuestionDetails = () => {
         };
 
 
-        await dispatch(thunkPostComment(id, commentData))
-        await dispatch(thunkGetOneQuestion(id))
+        await dispatch(thunkPostComment(questionId, commentData))
+        await dispatch(thunkGetOneQuestion(questionId))
 
         setCommentText('')
     };
@@ -54,8 +53,6 @@ const QuestionDetails = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
-
-
 
     useEffect(() => {
         dispatch(thunkGetOneQuestion(id))
@@ -84,6 +81,17 @@ const QuestionDetails = () => {
                         </p>
                     </div>
                     <button onClick={saved} className='save_button'>save</button>
+
+
+                </div>
+                {/* edit question button/modal */}
+                <div id="update-question-button">
+                    <OpenModalMenuItem
+                        itemText='Edit'
+                        onItemClick={closeMenu}
+                        className='updatequestionmodal'
+                        modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
+                    />
                 </div>
             </div>
             <div className="comments">

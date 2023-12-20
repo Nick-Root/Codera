@@ -131,12 +131,15 @@ const commentsReducer = (state= initialState, action) => {
           };
         }
         case UPDATE_COMMENT: {
-          const updatedComments = state.userComments.filter(
-            (comment) => comment.id !== action.commentId
-          );
+          const updatedComment = {
+            comment: action.comment.comment,
+            createdAt: action.comment.createdAt,
+            commentId: action.comment.id,
+          };
+
           return {
             ...state,
-            userComments: updatedComments,
+            comment: updatedComment,
           };
         }
       default:
