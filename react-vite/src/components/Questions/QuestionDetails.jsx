@@ -6,9 +6,9 @@ import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useParams } from "react-router-dom";
-
-import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal";
 import './QuestionDetails.css'
+import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal"
+import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 
 
 
@@ -45,7 +45,7 @@ const QuestionDetails = () => {
         if (!showMenu) return;
         const closeMenu = (e) => {
             if (!ulRef.current.contains(e.target)) {
-            setShowMenu(false);
+                setShowMenu(false);
             }
         };
         document.addEventListener('click', closeMenu);
@@ -53,8 +53,6 @@ const QuestionDetails = () => {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
-
-
 
     useEffect(() => {
         dispatch(thunkGetOneQuestion(id))
@@ -83,9 +81,22 @@ const QuestionDetails = () => {
                             })}
                         </p>
                     </div>
-                    {user && user.id === question.ownerId && (
-                        <button onClick={saved} className='save_button'>save</button>
-                    )}
+
+                {/* edit question button/modal */}
+                {user && user.id === question.ownerId && (
+                    <div className="edit_question">
+                        <i className="fa-solid fa-pen-to-square"></i>
+                        <OpenModalMenuItem
+                            itemText='Edit'
+                            onItemClick={closeMenu}
+                            className='updatequestionmodal'
+                            modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
+                            />
+                    </div>
+                )}
+                {user && (
+                    <button onClick={saved} className='save_button'>save</button>
+                )}
                 </div>
             </div>
             <div className="comments">
@@ -102,24 +113,39 @@ const QuestionDetails = () => {
                     <div key={comment.commentId} className="comment">
                         <div className='comments'>
                             <p>{comment.comment}</p>
-                            <p className='user_question' >
-                                Commented by: {comment.username}{" "} on {' '}
-                                {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                                    day: 'numeric',
-                                    month: "long",
-                                    year: "numeric",
-                                })}
-                            </p>
-                            <div className="delete_sq">
-                                {user && user.id === comment.ownerId && (
-                                    <>
-                                        <i className="fa-solid fa-trash-can"></i>
-                                        <OpenModalMenuItem
-                                            itemText='Delete'
-                                            modalComponent={<DeleteCommentModal comment={comment} />}
-                                        />
-                                    </>
-                                )}
+                            <div className='user_question'>
+                                <p >
+                                    Commented by: {comment.username}{" "} on {' '}
+                                    {new Date(comment.createdAt).toLocaleDateString(undefined, {
+                                        day: 'numeric',
+                                        month: "long",
+                                        year: "numeric",
+                                    })}
+                                </p>
+                                <div className="edit_delete_comment">
+                                    <div className="update_comment">
+                                        {user && user.id === comment.ownerId && (
+                                            <>
+                                                <i className="fa-solid fa-pen-to-square"></i>
+                                                <OpenModalMenuItem
+                                                    itemText='Update'
+                                                    modalComponent={<UpdateCommentModal comment={comment} />}
+                                                />
+                                            </>
+                                        )}
+                                    </div>
+                                    <div className="delete_comment">
+                                        {user && user.id === comment.ownerId && (
+                                            <>
+                                                <i className="fa-solid fa-trash-can"></i>
+                                                <OpenModalMenuItem
+                                                    itemText='Delete'
+                                                    modalComponent={<DeleteCommentModal comment={comment} />}
+                                                />
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

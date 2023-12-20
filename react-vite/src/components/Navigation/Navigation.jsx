@@ -3,7 +3,7 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
 import { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import CreateQuestionModal from "../CreateQuestionModal/CreateQuestionModal";
 

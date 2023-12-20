@@ -54,3 +54,26 @@
     border-radius: 5px;
 
 }
+
+#update-question-button {
+    display: inline-block;
+    list-style: none;
+    background-color: lightgray;
+    color: black;
+    font-size: 12px;
+    width: 30px;
+    border: 1px solid black;
+    height: 15px;
+}
+
+.edit_question {
+    position: relative;
+    top: 33px;
+    left: 150px;
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    bottom: 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
