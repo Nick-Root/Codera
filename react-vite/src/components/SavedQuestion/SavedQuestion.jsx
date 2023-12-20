@@ -31,31 +31,44 @@ export default function SavedQuestion() {
 
     return (
         <>
-        <div className='container'>
-            <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>
-            <div >
-                {saves.map(save => {
-                    if (sessionUser.id === save.userId) {
-                        return <div key={save.id}>
-                            {save?.questions.map(question => {
-                                return <div key={question.id} >
-                                    <NavLink to={`/questions/${question.id}`} className='question'>
-                                        {question?.question}
-                                    </NavLink>
-                                    <div className="delete_sq">
-                                        <i className="fa-solid fa-trash-can"></i>
-                                        <OpenModalMenuItem
-                                            itemText='Delete'
-                                            modalComponent={<DeleteSavedQuestion question={question} />}
-                                        />
+            <div className='container'>
+                <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>
+                <div >
+                    {saves.map(save => {
+                        if (sessionUser.id === save.userId) {
+                            return <div key={save.id}>
+                                {save?.questions.map(question => {
+                                    return <div key={question.id} >
+                                        <div className='one_question_container'>
+                                            <NavLink to={`/questions/${question.id}`} className='navtopage'>{question?.question}</NavLink>
+                                            <div className="user_comments">
+                                                <p className="userName">{sessionUser.username}</p>
+                                                <p className="created-date">
+                                                    Commented on:{" "}
+                                                    {new Date(question.createdAt).toLocaleDateString(undefined, {
+                                                        day: "numeric",
+                                                        month: "long",
+                                                        year: "numeric",
+                                                    })}
+                                                </p>
+                                                <div className="edit_delete_comment">
+                                                    <div className="delete_comment">
+                                                        <i className="fa-solid fa-trash-can"></i>
+                                                        <OpenModalMenuItem
+                                                            itemText='Delete'
+                                                            modalComponent={<DeleteSavedQuestion question={question} />}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            })}
-                        </div>
-                    }
-                })}
+                                })}
+                            </div>
+                        }
+                    })}
+                </div>
             </div>
-        </div>
         </>
     )
 
