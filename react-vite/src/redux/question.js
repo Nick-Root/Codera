@@ -208,10 +208,14 @@ const questionsReducer = (state = initialState, action) => {
     case LOAD_USER_QUESTIONS: {
       const newState = { ...state };
       newState.user = action.userQuestions.user;
+
       newState.userQuestions = action.userQuestions.questions.map((question) => ({
         id: question.id,
         question: question.question,
-        createdAt: question.createdAt
+        topicId: question.topicId,
+        ownerId: question.ownerId,
+        createdAt: question.createdAt,
+        updatedAt: question.updatedAt
       }))
       return newState;
     }
