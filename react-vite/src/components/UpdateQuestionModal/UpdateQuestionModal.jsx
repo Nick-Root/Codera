@@ -17,7 +17,7 @@ function UpdateQuestionModal({ id }) {
 
   const allTopics = useSelector(state => state.topic)  //object of objects
   //if(!allTopics) return null;
-  //console.log("allTopics", allTopics)
+  //console.log("allTopics", allTopics)c
   const arrAllTopics = Object.values(allTopics);  //array of objects
   //console.log("topicsArr", arrAllTopics)
 
