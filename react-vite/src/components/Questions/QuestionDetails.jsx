@@ -162,7 +162,7 @@ const QuestionDetails = () => {
 
                         </div>
                     </div>
-                ))}
+                )).reverse()}
             </div>
         </div >
 
