@@ -6,3 +6,38 @@
     color: grey;
     font-weight: 500;
 }
+
+.edit_delete_comment {
+    display: flex;
+    position: relative;
+    right: 60px;
+}
+
+.delete_comment {
+    position: relative;
+    left: 40em;
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    bottom: 15px;
+    font-size: 12px;
+}
+
+.delete_comment  > i {
+    padding-right: 3px;
+}
+
+.update_comment {
+    position: relative;
+    left: 40em;
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    bottom: 15px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.update_comment  > i {
+    padding-right: 3px;
+}

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllQuestions } from "../../redux/question";
 import { thunkGetAllTopics } from "../../redux/topic";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";

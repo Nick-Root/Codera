@@ -5,6 +5,7 @@ import { updateTopicThunk } from "../../redux/topic";
 // import { thunkGetAllTopics } from "../../redux/topic";
 import { useParams } from "react-router-dom";
 import { thunkGetSingleTopic } from "../../redux/topic";
+import './UpdateTopicModal.css'
 
 
 function UpdateTopicModal() {
@@ -48,7 +49,7 @@ function UpdateTopicModal() {
     }
 
     return (
-        <div className='topupmodalcont'>
+        <div className="modal_container">
             <h1>Update Your Topic</h1>
             <form onSubmit={handleSubmit} className='topupform'>
                 <label>
@@ -61,7 +62,6 @@ function UpdateTopicModal() {
                         className='topupname'
                     />
                 </label>
-
 
                 <button type='submit' disabled={topic.length === 0} className='topupbutton'>Update Topic</button>
             </form>

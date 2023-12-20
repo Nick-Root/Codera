@@ -24,11 +24,6 @@ const DeleteCommentModal = ({ comment }) => {
     }
 
 
-
-
-
-
-
     return (
         <>
             <div id='delete_comment_container' className="login_container">
