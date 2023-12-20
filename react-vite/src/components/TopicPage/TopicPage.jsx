@@ -51,18 +51,54 @@ export default function TopicPage() {
 
     return (
         <div className="container">
-                {ownercheck && (
-                    <div className="edit_topic">
-                        <i className="fa-solid fa-pen-to-square"></i>
-                        <OpenModalMenuItem
-                            itemText='Edit Topic'
-                            onItemClick={closeMenu}
-                            className='topmodal'
-                            modalComponent={<UpdateTopicModal />}
-                        />
-                    </div>
+            {ownercheck && (
+                <div className="edit_topic">
+                    <i className="fa-solid fa-pen-to-square"></i>
+                    <OpenModalMenuItem
+                        itemText='Edit Topic'
+                        onItemClick={closeMenu}
+                        className='topmodal'
+                        modalComponent={<UpdateTopicModal />}
+                    />
+                </div>
+            )}
+            <div className="container_text">
+                {topic[0].topic === 'Python' ? (
+                        <>
+                            <i className="fa-brands fa-python"></i> {topic[0].topic}
+                        </>
+                )
+                    : topic[0].topic === 'JavaScript' ? (
+                        <>
+                            <i className="fab fa-js"></i> {topic[0].topic}
+                        </>
+                )
+                    : topic[0].topic === 'Express' ? (
+                        <>
+                            <i className="fa-solid fa-code"></i> {topic[0].topic}
+                        </>
+                )
+                    : topic[0].topic === 'SQL' ? (
+                        <>
+                            <i className="fa-solid fa-database"></i> {topic[0].topic}
+                        </>
+                )
+                    : topic[0].topic === 'HTML' ? (
+                        <>
+                            <i className="fa-brands fa-html5"></i> {topic[0].topic}
+                        </>
+                )
+                    : topic[0].topic === 'CSS' ? (
+                        <>
+                            <i className="fa-brands fa-css3-alt"></i> {topic[0].topic}
+                        </>
+                )
+                    : (
+                        <>
+                            <i className="fa-solid fa-code"></i> {topic[0].topic}
+                        </>
                 )}
-            <div className="container_text">{topic[0]?.topic}</div>
+            </div>
             <div>
                 {topic[0]?.questions.map(question => {
                     return <NavLink to={`/questions/${question.id}`} className='question'>
