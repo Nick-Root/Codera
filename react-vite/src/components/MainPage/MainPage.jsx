@@ -14,8 +14,11 @@ const MainPage = () => {
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)
+    let user = useSelector((state) => state.session.user)
 
     const [showMenu, setShowMenu] = useState(false);
+
+
     useEffect(() => {
         dispatch(thunkGetAllQuestions())
         dispatch(thunkGetAllTopics())
@@ -38,6 +41,9 @@ const MainPage = () => {
     }, [showMenu]);
 
     const closeMenu = () => setShowMenu(false);
+    let usercheck = false
+
+    if (user) usercheck = true
 
     if (!questions, !topics) return null
     let arrQues = Object.values(questions)
@@ -51,7 +57,7 @@ const MainPage = () => {
                 {/* All Topics */}
                 <div className='topicscont'>
 
-                    <ul className='createtop'>
+                    {usercheck && <ul className='createtop'>
                         <OpenModalMenuItem
                             itemText='Create Topic'
                             onItemClick={closeMenu}
@@ -59,7 +65,7 @@ const MainPage = () => {
                             modalComponent={<CreateTopicModal />}
                         />
                     </ul>
-
+                    }
 
                     <h3 className='topicheader'>Topics</h3>
                     <div className='topics'>
