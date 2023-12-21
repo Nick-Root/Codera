@@ -7,7 +7,7 @@ https://codera.onrender.com/
 ### Index
 [Feature List](https://github.com/Nick-Root/Codera/wiki/Feature-List) |
 [Database Scheme](https://github.com/Nick-Root/Codera/wiki/Database-Schema) |
-[User Stories](https://github.com/Nick-Root/Codera/wiki/User-Stories) |
+[User Stories](https://github.com/Nick-Root/Codera/wiki/User-Stories) 
 
 
 ### Technologies Used
