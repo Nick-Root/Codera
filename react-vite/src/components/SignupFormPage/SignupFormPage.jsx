@@ -17,7 +17,8 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [signupErrors, setSignupErrors] = useState({});
+  const [loginErrors, setLoginErrors] = useState({})
 
   if (sessionUser) return <Navigate to="/questions" replace={true} />;
 
@@ -42,7 +43,7 @@ function SignupFormPage() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setSignupErrors(serverResponse);
     } else {
       navigate("/questions");
     }
@@ -59,7 +60,7 @@ function SignupFormPage() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setLoginErrors(serverResponse);
     } else {
       dispatch(thunkGetAllQuestions())
       dispatch(thunkGetAllTopics())
@@ -79,7 +80,7 @@ function SignupFormPage() {
       <div className="white-space">
         <div className="splash-form-signup">
           <h2 className='formhead'>Sign Up</h2>
-          {errors.server && <p className="error">{errors.server}</p>}
+          {signupErrors.server && <p className="error">{signupErrors.server}</p>}
           <form onSubmit={handleSubmit}>
             <label>
               First Name
@@ -108,7 +109,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.email && <p className="error">{errors.email}</p>}
+            {signupErrors.email && <p className="error">{signupErrors.email}</p>}
             <label>
               Username
               <input
@@ -118,7 +119,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.username && <p className="error">{errors.username}</p>}
+            {signupErrors.username && <p className="error">{signupErrors.username}</p>}
             <label>
               Password
               <input
@@ -128,7 +129,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.password && <p className="error">{errors.password}</p>}
+            {signupErrors.password && <p className="error">{signupErrors.password}</p>}
             <label>
               Confirm Password
               <input
@@ -138,14 +139,14 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
+            {signupErrors.confirmPassword && <p className="error">{signupErrors.confirmPassword}</p>}
             <button type="submit" className="signup">Sign Up</button>
           </form>
         </div>
         <div className="splash-form-login">
           <h2 className='formhead'>Log In</h2>
-          {errors.length > 0 &&
-            errors.map((message) => <p key={message} className="error">{message}</p>)}
+          {loginErrors.length > 0 &&
+            loginErrors.map((message) => <p key={message} className="error">{message}</p>)}
           <form onSubmit={handleLoginSubmit}>
             <label>
               Email
@@ -156,7 +157,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.email && <p className="error">{errors.email}</p>}
+            {loginErrors.email && <p className="error">{loginErrors.email}</p>}
             <label>
               Password
               <input
@@ -166,7 +167,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.password && <p className="error">{errors.password}</p>}
+            {loginErrors.password && <p className="error">{loginErrors.password}</p>}
             <button type="submit" className="login">Log In</button>
           </form>
           <button className="demouser" onClick={demo} style={{ cursor: 'pointer' }}>Demo User</button>
