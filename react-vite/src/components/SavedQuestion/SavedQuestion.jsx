@@ -5,12 +5,18 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteSavedQuestion from "./DeleteSaveQuestion";
 import { NavLink } from "react-router-dom";
 import './savedQuestion.css'
+import { useNavigate } from "react-router-dom";
 
 
 export default function SavedQuestion() {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const saved = useSelector(state => state.question);
-    const sessionUser = useSelector((state) => state.session.user);
+    let sessionUser = useSelector((state) => state.session.user);
+
+    if (sessionUser) {
+        navigate('/')
+    }
 
     useEffect(() => {
         dispatch(thunkGetSavedQuestions());
