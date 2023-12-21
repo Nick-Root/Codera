@@ -43,12 +43,13 @@ const QuestionDetails = () => {
     //logic for Modal
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-    
+
     useEffect(() => {
-        if (showSaved) {
-            localStorage.setItem('showSaved', JSON.stringify(question.question)); 
+        const savedState = localStorage.getItem('showSaved');
+        if (question?.saved && savedState) {
+            setShowSaved(true)
         }
-      
+
 
         if (!showMenu) return;
         const closeMenu = (e) => {
@@ -60,7 +61,7 @@ const QuestionDetails = () => {
 
         return () => document.removeEventListener("click", closeMenu);
 
-    }, [showMenu,showSaved]);
+    }, [showMenu]);
 
     const closeMenu = () => setShowMenu(false);
 
@@ -71,16 +72,17 @@ const QuestionDetails = () => {
     if (!question) {
         return null
     }
-    
 
-    const saved = (e) => {
-        e.preventDefault()
-        dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
 
-        setShowSaved(true)
-    }
-   
-    
+    const saved = async (e) => {
+          await dispatch(thunkFetchAddSavedQuestion(question.question, question.id));
+          await dispatch(thunkGetOneQuestion(id));
+          setShowSaved(true);
+          localStorage.setItem('showSaved', 'true');
+        
+      };
+
+
     // console.log(question)
 
 
@@ -117,7 +119,7 @@ const QuestionDetails = () => {
                     {user && (
                         <div className='save_b'>
                             <button onClick={saved} className='save_button'>
-                                {showSaved ? (<><i class="fa-solid fa-bookmark"></i> Saved</>) : (<><i class="fa-regular fa-bookmark"></i> Save</>)}
+                                {question?.saved && showSaved ? (<><i className="fa-solid fa-bookmark"></i> Saved</>) : (<><i className="fa-regular fa-bookmark"></i> Save</>)}
                             </button>
                         </div>
                     )}
