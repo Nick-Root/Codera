@@ -26,7 +26,7 @@ const CurrentQuestions = () => {
 
     let sessionUser = useSelector((state) => state.session.user);
 
-    if (sessionUser) {
+    if (!sessionUser) {
         navigate('/')
     }
     console.log("Curr user questions", questions)
