@@ -119,7 +119,7 @@ def update_question(id):
 @question_routes.route('<int:id>', methods=['DELETE'])
 def remove_question(id):
     question = Question.query.get(id)
-
+    Comment.query.filter_by(questionId=id).delete()
     if question:
         db.session.delete(question)
         db.session.commit()
