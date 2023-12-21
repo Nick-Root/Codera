@@ -1,7 +1,7 @@
 import './QuestionDetails.css';
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
+import { thunkGetOneQuestion, thunkFetchAddSavedQuestion, thunkFetchRemoveSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
@@ -45,10 +45,7 @@ const QuestionDetails = () => {
 
 
     useEffect(() => {
-        const savedState = localStorage.getItem('showSaved');
-        if (question?.saved && savedState) {
-            setShowSaved(true)
-        }
+        
 
 
         if (!showMenu) return;
@@ -75,13 +72,15 @@ const QuestionDetails = () => {
 
 
     const saved = async (e) => {
-        await dispatch(thunkFetchAddSavedQuestion(question.question, question.id));
-        await dispatch(thunkGetOneQuestion(id));
-        setShowSaved(true);
-        localStorage.setItem('showSaved', 'true');
+        await dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
+        await dispatch(thunkGetOneQuestion(id))
+    
+    }
 
-    };
-
+    const unsaved = async (e) => {
+        await dispatch(thunkFetchRemoveSavedQuestion(question.id))
+        await dispatch(thunkGetOneQuestion(id))
+    }
 
 
 
@@ -115,18 +114,16 @@ const QuestionDetails = () => {
                             />
                         </div>
                     )}
-                    {user && (
+                    {user && question?.saved.length === 0 ? (
                         <div className='save_b'>
                             <button onClick={saved} className='save_button'>
-                                {showSaved ? (
-                                    <>
-                                        <i className="fa-solid fa-bookmark"></i> Saved
-                                    </>
-                                ) : (
-                                    <>
-                                        <i className="fa-regular fa-bookmark"></i> Save
-                                    </>
-                                )}
+                                <i className="fa-regular fa-bookmark"></i> Save
+                            </button>
+                        </div>
+                    ) : (
+                        <div className='save_b'>
+                            <button onClick={unsaved} className='save_button'>
+                                <i className="fa-solid fa-bookmark"></i> Saved
                             </button>
                         </div>
                     )}
