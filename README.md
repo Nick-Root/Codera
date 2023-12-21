@@ -73,7 +73,7 @@ npm run dev
 7. In your browser, navigate to [`localhost:5173`].
 
 
-# Features
+## Features
 ### Questions
    -Users should be able to view all questions asked.
 
@@ -115,7 +115,7 @@ Routes: `/`, `/saved`
 Routes: `/`, `/topics/:id`
 
 
-# Connect
+## Connect
 * Nick Root [Github](https://github.com/Nick-Root/Codera)
 * Jomar Yanos [Github](https://github.com/JomarAA)
 * Anchi Nguyen [Github](https://github.com/anchiingn)
