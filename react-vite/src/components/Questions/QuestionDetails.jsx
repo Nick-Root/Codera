@@ -1,7 +1,7 @@
 import './QuestionDetails.css';
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetOneQuestion, thunkFetchAddSavedQuestion } from '../../redux/question'
+import { thunkGetOneQuestion, thunkFetchAddSavedQuestion, thunkFetchRemoveSavedQuestion } from '../../redux/question'
 import { thunkPostComment } from '../../redux/comment';
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
@@ -77,7 +77,10 @@ const QuestionDetails = () => {
     
     }
 
-
+    const unsaved = async (e) => {
+        await dispatch(thunkFetchRemoveSavedQuestion(question.id))
+        await dispatch(thunkGetOneQuestion(id))
+    }
 
 
 
@@ -119,7 +122,7 @@ const QuestionDetails = () => {
                         </div>
                     ) : (
                         <div className='save_b'>
-                            <button className='save_button'>
+                            <button onClick={unsaved} className='save_button'>
                                 <i className="fa-solid fa-bookmark"></i> Saved
                             </button>
                         </div>
