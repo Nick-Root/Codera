@@ -33,7 +33,7 @@ Have a question about programming? At Codera, you can ask questions about a prog
 ### Edit a Comment
 ![edit-comment](react-vite/public/readme-images/edit-comment.png)
 
-# Delete a Saved Question
+### Delete a Saved Question
 ![delete-saved-question](react-vite/public/readme-images/delete-saved-question.png)
 
 
