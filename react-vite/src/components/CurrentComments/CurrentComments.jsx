@@ -6,9 +6,12 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateCommentModal from "../CommentModals/UpdateCommentModal";
 import { NavLink } from "react-router-dom";
 import './CurrentComments.css'
+import { useNavigate } from "react-router-dom";
 
 
 const CurrentComments = () => {
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -20,6 +23,12 @@ const CurrentComments = () => {
     const comments = useSelector((state) => state.comment.userComments)
 
     const user = useSelector((state) => state.comment.user)
+
+    let sessionUser = useSelector((state) => state.session.user);
+
+    if (sessionUser) {
+        navigate('/')
+    }
 
     // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", comments);
 

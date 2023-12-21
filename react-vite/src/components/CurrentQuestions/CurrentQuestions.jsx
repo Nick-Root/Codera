@@ -6,11 +6,13 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateQuestionModalTwo from "../UpdateQuestionModal/UpdateQuestionModalTwo";
 import DeleteQuestionModalTwo from "../DeleteQuestionModal/DeleteQuestionModalTwo";
 import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 
 const CurrentQuestions = () => {
     const dispatch = useDispatch()
     const questionState = useSelector((state) => state.question)
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -21,10 +23,16 @@ const CurrentQuestions = () => {
     const questions = useSelector((state) => state.question.userQuestions || [])
     console.log("questionsState.userQuestions in CurrentQuestions", questions)
     const user = useSelector((state) => state.question.user)
+
+    let sessionUser = useSelector((state) => state.session.user);
+
+    if (sessionUser) {
+        navigate('/')
+    }
     console.log("Curr user questions", questions)
     console.log("Curr user question user", user)
     if (!questions) return null
-    if (!user) return null
+
 
     console.log("questionState in CurrentQuestions", questionState, questions)
     return (

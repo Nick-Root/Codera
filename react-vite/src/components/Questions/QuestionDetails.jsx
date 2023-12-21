@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import './QuestionDetails.css'
 import UpdateQuestionModal from "../UpdateQuestionModal/UpdateQuestionModal"
 import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,6 +26,11 @@ const QuestionDetails = () => {
     console.log(question?.saved, question?.id)
     const [commentText, setCommentText] = useState('');
     const [showSaved, setShowSaved] = useState(false)
+    const navigate = useNavigate()
+
+    if (!user) {
+        navigate('/')
+    }
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
 
@@ -45,7 +51,7 @@ const QuestionDetails = () => {
 
 
     useEffect(() => {
-        
+
 
 
         if (!showMenu) return;
@@ -74,7 +80,7 @@ const QuestionDetails = () => {
     const saved = async (e) => {
         await dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
         await dispatch(thunkGetOneQuestion(id))
-    
+
     }
 
     const unsaved = async (e) => {

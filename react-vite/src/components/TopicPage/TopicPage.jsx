@@ -7,6 +7,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useModal } from "../../context/Modal";
 import { NavLink } from "react-router-dom";
 import './TopicPage.css'
+import { useNavigate } from "react-router-dom";
 
 export default function TopicPage() {
     const { topicId } = useParams()
@@ -17,6 +18,12 @@ export default function TopicPage() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const { closeModal } = useModal()
+    const navigate = useNavigate()
+    let user = useSelector((state) => state.session.user)
+
+    if (!user) {
+        navigate('/')
+    }
 
     useEffect(() => {
         dispatch(thunkGetSingleTopic(topicId));
