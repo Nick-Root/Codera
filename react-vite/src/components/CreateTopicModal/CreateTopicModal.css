@@ -38,6 +38,11 @@
     align-items: center;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+}
+
 .topname {
     height: 20px;
     margin-top: 20px;
