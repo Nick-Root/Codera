@@ -15,7 +15,7 @@ Javascript, React, Redux, Python, Flask, SQLALchemy, PostgreSQL, Render, HTML, C
 
 
 ### Summary:
-Have a question about programming? At Codera, you can ask questions about a programming language when you are stuck on a bug. We have a wide variety of topics you can make posts on. If you can't find what you're looking for, you can simply create a new topic of your choice. Post your question, and anticipate insightful answers from our extensive community.
+Have a question about programming? At Codera, you can ask questions about a programming language when you are stuck on a bug. We have a wide variety of topics you can make posts on. If you can't find what you're looking for, you can simply create a new topic of your choice. Post your question, and anticipate insightful answers from our collaborative community.
 
 
 ## ScreenShots:
