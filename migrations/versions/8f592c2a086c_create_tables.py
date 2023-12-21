@@ -1,14 +1,8 @@
-"""data
+"""create tables
 
-<<<<<<<< HEAD:migrations/versions/88713c07a30a_data.py
-Revision ID: 88713c07a30a
+Revision ID: 8f592c2a086c
 Revises: 
-Create Date: 2023-12-21 12:16:22.363481
-========
-Revision ID: 0f1f4cc60765
-Revises: 
-Create Date: 2023-12-21 12:50:27.240509
->>>>>>>> saved:migrations/versions/0f1f4cc60765_data.py
+Create Date: 2023-12-21 14:25:48.559743
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/88713c07a30a_data.py
-revision = '88713c07a30a'
-========
-revision = '0f1f4cc60765'
->>>>>>>> saved:migrations/versions/0f1f4cc60765_data.py
+revision = '8f592c2a086c'
 down_revision = None
 branch_labels = None
 depends_on = None
