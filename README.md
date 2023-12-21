@@ -22,19 +22,19 @@ Have a question about programming? At Codera, you can ask questions about a prog
 
 
 ### Splash Page
-![splash](public/readme-images/splash.png)
+![splash](react-vite/public/readme-images/splash.png)
 
 ### Landing Page
-![landing](public/readme-images/landing.png)
+![landing](react-vite/public/readme-images/landing.png)
 
 ### Question Details Page
-![question-details](public/readme-images/question-details.png)
+![question-details](react-vite/public/readme-images/question-details.png)
 
 ### Edit a Comment
-![edit-comment](public/readme-images/edit-comment.png)
+![edit-comment](react-vite/public/readme-images/edit-comment.png)
 
 # Delete a Saved Question
-![delete-saved-question](public/readme-images/delete-saved-question.png)
+![delete-saved-question](react-vite/public/readme-images/delete-saved-question.png)
 
 
 ### Getting started
