@@ -45,10 +45,7 @@ const QuestionDetails = () => {
 
 
     useEffect(() => {
-        const savedState = localStorage.getItem('showSaved');
-        if (question?.saved && savedState) {
-            setShowSaved(true)
-        }
+        
 
 
         if (!showMenu) return;
@@ -75,12 +72,11 @@ const QuestionDetails = () => {
 
 
     const saved = async (e) => {
-        await dispatch(thunkFetchAddSavedQuestion(question.question, question.id));
-        await dispatch(thunkGetOneQuestion(id));
-        setShowSaved(true);
-        localStorage.setItem('showSaved', 'true');
+        await dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
+        await dispatch(thunkGetOneQuestion(id))
+    
+    }
 
-    };
 
 
 
@@ -115,18 +111,16 @@ const QuestionDetails = () => {
                             />
                         </div>
                     )}
-                    {user && (
+                    {user && question?.saved.length === 0 ? (
                         <div className='save_b'>
                             <button onClick={saved} className='save_button'>
-                                {showSaved ? (
-                                    <>
-                                        <i className="fa-solid fa-bookmark"></i> Saved
-                                    </>
-                                ) : (
-                                    <>
-                                        <i className="fa-regular fa-bookmark"></i> Save
-                                    </>
-                                )}
+                                <i className="fa-regular fa-bookmark"></i> Save
+                            </button>
+                        </div>
+                    ) : (
+                        <div className='save_b'>
+                            <button className='save_button'>
+                                <i className="fa-solid fa-bookmark"></i> Saved
                             </button>
                         </div>
                     )}
