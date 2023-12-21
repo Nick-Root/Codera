@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/questions",
         element: <MainPage />,
       },
       {
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         element: <LoginFormPage />,
       },
       {
-        path: "signup",
+        path: "/",
         element: <SignupFormPage />,
       },
       {

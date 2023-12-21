@@ -1,0 +1,15 @@
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 1000px;
+    background-image: url("../../../public/One_Piece_Anime_Logo.webp");
+}
+
+.splash-form {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
