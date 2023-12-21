@@ -6,14 +6,16 @@ import { NavLink } from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
+//import CreateQuestionModal from "../CreateQuestionModal/CreateQuestionModal";
+
 
 
 const MainPage = () => {
     const dispatch = useDispatch();
-    //const navigate = useNavigate()
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)
+
 
     const [showMenu, setShowMenu] = useState(false);
     useEffect(() => {
@@ -108,6 +110,7 @@ const MainPage = () => {
                 </div>
 
                 <div className='questionscont'>
+
                     {arrQues.map((question) => {
                         return (
                             <NavLink to={`/questions/${question.id}`} className='one_question_container' key={question.id}>

@@ -3,16 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 
 import { useModal } from "../../context/Modal";
-import { thunkPostOneQuestion } from '../../redux/question.js';
+import { thunkGetAllQuestions, thunkPostOneQuestion, getCurrentQuestions } from '../../redux/question.js';
+import {  } from '../../redux/question.js'
 import "./CreateQuestionModal.css";
+import { useLocation } from 'react-router-dom';
 
 
 function CreateQuestionModal() {
   const dispatch = useDispatch();
+
   const [question, setQuestion] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
   //const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  // const match = useRouteMatch();
+  // console.log("match.url", match.url)
+  const location = useLocation();
+  console.log("location.pathname", location.pathname)
+  // /, /questions, /questions/current
 
   const allTopics = useSelector(state => state.topic)  //object of objects
   //if(!allTopics) return null;
@@ -20,10 +29,14 @@ function CreateQuestionModal() {
   const arrAllTopics = Object.values(allTopics);  //array of objects
   //console.log("topicsArr", arrAllTopics)
 
+
+
   //might not need it because main page uses thunkGetAllTopics
   useEffect(() => {
     dispatch(thunkGetAllTopics());
+
   }, [dispatch]);
+
 
 
   const onSubmit = async (e) => {
@@ -36,8 +49,16 @@ function CreateQuestionModal() {
     };
     console.log("dataObj with {topicId: topicId, question: question}", dataObj);
 
-    const serverResponse = await dispatch(thunkPostOneQuestion(dataObj));
-    console.log("serverResponse", serverResponse)
+
+
+    await dispatch(thunkPostOneQuestion(dataObj));
+
+    if( location.pathname === "/" || location.pathname === "/questions"){
+      await dispatch(thunkGetAllQuestions());
+
+    } else if (location.pathname === "/questions/current") {
+      await dispatch(getCurrentQuestions());
+    }
 
     setQuestion('');
     // setValidationErrors({});

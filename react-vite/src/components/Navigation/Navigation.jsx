@@ -17,7 +17,6 @@ function Navigation() {
   const dispatch = useDispatch()
   useEffect(() => {
     if (!showMenu) return;
-    //if showMenu is true, we have a closeMenu
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
         setShowMenu(false);
@@ -27,7 +26,6 @@ function Navigation() {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-  //added in bonus optional
   const closeMenu = () => setShowMenu(false);
 
   return (

@@ -81,6 +81,8 @@ def post_question():
             question = form.data["question"],
             ownerId = current_user.id,
             topicId = form.data["topicId"],
+            createdAt = datetime.now(),
+            updatedAt = datetime.now()
         )
         print("new_question", new_question)
         db.session.add(new_question)

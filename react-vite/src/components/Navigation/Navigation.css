@@ -49,11 +49,13 @@ body {
 
 .profile-dropdown {
   position: fixed;
-  right: 2.8em;
-  top: 3em;
+  right: 3.4em;
+  top: 3.55em;
   background-color: #F1F2F2;
   border: 1px solid gray;
-  padding: 15px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: normal;
 }
 
 ul > li {
@@ -77,21 +79,29 @@ ul > li {
 }
 
 
+
+#drop-down-container {
+  position: relative;
+  width: 100%;
+}
+
 #login-container {
   list-style: none;
   margin-bottom: 5px;
-  padding: 3px;
+
 }
 #login-container:hover{
   cursor: pointer;
+  color: #b92b27;
   /* background-color: #cccaca */
 }
 #signup-container {
   list-style: none;
-  padding: 3px;
+
 }
 #signup-container:hover{
   cursor: pointer;
+  color: #b92b27;
   /* background-color:#cccaca; */
   /* width: 100%; */
 }

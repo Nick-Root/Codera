@@ -9,6 +9,7 @@ import { thunkGetOneQuestion, thunkUpdateOneQuestion, getCurrentQuestions } from
 import "./UpdateQuestionModal.css";
 
 
+
 function UpdateQuestionModalTwo({ id }) {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
