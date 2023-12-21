@@ -25,7 +25,6 @@ const QuestionDetails = () => {
     console.log(question?.saved, question?.id)
     const [commentText, setCommentText] = useState('');
     const [showSaved, setShowSaved] = useState(false)
-
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
 
@@ -43,6 +42,7 @@ const QuestionDetails = () => {
     //logic for Modal
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+
 
     useEffect(() => {
         const savedState = localStorage.getItem('showSaved');
@@ -75,15 +75,14 @@ const QuestionDetails = () => {
 
 
     const saved = async (e) => {
-          await dispatch(thunkFetchAddSavedQuestion(question.question, question.id));
-          await dispatch(thunkGetOneQuestion(id));
-          setShowSaved(true);
-          localStorage.setItem('showSaved', 'true');
-        
-      };
+        await dispatch(thunkFetchAddSavedQuestion(question.question, question.id));
+        await dispatch(thunkGetOneQuestion(id));
+        setShowSaved(true);
+        localStorage.setItem('showSaved', 'true');
+
+    };
 
 
-    // console.log(question)
 
 
     // console.log("questionState in QuestionDetails", questionState)
@@ -119,7 +118,15 @@ const QuestionDetails = () => {
                     {user && (
                         <div className='save_b'>
                             <button onClick={saved} className='save_button'>
-                                {question?.saved && showSaved ? (<><i className="fa-solid fa-bookmark"></i> Saved</>) : (<><i className="fa-regular fa-bookmark"></i> Save</>)}
+                                {showSaved ? (
+                                    <>
+                                        <i className="fa-solid fa-bookmark"></i> Saved
+                                    </>
+                                ) : (
+                                    <>
+                                        <i className="fa-regular fa-bookmark"></i> Save
+                                    </>
+                                )}
                             </button>
                         </div>
                     )}
