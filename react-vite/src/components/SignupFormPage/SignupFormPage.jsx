@@ -26,7 +26,7 @@ function SignupFormPage() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return setErrors({
+      return setSignupErrors({
         confirmPassword:
           "Confirm Password field must be the same as the Password field",
       });
