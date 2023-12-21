@@ -16,7 +16,7 @@ def seed_savedquestions():
         questionId = 3, userId = 2, saved = True
     )
     userthreesaved = SavedQuestion(
-        questionId = 1, userId = 3, saved = False
+        questionId = 2, userId = 3, saved = False
     )
 
     db.session.add(useronesaved)

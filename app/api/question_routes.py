@@ -38,17 +38,21 @@ def get_single_question(id):
 
     comments = Comment.query.filter_by(questionId=id).all()
 
+    saved = SavedQuestion.query.filter_by(questionId = question.id).all()
+
     comment_data = [{
         "comment": comment.comment,
         "createdAt": comment.createdAt,
         "commentId": comment.id,
         "username": User.query.get(comment.userId).username,
-        "ownerId": comment.userId
+        "ownerId": comment.userId,
+        'saved': [s.saved for s in saved]
     } for comment in comments]
 
     question_data = question.to_dict()
 
     question_data["askerUsername"] = asker_username
+    question_data['saved'] = [s.to_dict() for s in saved]
 
 
     return jsonify(question_data, comment_data)

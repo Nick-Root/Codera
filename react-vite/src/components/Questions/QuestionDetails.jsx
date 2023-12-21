@@ -14,7 +14,6 @@ import UpdateCommentModal from '../CommentModals/UpdateCommentModal';
 
 const QuestionDetails = () => {
     const questionState = useSelector((state) => state.question || [])
-
     const { id } = useParams();
     const dispatch = useDispatch();
     const questionData = useSelector((state) => state.question.oneQuestion || [])
@@ -23,8 +22,9 @@ const QuestionDetails = () => {
     const { 0: question, 1: comments } = questionData
     const user = useSelector((state) => state.session.user)
     // console.log("%c   LOOK HERE", "color: green; font-size: 18px", user);
-
+    console.log(question?.saved, question?.id)
     const [commentText, setCommentText] = useState('');
+    const [showSaved, setShowSaved] = useState(false)
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -43,7 +43,14 @@ const QuestionDetails = () => {
     //logic for Modal
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+
     useEffect(() => {
+        const savedState = localStorage.getItem('showSaved');
+        if (question?.saved && savedState) {
+            setShowSaved(true)
+        }
+
+
         if (!showMenu) return;
         const closeMenu = (e) => {
             if (!ulRef.current.contains(e.target)) {
@@ -53,7 +60,9 @@ const QuestionDetails = () => {
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
+
     }, [showMenu]);
+
     const closeMenu = () => setShowMenu(false);
 
     useEffect(() => {
@@ -63,13 +72,21 @@ const QuestionDetails = () => {
     if (!question) {
         return null
     }
-    const saved = () => {
-        dispatch(thunkFetchAddSavedQuestion(question.question, question.id))
-    }
-    console.log(question)
 
 
-    console.log("questionState in QuestionDetails", questionState)
+    const saved = async (e) => {
+          await dispatch(thunkFetchAddSavedQuestion(question.question, question.id));
+          await dispatch(thunkGetOneQuestion(id));
+          setShowSaved(true);
+          localStorage.setItem('showSaved', 'true');
+        
+      };
+
+
+    // console.log(question)
+
+
+    // console.log("questionState in QuestionDetails", questionState)
     return (
         <div className='container'>
             <div className="container_text">
@@ -101,8 +118,9 @@ const QuestionDetails = () => {
                     )}
                     {user && (
                         <div className='save_b'>
-                            <i class="fa-regular fa-bookmark"></i>
-                            <button onClick={saved} className='save_button'>Save</button>
+                            <button onClick={saved} className='save_button'>
+                                {question?.saved && showSaved ? (<><i className="fa-solid fa-bookmark"></i> Saved</>) : (<><i className="fa-regular fa-bookmark"></i> Save</>)}
+                            </button>
                         </div>
                     )}
                 </div>
