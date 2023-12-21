@@ -75,3 +75,31 @@ ul > li {
 #ask-question-button:hover{
  cursor: pointer
 }
+
+
+#login-container {
+  list-style: none;
+  margin-bottom: 5px;
+  padding: 3px;
+}
+#login-container:hover{
+  cursor: pointer;
+  /* background-color: #cccaca */
+}
+#signup-container {
+  list-style: none;
+  padding: 3px;
+}
+#signup-container:hover{
+  cursor: pointer;
+  /* background-color:#cccaca; */
+  /* width: 100%; */
+}
+
+#logout-button{
+  /* border: 1px solid black; */
+  border-top: 1px solid black;
+}
+#logout-button:hover{
+  cursor: pointer;
+}

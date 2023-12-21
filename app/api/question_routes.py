@@ -123,11 +123,11 @@ def remove_question(id):
     if question:
         db.session.delete(question)
         db.session.commit()
-        return jsonify({'message': 'Saved question removed successfully'})
+        return jsonify({'message': 'Question removed successfully'})
     else:
         print("Question does not exist")
 
-    return jsonify({'message': 'Saved question not found'})
+    return jsonify({'message': 'Question not found'})
 
 
 
