@@ -27,7 +27,7 @@ body {
   padding: 20px 70px;
   border-bottom: 1px solid rgba(146, 146, 146, 0.6);
   background-color: #F1F2F2;
-  margin-bottom: 30px;
+  padding-bottom: 30px;
   box-shadow: 0px 2px 10px rgba(146, 146, 146, 0.6);
   text-decoration: none;
   z-index: 2;
@@ -58,7 +58,7 @@ body {
   font-weight: normal;
 }
 
-ul > li {
+ul>li {
   list-style: none;
 }
 
@@ -74,8 +74,8 @@ ul > li {
   font-size: 14px;
 }
 
-#ask-question-button:hover{
- cursor: pointer
+#ask-question-button:hover {
+  cursor: pointer
 }
 
 
@@ -90,26 +90,30 @@ ul > li {
   margin-bottom: 5px;
 
 }
-#login-container:hover{
+
+#login-container:hover {
   cursor: pointer;
   color: #b92b27;
   /* background-color: #cccaca */
 }
+
 #signup-container {
   list-style: none;
 
 }
-#signup-container:hover{
+
+#signup-container:hover {
   cursor: pointer;
   color: #b92b27;
   /* background-color:#cccaca; */
   /* width: 100%; */
 }
 
-#logout-button{
+#logout-button {
   /* border: 1px solid black; */
   border-top: 1px solid black;
 }
-#logout-button:hover{
+
+#logout-button:hover {
   cursor: pointer;
 }

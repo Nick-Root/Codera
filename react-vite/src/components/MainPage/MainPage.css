@@ -1,6 +1,7 @@
 .mainpage {
     display: flex;
     justify-content: center;
+    margin-top: 30px
 }
 
 .topicscont {
@@ -151,21 +152,25 @@ h3 {
 }
 
 
-#question-box input{
+#question-box input {
     width: 97%;
     height: 25px;
     border-radius: 20px;
 }
+
 #question-box input:hover {
     cursor: pointer
 }
+
 #question-box input:focus {
     border-color: black;
     color: rgba(108, 108, 108, 0.5)
 }
+
 #question-box input::placeholder {
     text-indent: 10px;
 }
+
 #ask-a-question {
     margin-bottom: 10px;
 }
