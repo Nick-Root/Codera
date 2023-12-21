@@ -6,11 +6,15 @@ import { NavLink } from "react-router-dom";
 import './MainPage.css'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import CreateTopicModal from "../CreateTopicModal/CreateTopicModal";
-
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
     const dispatch = useDispatch();
-    //const navigate = useNavigate()
+    const navigate = useNavigate()
+    const user = useSelector((state) => state.session.user)
+    if (!user) {
+        navigate('/')
+    }
 
     let questions = useSelector((state) => state.question)
     let topics = useSelector((state) => state.topic)

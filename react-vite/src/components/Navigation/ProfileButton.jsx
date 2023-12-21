@@ -34,12 +34,19 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
+  const logout = async (e) => {
     e.preventDefault();
-    dispatch(thunkLogout())
-    .then(navigate('/'))
-    closeMenu()
-  };
+
+    const serverResponse = await dispatch(
+      thunkLogout()
+    )
+
+    if (serverResponse) {
+
+      navigate("/")
+    }
+  }
+
 
   return (
     <>

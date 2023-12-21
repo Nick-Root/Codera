@@ -53,9 +53,9 @@ function Navigation() {
             />
           </div>
         </>
-      )}
 
-      <ProfileButton />
+      )}
+      {user && (<ProfileButton />)}
 
     </ul>
   );
