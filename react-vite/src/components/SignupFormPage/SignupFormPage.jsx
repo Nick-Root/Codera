@@ -79,7 +79,7 @@ function SignupFormPage() {
       <div className="white-space">
         <div className="splash-form-signup">
           <h2 className='formhead'>Sign Up</h2>
-          {errors.server && <p>{errors.server}</p>}
+          {errors.server && <p className="error">{errors.server}</p>}
           <form onSubmit={handleSubmit}>
             <label>
               First Name
@@ -108,7 +108,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.email && <p>{errors.email}</p>}
+            {errors.email && <p className="error">{errors.email}</p>}
             <label>
               Username
               <input
@@ -118,7 +118,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.username && <p>{errors.username}</p>}
+            {errors.username && <p className="error">{errors.username}</p>}
             <label>
               Password
               <input
@@ -128,7 +128,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.password && <p>{errors.password}</p>}
+            {errors.password && <p className="error">{errors.password}</p>}
             <label>
               Confirm Password
               <input
@@ -138,14 +138,14 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+            {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
             <button type="submit" className="signup">Sign Up</button>
           </form>
         </div>
         <div className="splash-form-login">
           <h2 className='formhead'>Log In</h2>
           {errors.length > 0 &&
-            errors.map((message) => <p key={message}>{message}</p>)}
+            errors.map((message) => <p key={message} className="error">{message}</p>)}
           <form onSubmit={handleLoginSubmit}>
             <label>
               Email
@@ -156,7 +156,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.email && <p>{errors.email}</p>}
+            {errors.email && <p className="error">{errors.email}</p>}
             <label>
               Password
               <input
@@ -166,7 +166,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            {errors.password && <p>{errors.password}</p>}
+            {errors.password && <p className="error">{errors.password}</p>}
             <button type="submit" className="login">Log In</button>
           </form>
           <button className="demouser" onClick={demo} style={{ cursor: 'pointer' }}>Demo User</button>
