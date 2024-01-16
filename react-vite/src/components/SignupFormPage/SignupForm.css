@@ -54,6 +54,11 @@
     border-radius: 5px;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+}
+
 .signup {
     display: flex;
     margin-top: 10px;

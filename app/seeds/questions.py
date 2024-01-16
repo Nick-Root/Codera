@@ -2,13 +2,13 @@ from app.models import db, Question, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 def seed_questions():
-    pythonques = Question(
+    question1 = Question(
         ownerId = 1, topicId = 1, question = 'How do I install different versions of python?'
     )
-    javascriptques = Question(
+    question2 = Question(
         ownerId = 2, topicId = 2, question = 'How do I use a for loop in javascript?'
     )
-    expressques = Question(
+    question3 = Question(
         ownerId = 3, topicId = 3, question = 'How do I write a route in express?'
     )
     question4 = Question(
@@ -114,9 +114,9 @@ def seed_questions():
         ownerId=2, topicId=6, question='How can I use media queries in CSS to create a mobile-friendly design for my website?'
     )
 
-    db.session.add(pythonques)
-    db.session.add(javascriptques)
-    db.session.add(expressques)
+    db.session.add(question1)
+    db.session.add(question2)
+    db.session.add(question3)
     db.session.add(question4)
     db.session.add(question5)
     db.session.add(question6)

@@ -55,7 +55,7 @@ function CreateTopicModal() {
                         className='topname'
                     />
                 </label>
-                {<p>{errors}</p>}
+                {<p className="error">{errors}</p>}
                 <button type='submit' disabled={topic.length === 0} className='topbutton'>Create Topic</button>
             </form>
         </div>

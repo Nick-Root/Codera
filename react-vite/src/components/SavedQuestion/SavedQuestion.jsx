@@ -14,7 +14,7 @@ export default function SavedQuestion() {
     const saved = useSelector(state => state.question);
     let sessionUser = useSelector((state) => state.session.user);
 
-    if (sessionUser) {
+    if (!sessionUser) {
         navigate('/')
     }
 

@@ -26,7 +26,7 @@ const CurrentComments = () => {
 
     let sessionUser = useSelector((state) => state.session.user);
 
-    if (sessionUser) {
+    if (!sessionUser) {
         navigate('/')
     }
 
