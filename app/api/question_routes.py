@@ -68,7 +68,7 @@ def get_curr_questions():
     user_data = user.to_dict()
 
     question_data = [question.to_dict() for question in questions]
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", question_data, user_data)
+    print("question_data and user_data", question_data, user_data)
     return jsonify(user=user_data, questions=question_data)
 
 
