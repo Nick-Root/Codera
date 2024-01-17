@@ -13,6 +13,7 @@ function CreateQuestionModal() {
   const dispatch = useDispatch();
 
   const [question, setQuestion] = useState('');
+  const [image, setImage] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
   //const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
@@ -43,15 +44,21 @@ function CreateQuestionModal() {
     e.preventDefault();
     // setHasSubmitted(true);
 
-    const dataObj = {
-        question,
-        topicId
-    };
-    console.log("dataObj with {topicId: topicId, question: question}", dataObj);
+    // const dataObj = {
+    //     question,
+    //     topicId,
+    //     image
+    // };
+    //console.log("dataObj with {topicId: topicId, question: question}", dataObj);
+
+    const formData = new FormData ();
+    formData.append("question", question)
+    formData.append("topicId", topicId)
+    formData.append("image", image)
 
 
 
-    await dispatch(thunkPostOneQuestion(dataObj));
+    await dispatch(thunkPostOneQuestion(formData));
 
     if( location.pathname === "/" || location.pathname === "/questions"){
       await dispatch(thunkGetAllQuestions());
@@ -71,7 +78,7 @@ function CreateQuestionModal() {
     <div id="create-question-modal-container">
       <div className="question-form-container">
        <div id="heading">Ask a Question</div>
-       <form onSubmit={onSubmit}>
+       <form onSubmit={onSubmit} encType="multipart/form-data">
            <div className="input-container">
                 <input
                     id="question-input"
@@ -92,7 +99,16 @@ function CreateQuestionModal() {
                     ))}
                 </select>
            </div>
-           <button id="submit-question-button" onClick={onSubmit} >Submit</button>
+           <div>
+              <div>Upload an image</div>
+              <input id='image-file-input'
+                type='file'
+                accept='image/*'
+                onChange={e => setImage(e.target.files[0])}
+              />
+              </div>
+              {/* removed onSubmit */}
+           <button id="submit-question-button" >Submit</button>
        </form>
      </div>
     </div>

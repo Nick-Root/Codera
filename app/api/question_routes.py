@@ -8,6 +8,9 @@ from ..forms.comment_form import CommentForm
 from flask_login import login_required, current_user
 from datetime import datetime
 
+#aws s3, directly from recording
+from .aws_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
+
 
 question_routes = Blueprint('questions', __name__)
 
@@ -80,9 +83,22 @@ def post_question():
     #form.topicId.choices = [(topic.id, topic.topic) for topic in Topic.query.all()]
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    #aws s3
+    image = form.data["image"]
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+    print("upload", upload)
+
+    if "url" not in upload:
+    # if the dictionary doesn't have a url key
+    # it means that there was an error when you tried to upload
+    # so you send back that error message (and you printed it above)
+        return { "error": "url not in upload" }
+
     if form.validate_on_submit():
         new_question = Question (
             question = form.data["question"],
+            image = upload['url'],   #"url" in upload
             ownerId = current_user.id,
             topicId = form.data["topicId"],
             createdAt = datetime.now(),
@@ -109,8 +125,21 @@ def update_question(id):
     form = QuestionForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    #aws s3
+    image = form.data["image"]
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+    print("upload", upload)
+
+    if "url" not in upload:
+    # if the dictionary doesn't have a url key
+    # it means that there was an error when you tried to upload
+    # so you send back that error message (and you printed it above)
+        return { "error": "url not in upload" }
+
     if form.validate_on_submit():
         question.question = form.data["question"]
+        question.image = upload['url']   #"url" in upload
         question.ownerId = current_user.id
         question.topicId = form.data["topicId"]
         question.updatedAt = datetime.now()

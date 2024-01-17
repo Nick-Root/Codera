@@ -143,11 +143,11 @@ export const thunkFetchAddSavedQuestion = (question, questionId) => async (dispa
 
 
 //dataObj {question: question, topicId: topicId}
-export const thunkPostOneQuestion = (dataObj) => async (dispatch) => {
+export const thunkPostOneQuestion = (formData) => async (dispatch) => {
   const res = await fetch(`/api/questions`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dataObj)
+    // headers: { 'Content-Type': 'application/json' },
+    body: formData
   });
 
   if (res.ok) {
@@ -225,7 +225,6 @@ const questionsReducer = (state = initialState, action) => {
       const newState = { ...initialState };
       console.log('action.allquestions', action.allQuestions)
       action.allQuestions.forEach((question) => newState[question.id] = question);
-      // console.log('newState', newState);
       return newState;
     }
     case LOAD_ONE_QUESTION: {
