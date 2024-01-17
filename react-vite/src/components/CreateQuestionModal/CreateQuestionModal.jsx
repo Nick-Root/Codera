@@ -100,7 +100,7 @@ function CreateQuestionModal() {
                 </select>
            </div>
            <div>
-              <div>Upload an image</div>
+              <div id="upload-an-image">Upload an image</div>
               <input id='image-file-input'
                 type='file'
                 accept='image/*'

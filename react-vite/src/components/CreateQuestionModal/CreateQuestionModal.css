@@ -1,6 +1,6 @@
 #create-question-modal-container {
     width: 500px;
-    height: 150px;
+    height: 190px;
 }
 
 #heading {
@@ -36,4 +36,14 @@
 
 #submit-question-button {
     margin: 5px 0;
+}
+
+
+#upload-an-image {
+    font-size: 13.5px;
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+#image-file-input {
+    margin-bottom: 5px;
 }
