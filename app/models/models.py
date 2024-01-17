@@ -45,6 +45,8 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     question = db.Column(db.String(255), nullable=False)
+    #added image, nullable=True to make seeding easier for now
+    image = db.Column(db.String(255), nullable=True)
     topicId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('topics.id')))
     createdAt = db.Column(db.TIMESTAMP, default=datetime.now())
     updatedAt = db.Column(db.TIMESTAMP, default=datetime.now())
@@ -56,6 +58,7 @@ class Question(db.Model):
             'id': self.id,
             'ownerId': self.ownerId,
             'question': self.question,
+            'image': self.image,
             'topicId': self.topicId,
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt

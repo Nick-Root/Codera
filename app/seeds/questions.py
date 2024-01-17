@@ -3,7 +3,8 @@ from sqlalchemy.sql import text
 from datetime import datetime
 def seed_questions():
     question1 = Question(
-        ownerId = 1, topicId = 1, question = 'How do I install different versions of python?'
+        ownerId = 1, topicId = 1, question = 'How do I install different versions of python?',
+        image="https://as1.ftcdn.net/v2/jpg/02/48/42/64/1000_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
     )
     question2 = Question(
         ownerId = 2, topicId = 2, question = 'How do I use a for loop in javascript?'
@@ -111,8 +112,10 @@ def seed_questions():
         ownerId=7, topicId=6, question='What are CSS Grid and Flexbox, and how do they compare in building responsive layouts?'
     )
     question36 = Question(
-        ownerId=2, topicId=6, question='How can I use media queries in CSS to create a mobile-friendly design for my website?'
+        ownerId=2, topicId=6, question='How can I use media queries in CSS to create a mobile-friendly design for my website?',
+        image=""
     )
+
 
     db.session.add(question1)
     db.session.add(question2)
@@ -152,7 +155,13 @@ def seed_questions():
     db.session.add(question36)
     db.session.add(question37)
 
-
+    #now all questions are in the db
+    #query for all questions
+    all_questions = Question.query.all()
+    #updates on every 5th question
+    for i in range(0, len(all_questions), 5):
+         #placeholder image for all questions
+         if not all_questions[i].image: all_questions[i].image = "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
     # print("pre commit seeding questions")
     db.session.commit()

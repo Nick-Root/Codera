@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 713a2aaaaaa3
+Revision ID: 39ccb2085b65
 Revises:
-Create Date: 2024-01-16 14:34:13.696774
+Create Date: 2024-01-17 06:06:08.857414
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '713a2aaaaaa3'
+revision = '39ccb2085b65'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,7 +34,7 @@ def upgrade():
     sa.UniqueConstraint('username')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+       op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
     op.create_table('topics',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -43,12 +44,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE topics SET SCHEMA {SCHEMA};")
+       op.execute(f"ALTER TABLE topics SET SCHEMA {SCHEMA};")
 
     op.create_table('questions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('ownerId', sa.Integer(), nullable=True),
     sa.Column('question', sa.String(length=255), nullable=False),
+    sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('topicId', sa.Integer(), nullable=True),
     sa.Column('createdAt', sa.TIMESTAMP(), nullable=True),
     sa.Column('updatedAt', sa.TIMESTAMP(), nullable=True),
@@ -57,7 +59,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE questions SET SCHEMA {SCHEMA};")
+       op.execute(f"ALTER TABLE questions SET SCHEMA {SCHEMA};")
 
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -71,7 +73,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+       op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
 
     op.create_table('savedquestions',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -83,7 +85,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE savedquestions SET SCHEMA {SCHEMA};")
+       op.execute(f"ALTER TABLE savedquestions SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
