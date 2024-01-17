@@ -112,8 +112,7 @@ def seed_questions():
         ownerId=7, topicId=6, question='What are CSS Grid and Flexbox, and how do they compare in building responsive layouts?'
     )
     question36 = Question(
-        ownerId=2, topicId=6, question='How can I use media queries in CSS to create a mobile-friendly design for my website?',
-        image=""
+        ownerId=2, topicId=6, question='How can I use media queries in CSS to create a mobile-friendly design for my website?'
     )
 
 
