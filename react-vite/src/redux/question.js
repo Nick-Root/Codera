@@ -240,6 +240,7 @@ const questionsReducer = (state = initialState, action) => {
       newState.userQuestions = action.userQuestions.questions.map((question) => ({
         id: question.id,
         question: question.question,
+        image: question.image,
         topicId: question.topicId,
         ownerId: question.ownerId,
         createdAt: question.createdAt,

@@ -45,8 +45,15 @@ export default function SavedQuestion() {
                             return <div key={save.id}>
                                 {save?.questions.map(question => {
                                     return <div key={question.id} >
-                                        <div className='one_question_container'>
-                                            <NavLink to={`/questions/${question.id}`} className='navtopage'>{question?.question}</NavLink>
+                                        <div id='one_question_container'>
+                                            <NavLink to={`/questions/${question.id}`} className='navtopage' id="question-container">{question?.question}</NavLink>
+                                            {question.image && (
+                                                <>
+                                                    <div id="grey-border"></div>
+                                                    <img id='question-image-container' src={question.image}/>
+                                                    <div id="grey-border-2"></div>
+                                                </>
+                                            )}
                                             <div className="user_comments">
                                                 <p className="created-date">
                                                     Saved on:{" "}

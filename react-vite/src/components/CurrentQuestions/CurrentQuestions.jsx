@@ -40,11 +40,15 @@ const CurrentQuestions = () => {
             <div className="container_text">Your Questions</div>
             {questions.map((question) => (
 
-                <div key={question.id} className="one_question_container">
-                    {console.log("question.question", question.question)}
-                    {console.log("question.question", question.id)}
-
+                <div key={question.id} id="one_question_container">
                     <NavLink to={`/questions/${question.id}`} className='navtopage'>{question.question}</NavLink>
+                    {question.image && (
+                        <>
+                            <div id="grey-border"></div>
+                            <img id='question-image-container' src={question.image}/>
+                            <div id="grey-border-2"></div>
+                        </>
+                    )}
                     <div className="user_questions">
                         <p className="userName">{user.username}</p>
                         <p className="created-date">

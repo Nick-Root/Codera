@@ -124,7 +124,6 @@ const MainPage = () => {
                         return (
                             <NavLink to={`/questions/${question.id}`} id='one_question_container' key={question.id}>
                                 <div id="question-container">{question.question}</div>
-
                                 {question.image && (
                                     <>
                                         <div id="grey-border"></div>
@@ -132,7 +131,6 @@ const MainPage = () => {
                                         <div id="grey-border-2"></div>
                                     </>
                                 )}
-
                                 <div id="user-question">
                                     <p className="userName">{question.askerUsername}</p>
                                     <p className="created-date">

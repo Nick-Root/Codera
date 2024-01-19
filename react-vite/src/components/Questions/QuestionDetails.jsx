@@ -95,6 +95,13 @@ const QuestionDetails = () => {
         <div className='container'>
             <div className="container_text">
                 <div>{question.question}</div>
+                {question.image && (
+                    <>
+                        <div id="grey-border-details"></div>
+                        <img id='question-image-container-details' src={question.image}/>
+
+                    </>
+                )}
                 <div className='bottom_text'>
                     <div className="user_question">
                         <p className='userName'>{question.askerUsername}</p>
