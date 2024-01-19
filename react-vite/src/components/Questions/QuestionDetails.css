@@ -128,3 +128,8 @@
     border-radius: 20px;
     margin-left: 10px;
 }
+
+#grey-border-2-details{
+    border-top: 1px solid black;
+    width: 100%;
+}

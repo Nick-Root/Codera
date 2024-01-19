@@ -14,3 +14,36 @@
     padding-right: 5px;
 }
 
+/* question image */
+#question-image-container {
+    width: 100%;
+}
+/* border */
+#grey-border{
+    margin-top: 10px;
+    border-top: 1px solid black;
+    width: 100%;
+}
+#grey-border-2{
+    border-top: 1px solid black;
+    width: 100%;
+}
+#one_question_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    padding: 20px 0px;
+    width: 580px;
+    justify-content: center;
+    text-decoration: none;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    border-radius: 5px;
+}
+#question-container {
+    padding: 0 25px;
+}
