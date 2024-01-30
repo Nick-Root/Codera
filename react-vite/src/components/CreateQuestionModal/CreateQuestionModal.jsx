@@ -91,6 +91,7 @@ function CreateQuestionModal() {
            <div className='error'>
            {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
            </div>
+           <div id="choose-a-topic">Choose a topic</div>
            <div className="input">
                 <select onChange={e => setTopicId(e.target.value)} value={topicId}>
                     {arrAllTopics.map((topicObj) => (
