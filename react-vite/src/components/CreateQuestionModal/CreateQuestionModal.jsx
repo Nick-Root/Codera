@@ -57,7 +57,6 @@ function CreateQuestionModal() {
     formData.append("image", image)
 
 
-
     await dispatch(thunkPostOneQuestion(formData));
 
     if( location.pathname === "/" || location.pathname === "/questions"){
@@ -77,7 +76,7 @@ function CreateQuestionModal() {
   return (
     <div id="create-question-modal-container">
       <div className="question-form-container">
-       <div id="heading">Ask a Question</div>
+       <div id="ask-a-question">Ask a Question</div>
        <form onSubmit={onSubmit} encType="multipart/form-data">
            <div className="input-container">
                 <input
@@ -93,21 +92,24 @@ function CreateQuestionModal() {
            </div>
            <div id="choose-a-topic">Choose a topic</div>
            <div className="input">
-                <select onChange={e => setTopicId(e.target.value)} value={topicId}>
+                <select id="select-input" onChange={e => setTopicId(e.target.value)} value={topicId}>
                     {arrAllTopics.map((topicObj) => (
                         //value is topicObj.id because we want to pass that back
-                        <option key={topicObj.id} value={topicObj.id}>{topicObj.topic}</option>
+                        <option id="topic-option" key={topicObj.id} value={topicObj.id}>{topicObj.topic}</option>
                     ))}
                 </select>
            </div>
            <div>
-              <div id="upload-an-image">Upload an image</div>
-              <input id='image-file-input'
-                type='file'
-                accept='image/*'
-                onChange={e => setImage(e.target.files[0])}
-              />
-              </div>
+              <div id="upload-an-image">Upload an image (optional)</div>
+              <label for='image-input' className="testing">
+                <input
+                  id="image-input"
+                  type='file'
+                  accept='image/*'
+                  onChange={e => setImage(e.target.files[0])}
+                />
+              </label>
+            </div>
               {/* removed onSubmit */}
            <button id="submit-question-button" >Submit</button>
        </form>

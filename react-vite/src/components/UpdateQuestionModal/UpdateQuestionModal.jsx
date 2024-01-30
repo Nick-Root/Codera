@@ -12,8 +12,9 @@ import "./UpdateQuestionModal.css";
 function UpdateQuestionModal({ id }) {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
+  const [image, setImage] = useState('');  //added
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
-  //const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   //might not need it because main page uses thunkGetAllTopics
@@ -62,14 +63,19 @@ function UpdateQuestionModal({ id }) {
     // setHasSubmitted(true);
 
     //include the id this time
-    const dataObj = {
-        id,
-        question,
-        topicId
-    };
-    console.log("dataObj with {topicId: topicId, question: question}", dataObj);
+    // const dataObj = {
+    //     id,
+    //     question,
+    //     topicId
+    // };
+    //console.log("dataObj with {topicId: topicId, question: question}", dataObj);
 
-    const serverResponse = await dispatch(thunkUpdateOneQuestion(id, dataObj));
+    const formData = new FormData ();
+    formData.append("question", question)
+    formData.append("topicId", topicId)
+    formData.append("image", image)
+
+    const serverResponse = await dispatch(thunkUpdateOneQuestion(id, formData));
     console.log("serverResponse", serverResponse)
     await dispatch(thunkGetOneQuestion(id))
 
@@ -96,6 +102,7 @@ function UpdateQuestionModal({ id }) {
            <div className='error'>
            {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
            </div>
+           <div id="choose-a-topic">Choose a topic</div>
            <div className="input">
                 <select onChange={e => setTopicId(e.target.value)} value={topicId}>
                     {arrAllTopics.map((topicObj) => (
@@ -104,7 +111,19 @@ function UpdateQuestionModal({ id }) {
                     ))}
                 </select>
            </div>
-           <button id="submit-question-button" onClick={onSubmit} >Submit</button>
+           <div>
+              <div id="update-image">Update image </div>
+              {/* <div id="image-blank-note">{`(Submitting without a picture will delete your current picture)`}</div> */}
+              <label for='image-input' className="testing">
+                <input
+                  id="image-input"
+                  type='file'
+                  accept='image/*'
+                  onChange={e => setImage(e.target.files[0])}
+                />
+              </label>
+            </div>
+           <button id="submit-question-button" onClick={onSubmit}>Submit</button>
        </form>
      </div>
     </div>

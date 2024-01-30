@@ -65,9 +65,8 @@ export default function SavedQuestion() {
                                                 </p>
                                                 <div className="edit_delete_comment">
                                                     <div className="delete_comment">
-                                                        <i className="fa-solid fa-trash-can"></i>
                                                         <OpenModalMenuItem
-                                                            itemText='Delete'
+                                                            itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
                                                             modalComponent={<DeleteSavedQuestion question={question} />}
                                                         />
                                                     </div>

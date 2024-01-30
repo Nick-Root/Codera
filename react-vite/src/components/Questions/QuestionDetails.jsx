@@ -88,6 +88,7 @@ const QuestionDetails = () => {
         await dispatch(thunkGetOneQuestion(id))
     }
 
+    //itemText for edit modal, so that it opens when we click on the icon too, not just the text
 
 
     // console.log("questionState in QuestionDetails", questionState)
@@ -118,13 +119,15 @@ const QuestionDetails = () => {
                     {/* edit question button/modal */}
                     {user && user.id === question.ownerId && (
                         <div className="edit_question">
-                            <i className="fa-solid fa-pen-to-square"></i>
+
                             <OpenModalMenuItem
-                                itemText='Edit'
+                                itemText={(<><i className="fa-solid fa-pen-to-square"></i> Edit</>)}
                                 onItemClick={closeMenu}
                                 className='updatequestionmodal'
                                 modalComponent={<UpdateQuestionModal id={parseInt(id)} />}
-                            />
+                            >
+
+                            </OpenModalMenuItem>
                         </div>
                     )}
                     {user && question?.saved.length === 0 ? (
@@ -173,9 +176,8 @@ const QuestionDetails = () => {
                                     <div className="update_comment">
                                         {user && user.id === comment.ownerId && (
                                             <>
-                                                <i className="fa-solid fa-pen-to-square"></i>
                                                 <OpenModalMenuItem
-                                                    itemText='Update'
+                                                    itemText={(<><i className="fa-solid fa-pen-to-square"></i> Update</>)}
                                                     modalComponent={<UpdateCommentModal comment={comment} />}
                                                 />
                                             </>
@@ -184,9 +186,8 @@ const QuestionDetails = () => {
                                     <div className="delete_comment">
                                         {user && user.id === comment.ownerId && (
                                             <>
-                                                <i className="fa-solid fa-trash-can"></i>
                                                 <OpenModalMenuItem
-                                                    itemText='Delete'
+                                                    itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
                                                     modalComponent={<DeleteCommentModal comment={comment} />}
                                                 />
                                             </>

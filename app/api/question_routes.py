@@ -83,22 +83,29 @@ def post_question():
     #form.topicId.choices = [(topic.id, topic.topic) for topic in Topic.query.all()]
     form['csrf_token'].data = request.cookies['csrf_token']
 
+
     #aws s3
     image = form.data["image"]
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
-    print("upload", upload)
+    #using list did not work, so used object instead
+    upload = {}
+    #added contidional
+    if image is not None:
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print("upload", upload)
 
-    if "url" not in upload:
-    # if the dictionary doesn't have a url key
-    # it means that there was an error when you tried to upload
-    # so you send back that error message (and you printed it above)
-        return { "error": "url not in upload" }
+    # commented out because upload is an obj now
+    # if "url" not in upload:
+    # # if the dictionary doesn't have a url key
+    # # it means that there was an error when you tried to upload
+    # # so you send back that error message (and you printed it above)
+    #     return { "error": "url not in upload" }
 
     if form.validate_on_submit():
         new_question = Question (
             question = form.data["question"],
-            image = upload['url'],   #"url" in upload
+            #dictionary.get(), if url is not in upload dictionary, it returns None
+            image=upload.get('url'),
             ownerId = current_user.id,
             topicId = form.data["topicId"],
             createdAt = datetime.now(),
@@ -126,25 +133,31 @@ def update_question(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     #aws s3
+    #same as post
     image = form.data["image"]
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
-    print("upload", upload)
+    #using list did not work, so used object instead
+    upload = {}
+    #added contidional
+    if image is not None:
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print("upload", upload)
 
-    if "url" not in upload:
-    # if the dictionary doesn't have a url key
-    # it means that there was an error when you tried to upload
-    # so you send back that error message (and you printed it above)
-        return { "error": "url not in upload" }
+    # if "url" not in upload:
+    # # if the dictionary doesn't have a url key
+    # # it means that there was an error when you tried to upload
+    # # so you send back that error message (and you printed it above)
+    #     return { "error": "url not in upload" }
 
     if form.validate_on_submit():
         question.question = form.data["question"]
-        question.image = upload['url']   #"url" in upload
+        question.image=upload.get('url')  #no comma here
         question.ownerId = current_user.id
         question.topicId = form.data["topicId"]
         question.updatedAt = datetime.now()
 
         db.session.commit()
+        print("question.to_dict()", question.to_dict())
         return question.to_dict()
     else:
         print("Bad Data")

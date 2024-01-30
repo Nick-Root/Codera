@@ -12,6 +12,6 @@ from ..api.aws_helpers import ALLOWED_EXTENSIONS  #changed directory
 
 class QuestionForm(FlaskForm):
     question = StringField("Question", validators=[DataRequired()])
-    #for post/edit image
-    image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    #for post/edit image, FileRequired()
+    image = FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     topicId = IntegerField("TopicId", validators=[DataRequired()])

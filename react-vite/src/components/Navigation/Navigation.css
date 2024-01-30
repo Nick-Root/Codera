@@ -18,13 +18,15 @@ body {
 }
 
 .navbar {
+  min-width: 700px;
   position: sticky;
   top: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   /* width: 1024px; */
-  padding: 20px 70px;
+
+  padding: 20px 70px 20px 70px;
   border-bottom: 1px solid rgba(146, 146, 146, 0.6);
   background-color: #F1F2F2;
   padding-bottom: 30px;
@@ -32,6 +34,7 @@ body {
   text-decoration: none;
   z-index: 2;
 }
+
 
 .navLink {
   font-weight: 600;
@@ -77,8 +80,6 @@ ul>li {
 #ask-question-button:hover {
   cursor: pointer
 }
-
-
 
 #drop-down-container {
   position: relative;
