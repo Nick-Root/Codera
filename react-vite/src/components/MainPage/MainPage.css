@@ -2,10 +2,12 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
-
+    margin-left: 0px;
+    min-width: 1000px;
 }
 
 .topicscont {
+    margin-left: 28px;
     width: 150px;
     position: sticky;
     top: 0;

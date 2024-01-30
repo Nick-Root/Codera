@@ -29,6 +29,7 @@ function Navigation() {
   const closeMenu = () => setShowMenu(false);
 
   return (
+    <>
     <ul className='navbar'>
 
       <NavLink to="/" className='homenav' onClick={dispatch(thunkGetAllTopics())}>Codera</NavLink>
@@ -56,6 +57,8 @@ function Navigation() {
       {user && (<ProfileButton />)}
 
     </ul>
+
+    </>
   );
 }
 

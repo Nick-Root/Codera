@@ -13,6 +13,7 @@ import "./UpdateQuestionModal.css";
 function UpdateQuestionModalTwo({ id }) {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
+  const [image, setImage] = useState('');  //added
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
   //const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
@@ -50,7 +51,6 @@ function UpdateQuestionModalTwo({ id }) {
   }
   //console.log("thisQuestion", thisQuestion);
 
-
   //from QuestionDetails destructure the datas
   //there is no question.oneQuestion on question/currentPage
   //const questionData = useSelector((state) => state.question.oneQuestion)
@@ -58,8 +58,6 @@ function UpdateQuestionModalTwo({ id }) {
 
   //const { 0: questionText = "default text"} = questionData
   //console.log("questionText.topicId", questionText.topicId)
-
-
 
   //do not want to set state on first render, only on second and when it changes
   useEffect(() => {
@@ -73,14 +71,19 @@ function UpdateQuestionModalTwo({ id }) {
     // setHasSubmitted(true);
 
     //include the id this time
-    const dataObj = {
-        id,
-        question,
-        topicId
-    };
-    console.log("dataObj with {topicId: topicId, question: question}", dataObj);
+    // const dataObj = {
+    //     id,
+    //     question,
+    //     topicId
+    // };
+    // console.log("dataObj with {topicId: topicId, question: question}", dataObj);
 
-    await dispatch(thunkUpdateOneQuestion(id, dataObj));
+    const formData = new FormData ();
+    formData.append("question", question)
+    formData.append("topicId", topicId)
+    formData.append("image", image)
+
+    await dispatch(thunkUpdateOneQuestion(id, formData));
     await dispatch(getCurrentQuestions())
     closeModal();
     console.log("serverResponse", serverResponse)
@@ -109,6 +112,7 @@ function UpdateQuestionModalTwo({ id }) {
            <div className='error'>
            {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
            </div>
+           <div id="choose-a-topic">Choose a topic</div>
            <div className="input">
                 <select onChange={e => setTopicId(e.target.value)} value={topicId}>
                     {arrAllTopics.map((topicObj) => (
@@ -117,7 +121,19 @@ function UpdateQuestionModalTwo({ id }) {
                     ))}
                 </select>
            </div>
-           <button id="submit-question-button" onClick={onSubmit} >Submit</button>
+           <div>
+              <div id="update-image">Update image </div>
+              {/* <div id="image-blank-note">{`(Submitting without a picture will delete your current picture)`}</div> */}
+              <label for='image-input' className="testing">
+                <input
+                  id="image-input"
+                  type='file'
+                  accept='image/*'
+                  onChange={e => setImage(e.target.files[0])}
+                />
+              </label>
+            </div>
+           <button id="submit-question-button" onClick={onSubmit}>Submit</button>
        </form>
      </div>
     </div>

@@ -1,12 +1,15 @@
 #create-question-modal-container {
-    width: 500px;
-    height: 190px;
+    width: 539px;
+    height: 255px;
 }
 
-#heading {
+
+
+#ask-a-question {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
     margin: 5px 0;
+
 }
 
 .question-form-container {
@@ -24,6 +27,8 @@
 }
 
 #question-input {
+    display: block;
+    border: 1.5px solid;
     height: 100px;
     width: 100px;
     border-top: none;
@@ -31,15 +36,21 @@
     border-right: none;
 }
 
-#question-input:focus {
-    outline: none
-}
 
 
 #submit-question-button {
     margin: 5px 0;
 }
 
+#choose-a-topic {
+    margin-top: 12px;
+    font-size: 13.5px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#choose-a-topic:focus {
+    outline: none;
+}
 
 #modal-content {
     border: 3px solid #B92B27
@@ -47,10 +58,25 @@
 
 #upload-an-image {
     font-size: 13.5px;
-    margin-top: 10px;
-    margin-bottom: 3px;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-#image-file-input {
+
+#image-input{
     margin-bottom: 5px;
+    height: 30px;
+}
+
+/* select input */
+#select-input {
+    width: 120px;
+    height: 22.5px;
+}
+
+
+#testing {
+    display: inline-block;
+    height: 100px;
 }

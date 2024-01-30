@@ -157,21 +157,21 @@ export const thunkPostOneQuestion = (formData) => async (dispatch) => {
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
     return newQuestion;
   } else {
-    console.log('status code:', res.status)
-    console.log("POST error message")
+    //console.log('status code:', res.status)
+    //console.log("POST error message")
     const error = await res.json();
-    console.log('error', error)
+    //console.log('error', error)
     return error;
   }
 }
 
 
 
-export const thunkUpdateOneQuestion = (id, dataObj) => async (dispatch) => {
+export const thunkUpdateOneQuestion = (id, formData) => async (dispatch) => {
   const res = await fetch(`/api/questions/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dataObj)
+    // headers: { 'Content-Type': 'application/json' },
+    body: formData
   });
 
   if (res.ok) {
@@ -181,10 +181,10 @@ export const thunkUpdateOneQuestion = (id, dataObj) => async (dispatch) => {
     dispatch(receiveOneQuestion(newQuestion));  //receiveQuestion adds the data, as seen in the reducer
     return newQuestion;
   } else {
-    console.log('status code:', res.status)
-    console.log("POST error message")
+    //console.log('status code:', res.status)
+    //console.log("POST error message")
     const error = await res.json();
-    console.log('error', error)
+    //console.log('error', error)
     return error;
   }
 }
@@ -228,7 +228,6 @@ const questionsReducer = (state = initialState, action) => {
       return newState;
     }
     case LOAD_ONE_QUESTION: {
-
       nextState = { ...state, oneQuestion: null }
       nextState.oneQuestion = { ...action.question }
       return nextState

@@ -1,6 +1,6 @@
 #update-question-modal-container {
-    width: 500px;
-    height: 150px;
+    width: 539px;
+    height: 255px;
 }
 
 #heading {
@@ -48,4 +48,15 @@
 
 #submit-question-button:hover {
     cursor: pointer;
+}
+
+#update-image {
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#image-blank-note {
+    color: grey;
+    font-size: 12px;
 }

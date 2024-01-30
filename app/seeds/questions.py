@@ -3,8 +3,7 @@ from sqlalchemy.sql import text
 from datetime import datetime
 def seed_questions():
     question1 = Question(
-        ownerId = 1, topicId = 1, question = 'How do I install different versions of python?',
-        image="https://as1.ftcdn.net/v2/jpg/02/48/42/64/1000_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+        ownerId = 1, topicId = 1, question = 'How do I install different versions of python?'
     )
     question2 = Question(
         ownerId = 2, topicId = 2, question = 'How do I use a for loop in javascript?'

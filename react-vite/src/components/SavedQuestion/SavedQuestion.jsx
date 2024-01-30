@@ -40,7 +40,7 @@ export default function SavedQuestion() {
         <>
             <div className='container'>
                 <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>
-                <div >
+                <div>
                     {isLoading ? (
                         <div className="spinner-container">
                             <div className="spinner"></div>
@@ -71,9 +71,8 @@ export default function SavedQuestion() {
                                                     </p>
                                                     <div className="edit_delete_comment">
                                                         <div className="delete_comment">
-                                                            <i className="fa-solid fa-trash-can"></i>
                                                             <OpenModalMenuItem
-                                                                itemText='Delete'
+                                                                itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
                                                                 modalComponent={<DeleteSavedQuestion question={question} />}
                                                             />
                                                         </div>

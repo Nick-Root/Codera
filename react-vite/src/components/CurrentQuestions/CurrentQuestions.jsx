@@ -70,17 +70,14 @@ const CurrentQuestions = () => {
                             </p>
                             <div className="edit_delete_question">
                                 <div className="update_question">
-
-                                    <i className="fa-solid fa-pen-to-square"></i>
                                     <OpenModalMenuItem
-                                        itemText='Update'
+                                        itemText={(<><i className="fa-solid fa-pen-to-square"></i> Update</>)}
                                         modalComponent={<UpdateQuestionModalTwo id={question.id} />}
                                     />
                                 </div>
                                 <div className="delete_question">
-                                    <i className="fa-solid fa-trash-can"></i>
                                     <OpenModalMenuItem
-                                        itemText='Delete'
+                                        itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
                                         modalComponent={<DeleteQuestionModalTwo id={question.id} />}
                                     />
                                 </div>
