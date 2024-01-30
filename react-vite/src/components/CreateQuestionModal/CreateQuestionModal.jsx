@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useModal } from "../../context/Modal";
 import { thunkGetAllQuestions, thunkPostOneQuestion, getCurrentQuestions } from '../../redux/question.js';
-import {  } from '../../redux/question.js'
+import { } from '../../redux/question.js'
 import "./CreateQuestionModal.css";
 import { useLocation } from 'react-router-dom';
 
@@ -51,7 +51,7 @@ function CreateQuestionModal() {
     // };
     //console.log("dataObj with {topicId: topicId, question: question}", dataObj);
 
-    const formData = new FormData ();
+    const formData = new FormData();
     formData.append("question", question)
     formData.append("topicId", topicId)
     formData.append("image", image)
@@ -59,7 +59,7 @@ function CreateQuestionModal() {
 
     await dispatch(thunkPostOneQuestion(formData));
 
-    if( location.pathname === "/" || location.pathname === "/questions"){
+    if (location.pathname === "/" || location.pathname === "/questions") {
       await dispatch(thunkGetAllQuestions());
 
     } else if (location.pathname === "/questions/current") {
@@ -76,6 +76,7 @@ function CreateQuestionModal() {
   return (
     <div id="create-question-modal-container">
       <div className="question-form-container">
+<<<<<<< HEAD
        <div id="ask-a-question">Ask a Question</div>
        <form onSubmit={onSubmit} encType="multipart/form-data">
            <div className="input-container">
@@ -114,6 +115,43 @@ function CreateQuestionModal() {
            <button id="submit-question-button" >Submit</button>
        </form>
      </div>
+=======
+        <div id="heading">Ask a Question</div>
+        <form onSubmit={onSubmit} encType="multipart/form-data">
+          <div className="input-container">
+            <input
+              id="question-input"
+              type='text'
+              placeholder='Start your question with "What", "How", "Why", etc.'
+              onChange={e => setQuestion(e.target.value)}  //changes the state first
+              value={question}  //then we get it from the state
+              maxLength={255}
+            />
+          </div>
+          <div className='error'>
+            {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
+          </div>
+          <div className="input">
+            <select onChange={e => setTopicId(e.target.value)} value={topicId}>
+              {arrAllTopics.map((topicObj) => (
+                //value is topicObj.id because we want to pass that back
+                <option key={topicObj.id} value={topicObj.id}>{topicObj.topic}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <div id="upload-an-image">Upload an image</div>
+            <input id='image-file-input'
+              type='file'
+              accept='image/*'
+              onChange={e => setImage(e.target.files[0])}
+            />
+          </div>
+          {/* removed onSubmit */}
+          <button id="submit-question-button" >Submit</button>
+        </form>
+      </div>
+>>>>>>> b12a9baae7fdd8d2712d021ac44bc73c8a00dd84
     </div>
   );
 }

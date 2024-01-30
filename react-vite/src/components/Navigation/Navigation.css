@@ -18,9 +18,14 @@ body {
 }
 
 .navbar {
+<<<<<<< HEAD
   min-width: 700px;
   position: sticky;
   top: 0px;
+=======
+  /* position: sticky;
+  top: 0px; */
+>>>>>>> b12a9baae7fdd8d2712d021ac44bc73c8a00dd84
   display: flex;
   justify-content: space-between;
   align-items: center;
