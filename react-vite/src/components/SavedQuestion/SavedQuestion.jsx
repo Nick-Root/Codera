@@ -40,38 +40,7 @@ export default function SavedQuestion() {
         <>
             <div className='container'>
                 <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>
-                <div >
-<<<<<<< HEAD
-                    {saves.map(save => {
-                        if (sessionUser.id === save.userId) {
-                            return <div key={save.id}>
-                                {save?.questions.map(question => {
-                                    return <div key={question.id} >
-                                        <div id='one_question_container'>
-                                            <NavLink to={`/questions/${question.id}`} className='navtopage' id="question-container">{question?.question}</NavLink>
-                                            {question.image && (
-                                                <>
-                                                    <div id="grey-border"></div>
-                                                    <img id='question-image-container' src={question.image}/>
-                                                    <div id="grey-border-2"></div>
-                                                </>
-                                            )}
-                                            <div className="user_comments">
-                                                <p className="created-date">
-                                                    Saved on:{" "}
-                                                    {new Date().toLocaleDateString(undefined, {
-                                                        day: "numeric",
-                                                        month: "long",
-                                                        year: "numeric",
-                                                    })}
-                                                </p>
-                                                <div className="edit_delete_comment">
-                                                    <div className="delete_comment">
-                                                        <OpenModalMenuItem
-                                                            itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
-                                                            modalComponent={<DeleteSavedQuestion question={question} />}
-                                                        />
-=======
+                <div>
                     {isLoading ? (
                         <div className="spinner-container">
                             <div className="spinner"></div>
@@ -102,13 +71,11 @@ export default function SavedQuestion() {
                                                     </p>
                                                     <div className="edit_delete_comment">
                                                         <div className="delete_comment">
-                                                            <i className="fa-solid fa-trash-can"></i>
                                                             <OpenModalMenuItem
-                                                                itemText='Delete'
+                                                                itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
                                                                 modalComponent={<DeleteSavedQuestion question={question} />}
                                                             />
                                                         </div>
->>>>>>> b12a9baae7fdd8d2712d021ac44bc73c8a00dd84
                                                     </div>
                                                 </div>
                                             </div>

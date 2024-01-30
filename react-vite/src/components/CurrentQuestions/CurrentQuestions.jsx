@@ -41,20 +41,6 @@ const CurrentQuestions = () => {
             <div className="container_text">Your Questions</div>
 
 
-<<<<<<< HEAD
-
-                                <OpenModalMenuItem
-                                    itemText={(<><i className="fa-solid fa-pen-to-square"></i> Update</>)}
-                                    modalComponent={<UpdateQuestionModalTwo id={question.id} />}
-                                />
-                            </div>
-                            <div className="delete_question">
-
-                                <OpenModalMenuItem
-                                    itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
-                                    modalComponent={<DeleteQuestionModalTwo id={question.id} />}
-                                />
-=======
             {isLoading ? (
                 <div className="spinner-container">
                     <div className="spinner"></div>
@@ -84,21 +70,17 @@ const CurrentQuestions = () => {
                             </p>
                             <div className="edit_delete_question">
                                 <div className="update_question">
-
-                                    <i className="fa-solid fa-pen-to-square"></i>
                                     <OpenModalMenuItem
-                                        itemText='Update'
+                                        itemText={(<><i className="fa-solid fa-pen-to-square"></i> Update</>)}
                                         modalComponent={<UpdateQuestionModalTwo id={question.id} />}
                                     />
                                 </div>
                                 <div className="delete_question">
-                                    <i className="fa-solid fa-trash-can"></i>
                                     <OpenModalMenuItem
-                                        itemText='Delete'
+                                        itemText={(<><i className="fa-solid fa-trash-can"></i> Delete</>)}
                                         modalComponent={<DeleteQuestionModalTwo id={question.id} />}
                                     />
                                 </div>
->>>>>>> b12a9baae7fdd8d2712d021ac44bc73c8a00dd84
                             </div>
                         </div>
                     </div>

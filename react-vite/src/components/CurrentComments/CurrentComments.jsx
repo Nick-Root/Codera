@@ -43,34 +43,6 @@ const CurrentComments = () => {
         <div className="container">
             <div className="container_text">Your Comments</div>
 
-<<<<<<< HEAD
-                    className="one_question_container"
-                >
-                    <NavLink to={`/questions/${comment.questionId}`} className='navtopage'>{comment.comment}</NavLink>
-                    <div className="user_comments">
-                        <p className="userName">{user.username}</p>
-                        <p className="created-date">
-                            Commented on:{" "}
-                            {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                            })}
-                        </p>
-                        <div className="edit_delete_comment">
-                            <div className="update_comment">
-                                <OpenModalMenuItem
-                                    itemText={(<><i className="fa-solid fa-pen-to-square"></i> Update</>)}
-                                    modalComponent={<UpdateCommentModal comment={comment} />}
-                                />
-                            </div>
-                            <div className="delete_comment">
-
-                                <OpenModalMenuItem
-                                    itemText={<><i className="fa-solid fa-trash-can"></i> Delete</>}
-                                    modalComponent={<DeleteCommentModal comment={comment} />}
-                                />
-=======
             {isLoading ? (
                 <div className="spinner-container">
                     <div className="spinner"></div>
@@ -95,21 +67,17 @@ const CurrentComments = () => {
                             </p>
                             <div className="edit_delete_comment">
                                 <div className="update_comment">
-
-                                    <i className="fa-solid fa-pen-to-square"></i>
                                     <OpenModalMenuItem
-                                        itemText='Update'
+                                        itemText={(<><i className="fa-solid fa-pen-to-square"></i> Update</>)}
                                         modalComponent={<UpdateCommentModal comment={comment} />}
                                     />
                                 </div>
                                 <div className="delete_comment">
-                                    <i className="fa-solid fa-trash-can"></i>
                                     <OpenModalMenuItem
-                                        itemText='Delete'
+                                        itemText={<><i className="fa-solid fa-trash-can"></i> Delete</>}
                                         modalComponent={<DeleteCommentModal comment={comment} />}
                                     />
                                 </div>
->>>>>>> b12a9baae7fdd8d2712d021ac44bc73c8a00dd84
                             </div>
                         </div>
 

@@ -18,20 +18,15 @@ body {
 }
 
 .navbar {
-<<<<<<< HEAD
   min-width: 700px;
-  position: sticky;
-  top: 0px;
-=======
   /* position: sticky;
   top: 0px; */
->>>>>>> b12a9baae7fdd8d2712d021ac44bc73c8a00dd84
   display: flex;
   justify-content: space-between;
   align-items: center;
   /* width: 1024px; */
 
-  padding: 20px 70px 20px 70px;
+  padding: 20px 70px 20px 60px;
   border-bottom: 1px solid rgba(146, 146, 146, 0.6);
   background-color: #F1F2F2;
   padding-bottom: 30px;
