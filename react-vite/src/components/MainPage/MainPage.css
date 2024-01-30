@@ -1,11 +1,15 @@
 .mainpage {
     display: flex;
     justify-content: center;
-    margin-top: 30px
+    margin-top: 30px;
+
 }
 
 .topicscont {
     width: 150px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .topicscont>button,
@@ -118,7 +122,11 @@ h3 {
     align-items: center;
     /* border: 1px solid black; */
     margin-left: 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
+
 
 .resourcesheader {
     border-bottom: 1px solid black;
@@ -179,16 +187,19 @@ h3 {
 #question-image-container {
     width: 100%;
 }
+
 /* border */
-#grey-border{
+#grey-border {
     margin-top: 10px;
     border-top: 1px solid black;
     width: 100%;
 }
-#grey-border-2{
+
+#grey-border-2 {
     border-top: 1px solid black;
     width: 100%;
 }
+
 #user-question {
     margin-top: 15px;
     position: relative;
@@ -215,6 +226,7 @@ h3 {
     color: black;
     border-radius: 5px;
 }
+
 /* add padding for top question */
 #question-container {
     padding: 0 25px;

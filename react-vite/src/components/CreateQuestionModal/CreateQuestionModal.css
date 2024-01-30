@@ -15,15 +15,17 @@
     margin-left: 50px;
 }
 
-.input-container{
+.input-container {
     margin: 5px 0;
 }
+
 #question-label {
     margin: 0 5px;
 }
+
 #question-input {
-    width: 80%;
-    height: 25px;
+    height: 100px;
+    width: 100px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -39,11 +41,16 @@
 }
 
 
+#modal-content {
+    border: 3px solid #B92B27
+}
+
 #upload-an-image {
     font-size: 13.5px;
     margin-top: 10px;
     margin-bottom: 3px;
 }
+
 #image-file-input {
     margin-bottom: 5px;
 }

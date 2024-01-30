@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentComments } from "../../redux/comment"
 import DeleteCommentModal from "../CommentModals/DeleteCommentModal"
@@ -14,9 +14,10 @@ const CurrentComments = () => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         dispatch(getCurrentComments())
+        setIsLoading(false)
     }, [dispatch])
 
 
@@ -41,44 +42,50 @@ const CurrentComments = () => {
     return (
         <div className="container">
             <div className="container_text">Your Comments</div>
-            {comments.map((comment) => (
-                <div
-                    key={comment.commentId}
 
-                    className="one_question_container"
-                >
-                    <NavLink to={`/questions/${comment.questionId}`} className='navtopage'>{comment.comment}</NavLink>
-                    <div className="user_comments">
-                        <p className="userName">{user.username}</p>
-                        <p className="created-date">
-                            Commented on:{" "}
-                            {new Date(comment.createdAt).toLocaleDateString(undefined, {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                            })}
-                        </p>
-                        <div className="edit_delete_comment">
-                            <div className="update_comment">
+            {isLoading ? (
+                <div className="spinner-container">
+                    <div className="spinner"></div>
+                </div>
+            ) : (
+                comments.map((comment) => (
+                    <div
+                        key={comment.commentId}
 
-                                <i className="fa-solid fa-pen-to-square"></i>
-                                <OpenModalMenuItem
-                                    itemText='Update'
-                                    modalComponent={<UpdateCommentModal comment={comment} />}
-                                />
-                            </div>
-                            <div className="delete_comment">
-                                <i className="fa-solid fa-trash-can"></i>
-                                <OpenModalMenuItem
-                                    itemText='Delete'
-                                    modalComponent={<DeleteCommentModal comment={comment} />}
-                                />
+                        className="one_question_container"
+                    >
+                        <NavLink to={`/questions/${comment.questionId}`} className='navtopage'>{comment.comment}</NavLink>
+                        <div className="user_comments">
+                            <p className="userName">{user.username}</p>
+                            <p className="created-date">
+                                Commented on:{" "}
+                                {new Date(comment.createdAt).toLocaleDateString(undefined, {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
+                            <div className="edit_delete_comment">
+                                <div className="update_comment">
+
+                                    <i className="fa-solid fa-pen-to-square"></i>
+                                    <OpenModalMenuItem
+                                        itemText='Update'
+                                        modalComponent={<UpdateCommentModal comment={comment} />}
+                                    />
+                                </div>
+                                <div className="delete_comment">
+                                    <i className="fa-solid fa-trash-can"></i>
+                                    <OpenModalMenuItem
+                                        itemText='Delete'
+                                        modalComponent={<DeleteCommentModal comment={comment} />}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-            )).reverse()}
+                    </div>
+                )).reverse())}
         </div>
 
     );

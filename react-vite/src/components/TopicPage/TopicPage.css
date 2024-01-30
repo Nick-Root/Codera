@@ -10,6 +10,34 @@
     cursor: pointer;
 }
 
-.edit_topic > i {
+.edit_topic>i {
     margin-right: 3px;
+}
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #B92B27;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
