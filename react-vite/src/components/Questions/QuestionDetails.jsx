@@ -130,19 +130,25 @@ const QuestionDetails = () => {
                             </OpenModalMenuItem>
                         </div>
                     )}
-                    {user && question?.saved.length === 0 ? (
-                        <div className='save_b'>
-                            <button onClick={saved} className='save_button'>
-                                <i className="fa-regular fa-bookmark"></i> Save
-                            </button>
-                        </div>
-                    ) : (
-                        <div className='save_b'>
-                            <button onClick={unsaved} className='save_button'>
-                                <i className="fa-solid fa-bookmark"></i> Saved
-                            </button>
-                        </div>
-                    )}
+                    {question?.saved.length === 0 ? (  // If there is a user and no one has saved this question, show the "Save" button.
+                            <div className='save_b'>                
+                                <button onClick={saved} className='save_button'>
+                                    <i className="fa-regular fa-bookmark"></i> Save
+                                </button>
+                            </div>
+                        ) : question.saved.some(save => save.userId === user.id) ? ( // If the user has already saved this question, show the "Saved" button.
+                            <div className='save_b'>
+                                <button onClick={unsaved} className='save_button'>
+                                    <i className="fa-solid fa-bookmark"></i> Saved
+                                </button>
+                            </div>
+                        ) : (                                        // If the user hasn't saved this question, show the "Save" button.
+                            <div className='save_b'>
+                                <button onClick={saved} className='save_button'> 
+                                    <i className="fa-regular fa-bookmark"></i> Save
+                                </button>
+                            </div>
+                        )}
                 </div>
             </div>
             <div className="comments">
