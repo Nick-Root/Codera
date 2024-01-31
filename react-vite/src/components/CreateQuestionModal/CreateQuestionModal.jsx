@@ -15,7 +15,7 @@ function CreateQuestionModal() {
   const [question, setQuestion] = useState('');
   const [image, setImage] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
-  //const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   // const match = useRouteMatch();
@@ -35,8 +35,15 @@ function CreateQuestionModal() {
   //might not need it because main page uses thunkGetAllTopics
   useEffect(() => {
     dispatch(thunkGetAllTopics());
-
   }, [dispatch]);
+
+  //error handling
+  useEffect(() => {
+    const errors = {};
+    if (question.length === 255)
+      errors.question = "Maximum question length is 255 characters.";
+    setErrors(errors);
+  }, [question])
 
 
 
@@ -73,23 +80,39 @@ function CreateQuestionModal() {
     closeModal();
   }
 
+  //code to automatically adjust the height
+  function adjustTextareaHeight() {
+    const textarea = document.getElementById('question-textarea');
+    /* expands the textarea height dynmically */
+    textarea.style.height = 'auto';
+    /* sets the height including the unseen part of the textarea */
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+  }
+  //we use useeffect to check the height everytime the question state changes
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [question]);
+
+
+
   return (
     <div id="create-question-modal-container">
       <div className="question-form-container">
        <div id="ask-a-question">Ask a Question</div>
        <form onSubmit={onSubmit} encType="multipart/form-data">
            <div className="input-container">
-                <input
-                    id="question-input"
+                <textarea
+                    id="question-textarea"
                     type='text'
                     placeholder='Start your question with "What", "How", "Why", etc.'
                     onChange={e => setQuestion(e.target.value)}  //changes the state first
                     value={question}  //then we get it from the state
                     maxLength={255}
+                    rows="1"
                 />
            </div>
            <div className='error'>
-           {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
+           {errors.question && `${errors.question}`}
            </div>
            <div id="choose-a-topic">Choose a topic</div>
            <div className="input">

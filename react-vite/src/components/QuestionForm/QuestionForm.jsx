@@ -49,7 +49,7 @@ function QuestionForm() {
            question,
            topicId
        };
-       console.log("dataObj with {topicId: topicId, question: question}", dataObj );
+       /* console.log("dataObj with {topicId: topicId, question: question}", dataObj ); */
        dispatch(thunkPostOneQuestion(dataObj));
 
        setQuestion('');

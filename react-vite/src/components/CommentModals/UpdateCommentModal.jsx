@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import { thunkGetOneQuestion } from '../../redux/question.js';
 import { thunkUpdateComment, getCurrentComments } from '../../redux/comment.js';
@@ -12,6 +12,7 @@ const UpdateCommentModal = ({ comment }) => {
     const { closeModal } = useModal();
     const id = comment.commentId
     const [newCommentText, setUpdatedComment] = useState(comment.comment);
+    const [errors, setErrors] = useState({});
     const questionData = useSelector((state) => state.question.oneQuestion || [])
 
 
@@ -24,11 +25,17 @@ const UpdateCommentModal = ({ comment }) => {
         questionPageId = comment.questionId
     }
 
+    // console.log("%c   LOOK HERE", "color: blue; font-size: 18px", comment);
+    // console.log("%c   LOOK HERE", "color: purple; font-size: 18px", question);
+    // console.log("%c   LOOK HERE", "color: red; font-size: 18px", questionPageId);
 
-
-    console.log("%c   LOOK HERE", "color: blue; font-size: 18px", comment);
-    console.log("%c   LOOK HERE", "color: purple; font-size: 18px", question);
-    console.log("%c   LOOK HERE", "color: red; font-size: 18px", questionPageId);
+    //error handling
+    useEffect(() => {
+        const errors = {};
+        if (newCommentText.length === 255)
+        errors.newCommentText = "Maximum comment length is 255 characters.";
+        setErrors(errors);
+    }, [newCommentText])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,6 +56,19 @@ const UpdateCommentModal = ({ comment }) => {
 
     }
 
+    //code to automatically adjust the height
+    function adjustTextareaHeight() {
+        const textarea = document.getElementById('updatedComment');
+        //expands the textarea height dynmically
+        textarea.style.height = 'auto';
+        //sets the height including the unseen part of the textarea
+        textarea.style.height = (textarea.scrollHeight) + 'px';
+    }
+    //we use useeffect to check the height everytime the newCommentText state changes
+    useEffect(() => {
+        adjustTextareaHeight();
+    }, [newCommentText]);
+
     return (
         <div className="update-comment-modal">
             <div className="modal-header">
@@ -57,15 +77,22 @@ const UpdateCommentModal = ({ comment }) => {
             <div className="modal-content">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <input
+                        {/* same as other forms */}
+                        <div className="input-container">
+                        <textarea
                             id="updatedComment"
                             type='text'
                             name="updatedComment"
-                            placeholder=''
                             value={newCommentText}
                             onChange={(e) => setUpdatedComment(e.target.value)}
+                            maxLength={255}
+                            rows='1'
+
                         />
-                        {/* <label htmlFor="updatedComment">Updated Comment</label> */}
+                        </div>
+                        <div className='error'>
+                        {errors.newCommentText && `${errors.newCommentText}`}
+                        </div>
 
                     </div>
                     <div className="form-group">

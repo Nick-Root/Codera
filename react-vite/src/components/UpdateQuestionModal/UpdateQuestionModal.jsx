@@ -28,7 +28,7 @@ function UpdateQuestionModal({ id }) {
     dispatch(thunkGetOneQuestion(id))
   }, [dispatch, id])
 
-  console.log("UpdateQuestionModal id", id)
+  //console.log("UpdateQuestionModal id", id)
 
 
 
@@ -57,10 +57,17 @@ function UpdateQuestionModal({ id }) {
     setTopicId(questionText.topicId)
   }, [questionData, questionText.question, questionText.topicId])
 
+  //error handling
+  useEffect(() => {
+    const errors = {};
+    if (question.length === 255)
+      errors.question = "Maximum question length is 255 characters.";
+    setErrors(errors);
+  }, [question])
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // setHasSubmitted(true);
 
     //include the id this time
     // const dataObj = {
@@ -80,27 +87,40 @@ function UpdateQuestionModal({ id }) {
     await dispatch(thunkGetOneQuestion(id))
 
     setQuestion('');
-    // setValidationErrors({});
-    // setHasSubmitted(false);
     closeModal();
   }
+
+  //code to automatically adjust the height
+  function adjustTextareaHeight() {
+    const textarea = document.getElementById('update-question-textarea');
+    //expands the textarea height dynmically
+    textarea.style.height = 'auto';
+    //sets the height including the unseen part of the textarea
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+  }
+  //we use useeffect to check the height everytime the question state changes
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [question]);
 
   return (
     <div id="update-question-modal-container">
       <div className="question-form-container">
        <div id="heading">Edit your question</div>
        <form onSubmit={onSubmit}>
-           <div className="input-container">
-                <input
-                    id="question-input"
+            <div className="input-container">
+                <textarea
+                    id="update-question-textarea"
                     type='text'
-                    placeholder=''
                     onChange={e => setQuestion(e.target.value)}  //changes the state first
                     value={question}  //then we get it from the state
+                    maxLength={255}
+                    rows="1"
                 />
            </div>
+
            <div className='error'>
-           {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
+            {errors.question && `${errors.question}`}
            </div>
            <div id="choose-a-topic">Choose a topic</div>
            <div className="input">
@@ -112,7 +132,7 @@ function UpdateQuestionModal({ id }) {
                 </select>
            </div>
            <div>
-              <div id="update-image">Update image </div>
+              <div id="update-image">Update image</div>
               {/* <div id="image-blank-note">{`(Submitting without a picture will delete your current picture)`}</div> */}
               <label for='image-input' className="testing">
                 <input

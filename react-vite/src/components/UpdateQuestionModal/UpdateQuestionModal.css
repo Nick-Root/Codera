@@ -1,6 +1,7 @@
 #update-question-modal-container {
-    width: 539px;
-    height: 255px;
+    width: 550px;
+    max-height: 380px;
+    padding-bottom: 20px;
 }
 
 #heading {
@@ -15,23 +16,22 @@
     margin-left: 50px;
 }
 
-.input-container {
-    margin: 5px 0;
-}
 
-#question-label {
-    margin: 0 5px;
-}
-
-#question-input {
-    width: 80%;
-    height: 25px;
+#update-question-textarea {
+    white-space: pre-wrap;
+    font-size: 15.5px;
+    width: 88%;
+    height: auto;
     border-top: none;
     border-left: none;
     border-right: none;
+    border-bottom: 1px solid;
+    font-family: sans-serif;
+    resize: none; /* removes resize triangle */
+    overflow-y: hidden; /* remvoes scrollbar */
 }
 
-#question-input:focus {
+#update-question-textarea:focus {
     outline: none
 }
 

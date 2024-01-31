@@ -1,9 +1,8 @@
 #create-question-modal-container {
-    width: 539px;
-    height: 255px;
+    width: 550px;
+    max-height: 380px;
+    padding-bottom: 20px;
 }
-
-
 
 #ask-a-question {
     font-weight: bold;
@@ -19,27 +18,32 @@
 }
 
 .input-container {
-    margin: 5px 0;
+    height: auto;
 }
-
-#question-label {
-    margin: 0 5px;
-}
-
-#question-input {
-    display: block;
-    border: 1.5px solid;
-    height: 100px;
-    width: 100px;
+#question-textarea {
+    font-size: 15.5px;
+    width: 88%;
+    height: auto;
     border-top: none;
     border-left: none;
     border-right: none;
+    border-bottom: 1px solid;
+    font-family: sans-serif;
+    resize: none; /* removes resize triangle */
+    overflow-y: hidden; /* remvoes scrollbar */
 }
+#question-textarea::placeholder {
+    font-family: sans-serif;
+}
+#question-textarea:focus {
+    outline: none;
+}
+
 
 
 
 #submit-question-button {
-    margin: 5px 0;
+    margin: 5px 0 0 20px;
 }
 
 #choose-a-topic {
