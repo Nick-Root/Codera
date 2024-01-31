@@ -4,8 +4,6 @@
     padding-bottom: 20px;
 }
 
-
-
 #ask-a-question {
     font-weight: bold;
     font-size: 22px;
@@ -23,7 +21,6 @@
     height: auto;
 }
 #question-textarea {
-    white-space: pre-wrap;
     font-size: 15.5px;
     width: 88%;
     height: auto;
@@ -37,7 +34,6 @@
 }
 #question-textarea::placeholder {
     font-family: sans-serif;
-
 }
 #question-textarea:focus {
     outline: none;

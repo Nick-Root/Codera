@@ -15,7 +15,7 @@ function UpdateQuestionModalTwo({ id }) {
   const [question, setQuestion] = useState('');
   const [image, setImage] = useState('');  //added
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
-  //const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   //might not need it because main page uses thunkGetAllTopics
@@ -29,7 +29,15 @@ function UpdateQuestionModalTwo({ id }) {
     dispatch(thunkGetOneQuestion(id))
   }, [dispatch, id])
 
-  console.log("UpdateQuestionModal id", id)
+  //console.log("UpdateQuestionModal id", id)
+
+  //error handling
+  useEffect(() => {
+    const errors = {};
+    if (question.length === 255)
+      errors.question = "Maximum question length is 255 characters.";
+    setErrors(errors);
+  }, [question])
 
 
   //for getting all topics
@@ -92,25 +100,38 @@ function UpdateQuestionModalTwo({ id }) {
     //setQuestion('');
     // setValidationErrors({});
     // setHasSubmitted(false);
-
   }
+
+  //code to automatically adjust the height
+  function adjustTextareaHeight() {
+    const textarea = document.getElementById('update-question-textarea');
+    //expands the textarea height dynmically
+    textarea.style.height = 'auto';
+    //sets the height including the unseen part of the textarea
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+  }
+  //we use useeffect to check the height everytime the question state changes
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [question]);
 
   return (
     <div id="update-question-modal-container">
       <div className="question-form-container">
        <div id="heading">Edit your question</div>
        <form onSubmit={onSubmit}>
-           <div className="input-container">
-                <input
-                    id="question-input"
+            <div className="input-container">
+                <textarea
+                    id="update-question-textarea"
                     type='text'
-                    placeholder=''
                     onChange={e => setQuestion(e.target.value)}  //changes the state first
                     value={question}  //then we get it from the state
+                    maxLength={255}
+                    rows="1"
                 />
            </div>
            <div className='error'>
-           {/* {hasSubmitted && validationErrors.question && `* ${validationErrors.question}`} */}
+            {errors.question && `${errors.question}`}
            </div>
            <div id="choose-a-topic">Choose a topic</div>
            <div className="input">

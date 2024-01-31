@@ -4,7 +4,8 @@
     justify-content: center;
     align-items: center;
     width: 500px;
-    height: 150px;
+    height: auto;
+    padding: 30px 0;
 }
 
 .form-group {
@@ -12,11 +13,22 @@
     flex-direction: column;
 }
 
+/* textarea, updated */
 #updatedComment {
-    border: none;
+    white-space: pre-wrap;
+    font-size: 15.5px;
     width: 400px;
-    height: fit-content;
-    border-bottom: 1px solid black;
+    height: auto;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid;
+    font-family: sans-serif;
+    resize: none; /* removes resize triangle */
+    overflow-y: hidden; /* remvoes scrollbar */
+}
+#updatedComment:focus {
+    outline: none;
 }
 
 .savechange {
