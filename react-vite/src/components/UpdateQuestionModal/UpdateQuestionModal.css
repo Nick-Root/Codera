@@ -23,13 +23,14 @@
     margin: 0 5px;
 }
 
-#question-input {
-    width: 80%;
+/* was interefering, sorry */
+/* #question-input {
+    width: 90%;
     height: 25px;
     border-top: none;
     border-left: none;
     border-right: none;
-}
+} */
 
 #question-input:focus {
     outline: none

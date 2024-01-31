@@ -14,7 +14,7 @@ function UpdateQuestionModal({ id }) {
   const [question, setQuestion] = useState('');
   const [image, setImage] = useState('');  //added
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   //might not need it because main page uses thunkGetAllTopics
@@ -112,7 +112,7 @@ function UpdateQuestionModal({ id }) {
                 </select>
            </div>
            <div>
-              <div id="update-image">Update image </div>
+              <div id="update-image">Update image</div>
               {/* <div id="image-blank-note">{`(Submitting without a picture will delete your current picture)`}</div> */}
               <label for='image-input' className="testing">
                 <input

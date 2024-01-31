@@ -1,4 +1,6 @@
-#heading {
+/* commented this out because it was
+interfering with other page's css */
+/* #heading {
     font-weight: bold;
     font-size: 20px;
     margin: 5px 0;
@@ -16,10 +18,9 @@
     margin: 0 5px;
 }
 
-#question-input {
-    width: 80%;
-}
+
 
 #submit-question-button {
     margin: 5px 0;
 }
+ */

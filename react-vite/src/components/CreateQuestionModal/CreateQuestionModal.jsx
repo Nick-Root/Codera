@@ -73,19 +73,34 @@ function CreateQuestionModal() {
     closeModal();
   }
 
+  function adjustTextareaHeight() {
+    var textarea = document.getElementById('question-textarea');
+    textarea.style.height = 'auto';
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+  }
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [question]);
+
+
+
   return (
     <div id="create-question-modal-container">
       <div className="question-form-container">
        <div id="ask-a-question">Ask a Question</div>
        <form onSubmit={onSubmit} encType="multipart/form-data">
            <div className="input-container">
-                <input
-                    id="question-input"
+                <textarea
+                    id="question-textarea"
                     type='text'
                     placeholder='Start your question with "What", "How", "Why", etc.'
-                    onChange={e => setQuestion(e.target.value)}  //changes the state first
+                    onChange={e => {
+                      setQuestion(e.target.value)
+                    }}  //changes the state first
                     value={question}  //then we get it from the state
                     maxLength={255}
+                    rows="1"
                 />
            </div>
            <div className='error'>
