@@ -65,7 +65,7 @@ const CurrentQuestions = () => {
                 </div>
             ) : questions.length === 0 ? (
                 <div className="no-saved-questions">
-                    <h3>Looks like you have no saved questions. Explore the community to find something that interests you with this button below:</h3>
+                    <h3>Looks like you have no questions yet. Post a question to the community.</h3>
                     <div id="ask-question-button">
                         <OpenModalMenuItem
                             itemText='Add question'
