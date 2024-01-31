@@ -7,6 +7,7 @@ import UpdateQuestionModalTwo from "../UpdateQuestionModal/UpdateQuestionModalTw
 import DeleteQuestionModalTwo from "../DeleteQuestionModal/DeleteQuestionModalTwo";
 import { NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import CreateQuestionModal from "../CreateQuestionModal/CreateQuestionModal";
 
 
 const CurrentQuestions = () => {
@@ -14,11 +15,13 @@ const CurrentQuestions = () => {
     const questionState = useSelector((state) => state.question)
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true)
+    const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
         dispatch(getCurrentQuestions())  //gets current quesitons, (thunk)
         setIsLoading(false)
     }, [dispatch])
+
 
 
     const questions = useSelector((state) => state.question.userQuestions || [])
@@ -34,19 +37,45 @@ const CurrentQuestions = () => {
     console.log("Curr user question user", user)
     if (!questions) return null
 
+    useEffect(() => {
+        if (!showMenu) return;
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setShowMenu(false);
+            }
+        };
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+    const closeMenu = () => setShowMenu(false);
+
 
     console.log("questionState in CurrentQuestions", questionState, questions)
     return (
         <div className="container">
-            <div className="container_text">Your Questions</div>
-
+            {/* Render container_text only if there are questions */}
+            {isLoading || questions.length > 0 ? (
+                <div className="container_text">Your Questions</div>
+            ) : null}
 
             {isLoading ? (
                 <div className="spinner-container">
                     <div className="spinner"></div>
                 </div>
+            ) : questions.length === 0 ? (
+                <div className="no-saved-questions">
+                    <h3>Looks like you have no saved questions. Explore the community to find something that interests you with this button below:</h3>
+                    <div id="ask-question-button">
+                        <OpenModalMenuItem
+                            itemText='Add question'
+                            onItemClick={closeMenu}
+                            className='questionmodal'
+                            modalComponent={<CreateQuestionModal />}
+                        />
+                    </div>
+                </div>
             ) : (
-
                 questions.map((question) => (
 
                     <div key={question.id} id="one_question_container">

@@ -39,6 +39,15 @@ const CurrentComments = () => {
 
     if (!user) return null
 
+    if (!isLoading && comments.length === 0) {
+        return (
+            <div className='no-saved-questions '>
+                <h3>Looks like you have no comments. Explore the community to find something that interests you.</h3>
+                <button id="ask-question-button" onClick={() => navigate('/questions')}>Explore Questions</button>
+            </div>
+        );
+    }
+
     return (
         <div className="container">
             <div className="container_text">Your Comments</div>
@@ -47,11 +56,16 @@ const CurrentComments = () => {
                 <div className="spinner-container">
                     <div className="spinner"></div>
                 </div>
+            ) : comments.length === 0 ? (
+                // Displaying the no-comments message
+                <div className='no-comments-container'>
+                    <p>Looks like you have no saved questions. Explore the community to find something that interests you.</p>
+                    <button onClick={() => navigate('/questions')}>Explore Questions</button>
+                </div>
             ) : (
                 comments.map((comment) => (
                     <div
                         key={comment.commentId}
-
                         className="one_question_container"
                     >
                         <NavLink to={`/questions/${comment.questionId}`} className='navtopage'>{comment.comment}</NavLink>
@@ -84,8 +98,8 @@ const CurrentComments = () => {
                     </div>
                 )).reverse())}
         </div>
-
     );
+
 
 }
 

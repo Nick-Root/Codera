@@ -47,3 +47,15 @@
 #question-container {
     padding: 0 25px;
 }
+
+.no-saved-questions {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: 150px;
+   gap: 20px;
+   margin-left: 40px;
+   margin-right: 40px;
+   text-align: center;
+}

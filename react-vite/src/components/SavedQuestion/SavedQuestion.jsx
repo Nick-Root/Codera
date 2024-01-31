@@ -36,6 +36,16 @@ export default function SavedQuestion() {
         }
     }
 
+    if (length === 0) {
+        return (
+            <div className='no-saved-questions'>
+                <h3>Looks like you have no saved questions. Explore the community to find something that interests you.</h3>
+                <button id="ask-question-button" onClick={() => navigate('/questions')}>Explore Questions</button>
+            </div>
+        );
+    }
+
+
     return (
         <>
             <div className='container'>
