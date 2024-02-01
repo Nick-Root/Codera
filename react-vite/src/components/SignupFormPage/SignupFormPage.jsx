@@ -82,7 +82,7 @@ function SignupFormPage() {
           <h2 className='formhead'>Sign Up</h2>
           {signupErrors.server && <p className="error">{signupErrors.server}</p>}
           <form onSubmit={handleSubmit}>
-            <label>
+            <label className="signup-in-label">
               First Name
               <input
                 type="text"
@@ -91,7 +91,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            <label>
+            <label className="signup-in-label">
               Last Name
               <input
                 type="text"
@@ -100,7 +100,7 @@ function SignupFormPage() {
                 required
               />
             </label>
-            <label>
+            <label className="signup-in-label">
               Email
               <input
                 type="text"
@@ -110,7 +110,7 @@ function SignupFormPage() {
               />
             </label>
             {signupErrors.email && <p className="error">{signupErrors.email}</p>}
-            <label>
+            <label className="signup-in-label">
               Username
               <input
                 type="text"
@@ -120,7 +120,7 @@ function SignupFormPage() {
               />
             </label>
             {signupErrors.username && <p className="error">{signupErrors.username}</p>}
-            <label>
+            <label className="signup-in-label">
               Password
               <input
                 type="password"
@@ -130,7 +130,7 @@ function SignupFormPage() {
               />
             </label>
             {signupErrors.password && <p className="error">{signupErrors.password}</p>}
-            <label>
+            <label className="signup-in-label">
               Confirm Password
               <input
                 type="password"
@@ -148,7 +148,7 @@ function SignupFormPage() {
           {loginErrors.length > 0 &&
             loginErrors.map((message) => <p key={message} className="error">{message}</p>)}
           <form onSubmit={handleLoginSubmit}>
-            <label>
+            <label className="signup-in-label">
               Email
               <input
                 type="text"
@@ -158,7 +158,7 @@ function SignupFormPage() {
               />
             </label>
             {loginErrors.email && <p className="error">{loginErrors.email}</p>}
-            <label>
+            <label className="signup-in-label">
               Password
               <input
                 type="password"
