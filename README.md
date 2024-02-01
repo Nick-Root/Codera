@@ -1,7 +1,7 @@
 # Codera
 
 ### Link to live site:
-https://codera.onrender.com/
+https://codera-webservice-0na2.onrender.com
 
 
 ### Index
@@ -28,11 +28,14 @@ Have a question about programming? At Codera, you can ask questions about a prog
 ### Question Details Page
 ![question-details](react-vite/public/readme-images/question-details.png)
 
+### Edit a Question
+![edit-question](react-vite/public/readme-images/edit-question.png)
+
 ### Edit a Comment
 ![edit-comment](react-vite/public/readme-images/edit-comment.png)
 
-### Delete a Saved Question
-![delete-saved-question](react-vite/public/readme-images/delete-saved-question.png)
+### Saved Questions
+![saved-questions](react-vite/public/readme-images/saved-questions.png)
 
 
 ## Getting started
