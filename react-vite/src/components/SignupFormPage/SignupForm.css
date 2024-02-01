@@ -6,6 +6,7 @@
     height: 1000px;
     width: 100%;
     background-image: url("../../../codeback.jpg");
+    /* border: 2px solid black; */
 }
 
 .splash-form-signup {
@@ -39,12 +40,13 @@
 .formhead {
     display: flex;
     justify-content: center;
+    margin-bottom: 15px;
 }
 
 .login {
     display: flex;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-left: 59.5px;
     color: white;
     background-color: #B92B27;
@@ -96,4 +98,9 @@
     padding: 5px 5px 5px 5px;
     border-radius: 5px;
     width: fit-content;
+}
+
+.signup-in-label {
+    display: block;
+    margin-bottom: 2.5px;
 }
