@@ -16,10 +16,17 @@ const CurrentComments = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        dispatch(getCurrentComments())
-        setIsLoading(false)
-    }, [dispatch])
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                await dispatch(getCurrentComments());
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
+        fetchData();
+    }, [dispatch]);
 
     const comments = useSelector((state) => state.comment.userComments)
 
@@ -39,24 +46,19 @@ const CurrentComments = () => {
 
     if (!user) return null
 
-    if (!isLoading && comments.length === 0) {
+    if (isLoading === true) {
         return (
-            <div className='no-saved-questions '>
-                <h3>Looks like you have no comments. Explore the community to find something that interests you.</h3>
-                <button id="ask-question-button" onClick={() => navigate('/questions')}>Explore Questions</button>
+            <div className="spinner-container">
+                <div className="spinner"></div>
             </div>
-        );
+        )
     }
 
     return (
         <div className="container">
             <div className="container_text">Your Comments</div>
 
-            {isLoading ? (
-                <div className="spinner-container">
-                    <div className="spinner"></div>
-                </div>
-            ) : comments.length === 0 ? (
+            {!isLoading && comments.length === 0 ? (
                 // Displaying the no-comments message
                 <div className='no-comments-container'>
                     <p>Looks like you have no saved questions. Explore the community to find something that interests you.</p>

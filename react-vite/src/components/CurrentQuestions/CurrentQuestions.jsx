@@ -18,9 +18,17 @@ const CurrentQuestions = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
-        dispatch(getCurrentQuestions())  //gets current quesitons, (thunk)
-        setIsLoading(false)
-    }, [dispatch])
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                await dispatch(getCurrentQuestions());
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [dispatch]);
 
 
 
@@ -50,20 +58,21 @@ const CurrentQuestions = () => {
     }, [showMenu]);
     const closeMenu = () => setShowMenu(false);
 
-
+    if (isLoading === true) {
+        return (
+            <div className="spinner-container">
+                <div className="spinner"></div>
+            </div>
+        )
+    }
     console.log("questionState in CurrentQuestions", questionState, questions)
     return (
         <div className="container">
-            {/* Render container_text only if there are questions */}
-            {isLoading || questions.length > 0 ? (
-                <div className="container_text">Your Questions</div>
-            ) : null}
 
-            {isLoading ? (
-                <div className="spinner-container">
-                    <div className="spinner"></div>
-                </div>
-            ) : questions.length === 0 ? (
+            <div className="container_text">Your Questions</div>
+
+
+            {!isLoading && questions.length === 0 ? (
                 <div className="no-saved-questions">
                     <h3>Looks like you have no questions yet. Post a question to the community.</h3>
                     <div id="ask-question-button">

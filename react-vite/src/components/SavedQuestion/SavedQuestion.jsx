@@ -19,8 +19,16 @@ export default function SavedQuestion() {
     }
 
     useEffect(() => {
-        dispatch(thunkGetSavedQuestions());
-        setIsLoading(false)
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                await dispatch(thunkGetSavedQuestions());
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
     }, [dispatch]);
 
     if (!saved || !sessionUser) {
@@ -36,7 +44,7 @@ export default function SavedQuestion() {
         }
     }
 
-    if (length === 0) {
+    if (!isLoading && length === 0) {
         return (
             <div className='no-saved-questions'>
                 <h3>Looks like you have no saved questions. Explore the community to find something that interests you.</h3>
@@ -49,7 +57,7 @@ export default function SavedQuestion() {
     return (
         <>
             <div className='container'>
-                <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>
+                {!isLoading && <div className="container_text">{length <= 1 ? `${length} saved question` : `${length} saved questions`}</div>}
                 <div>
                     {isLoading ? (
                         <div className="spinner-container">
