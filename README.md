@@ -1,7 +1,7 @@
 # Codera
 
 ### Link to live site:
-[https://codera-webservice-0na2.onrender.com] (https://codera-webservice-0na2.onrender.com)
+[https://codera-webservice-0na2.onrender.com]
 
 
 ### Index
