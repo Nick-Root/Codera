@@ -43,9 +43,9 @@ function Navigation() {
 
           <NavLink to='/savedQuestions' className={'navLink'}>Saved Questions</NavLink>
 
-          <div id="ask-question-button">
+          <div>
             <OpenModalMenuItem
-              itemText='Add question'
+              itemText={(<div id="ask-question-button">Add question</div>)}
               onItemClick={closeMenu}
               className='questionmodal'
               modalComponent={<CreateQuestionModal />}
@@ -54,7 +54,7 @@ function Navigation() {
         </>
 
       )}
-      {user && (<ProfileButton />)}
+      {user && (<ProfileButton/>)}
 
     </ul>
 
