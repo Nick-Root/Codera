@@ -16,6 +16,7 @@ function CreateQuestionModal() {
   const [image, setImage] = useState('');
   const [topicId, setTopicId] = useState(1);  //default to the first topic/ topicId 1 when not selected
   const [errors, setErrors] = useState({});
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);  //false here
   const { closeModal } = useModal();
 
   // const match = useRouteMatch();
@@ -77,16 +78,22 @@ function CreateQuestionModal() {
     // setValidationErrors({});
     // setHasSubmitted(false);
 
+    //after we submit the thunk and before we close the modal
+    //we display the loading animation
+    setIsLoadingQuestions(true);
     closeModal();
+    setIsLoadingQuestions(false);  //set back to false just in case
   }
 
   //code to automatically adjust the height
   function adjustTextareaHeight() {
-    const textarea = document.getElementById('question-textarea');
-    /* expands the textarea height dynmically */
-    textarea.style.height = 'auto';
-    /* sets the height including the unseen part of the textarea */
-    textarea.style.height = (textarea.scrollHeight) + 'px';
+    if (isLoadingQuestions === false){
+      const textarea = document.getElementById('question-textarea');
+      /* expands the textarea height dynmically */
+      textarea.style.height = 'auto';
+      /* sets the height including the unseen part of the textarea */
+      textarea.style.height = (textarea.scrollHeight) + 'px';
+    }
   }
   //we use useeffect to check the height everytime the question state changes
   useEffect(() => {
@@ -97,6 +104,11 @@ function CreateQuestionModal() {
 
   return (
     <div id="create-question-modal-container">
+      {isLoadingQuestions ? (
+        <div className="question-modal-spinner-container">
+            <div className="question-modal-spinner"></div>
+        </div>
+      ) : (
       <div className="question-form-container">
        <div id="ask-a-question">Ask a Question</div>
        <form onSubmit={onSubmit} encType="multipart/form-data">
@@ -138,6 +150,7 @@ function CreateQuestionModal() {
            <button id="submit-question-button" >Submit</button>
        </form>
      </div>
+     )}
     </div>
   );
 }

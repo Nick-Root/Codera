@@ -59,11 +59,14 @@ body {
   padding: 10px 15px;
   border-radius: 10px;
   font-weight: normal;
+  z-index: 2;
 }
+
 
 ul>li {
   list-style: none;
 }
+
 
 
 
